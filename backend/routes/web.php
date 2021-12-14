@@ -14,7 +14,7 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-
+dd
 
 Route::get('/{any}',function(){
     return view('app');
