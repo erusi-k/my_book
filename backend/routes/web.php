@@ -14,11 +14,11 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/top',[HomeController::class,'index']);
 
-Route::get('test',function(){
-    return view('test');
-});
+
+Route::get('/{any}',function(){
+    return view('app');
+})->where('any','.*')->middleware(['auth']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
