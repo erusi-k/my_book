@@ -5,6 +5,8 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import BookCreateComponent from "./components/BookCreateComponent";
 import BookListComponent from "./components/BookListComponent";
+import BookShowComponent from "./components/BookShowComponent"
+import StarRating from 'vue-star-rating';
 
 
 window.Alpine = Alpine;
@@ -15,8 +17,11 @@ window.Vue = require('vue').default;
 
 
 Vue.component('bookcreaet-component', require('./components/BookCreateComponent.vue').default);
+Vue.component('booklist-component',require('./components/BookListComponent.vue').default);
+Vue.component('booklist-component',require('./components/BookListComponent.vue').default);
+Vue.component('bookshow-component',require('./components/BookShowComponent.vue').default);
 Vue.component('header-component',require('./components/HeaderComponent.vue').default);
-
+Vue.component('star-rating',StarRating);
 
 Vue.use(VueRouter);
 
@@ -29,10 +34,16 @@ const router = new VueRouter({
             component: BookCreateComponent
         },
         {
-            path: '/book',
+            path: '/book/list',
             name: 'book.list',
             component: BookListComponent
         },
+        {
+            path:'/book/show/:bookId',
+            name: 'book.show',
+            component: BookShowComponent,
+            props:true
+        }
     ]
 })
 

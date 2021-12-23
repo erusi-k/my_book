@@ -1,0 +1,48 @@
+<template>
+<div>
+    <div v-for="item in items" :key="item.id">
+        <p>{{item.title}}</p>
+        <p>{{item.author}}</p>
+        <p>{{item.report}}</p>
+        <star-rating v-model="item.rating" v-bind:increment="0.5" read-only="true"></star-rating>
+        
+    </div>
+    
+</div>    
+</template>
+
+<script>
+export default ({
+    props:['bookId'],
+    data(){
+        return {
+            items:'',
+        }
+    },
+    methods:{
+        getData() {
+            const id = this.bookId
+            axios.get("http://localhost:8080/api/book/"+id)
+            .then((res) => {
+                
+                this.items = res.data;
+                console.log(this.items);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        },
+        checkId(user_id){
+            if(this.user.id == user_id){
+                return true;
+            }
+            return false;
+        }
+    },
+
+
+    created(){
+        this.getData();
+    }
+})
+</script>

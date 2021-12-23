@@ -3,15 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use ILluminate\Support\Facades\Auth;
 use App\Models\Book;
 
 class BookController extends Controller
 {
     public function index(){
-        return Book::all();
+        $data =  Book::all();
+        return response()->json([
+            'data'=>$data
+        ]);
     }
 
     public function store(Request $request){
-        return Book::create($request->all());
+        $id = Auth::id();
+        return Book::create([
+            'user_id' =>$request->user_id,
+            'rating'=>$request->rating,
+            'title' => $request->title,
+            'author' => $request->author,
+            'report' => $request->report
+            
+        ]);
+    }
+
+    public function show($id) {
+        $data = Book::find($id);
+        return response()->json([
+            'data'=>$data
+        ]);
     }
 }

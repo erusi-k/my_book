@@ -18,6 +18,7 @@ class CreateBooksTable extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('title',100);
             $table->string('author',100);
+            $table->string('image',100)->nullable();
             $table->text('report',1000);
             $table->timestamps();
         });

@@ -4,7 +4,7 @@
             <li>ホーム</li>
             <li>mybookについて</li>
             <li>mybook</li>
-            <li>新規作成</li>
+            <li><router-link v-bind:to="{name: 'book.create'}">新規作成</router-link></li>
             <li>ログアウト</li>
         </ul>
         <router-link v-bind:to ="{name: 'book.list'}">

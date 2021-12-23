@@ -11,7 +11,7 @@
 <body>
     <div id="app">
         <header-component></header-component>
-        <router-view></router-view>
+        <router-view v-bind:user="{{Auth::user()}}"></router-view>
     </div>
 <script src="{{mix('js/app.js')}}"></script>    
 </body>
