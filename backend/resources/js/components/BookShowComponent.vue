@@ -4,16 +4,17 @@
         <p>{{item.title}}</p>
         <p>{{item.author}}</p>
         <p>{{item.report}}</p>
+        <p>{{item.user_id}}</p>
         <star-rating v-model="item.rating" v-bind:increment="0.5" read-only="true"></star-rating>
-        
+        <p v-if="checkId(item.user_id)">編集する</p>
     </div>
-    
+    <p>{{user.id}}</p>
 </div>    
 </template>
 
 <script>
 export default ({
-    props:['bookId'],
+    props:['bookId','user'],
     data(){
         return {
             items:'',
@@ -37,7 +38,18 @@ export default ({
                 return true;
             }
             return false;
+            
         }
+        
+    },
+
+    computed:{
+
+        
+    },
+
+    mounted(){
+        this.checkId();
     },
 
 
