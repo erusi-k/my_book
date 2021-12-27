@@ -6,6 +6,7 @@ import VueRouter from 'vue-router';
 import BookCreateComponent from "./components/BookCreateComponent";
 import BookListComponent from "./components/BookListComponent";
 import BookShowComponent from "./components/BookShowComponent"
+import BookEditComponent from "./components/BookEditComponent"
 import StarRating from 'vue-star-rating';
 
 
@@ -20,6 +21,7 @@ Vue.component('bookcreaet-component', require('./components/BookCreateComponent.
 Vue.component('booklist-component',require('./components/BookListComponent.vue').default);
 Vue.component('booklist-component',require('./components/BookListComponent.vue').default);
 Vue.component('bookshow-component',require('./components/BookShowComponent.vue').default);
+Vue.component('bookedit-component',require('./components/BookEditComponent.vue').default);
 Vue.component('header-component',require('./components/HeaderComponent.vue').default);
 Vue.component('star-rating',StarRating);
 
@@ -42,6 +44,12 @@ const router = new VueRouter({
             path:'/book/show/:bookId',
             name: 'book.show',
             component: BookShowComponent,
+            props:true
+        },
+        {
+            path:'/book/edit/:bookId',
+            name: 'book.edit',
+            component: BookEditComponent,
             props:true
         }
     ]

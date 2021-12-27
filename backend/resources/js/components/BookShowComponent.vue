@@ -1,12 +1,13 @@
 <template>
 <div>
+    <p>詳細テスト</p>
     <div v-for="item in items" :key="item.id">
         <p>{{item.title}}</p>
         <p>{{item.author}}</p>
         <p>{{item.report}}</p>
-        <p>{{item.user_id}}</p>
         <star-rating v-model="item.rating" v-bind:increment="0.5" read-only="true"></star-rating>
-        <p v-if="checkId(item.user_id)">編集する</p>
+        <router-link :to="`/book/edit/${item.id}`" v-if="checkId(item.user_id)">編集する</router-link>
+        <router-link :to="`/book/edit/${item.id}`" v-if="checkId(item.user_id)">削除する</router-link>
     </div>
     <p>{{user.id}}</p>
 </div>    

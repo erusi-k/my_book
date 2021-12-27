@@ -28,9 +28,21 @@ class BookController extends Controller
     }
 
     public function show($id) {
-        $data = Book::find($id);
+    $data = Book::find($id);
         return response()->json([
             'data'=>$data
         ]);
     }
+
+    public function update(Request $request, Book $book) {
+        $item = Book::find($request->id);
+        $item->update([
+            'title' =>$request->title,
+            'rating'=>$request->rating,
+            'author'=>$request->author,
+        ]);
+        return $book;
+    }
+
+    
 }
