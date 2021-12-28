@@ -7,7 +7,7 @@
         <p>{{item.report}}</p>
         <star-rating v-model="item.rating" v-bind:increment="0.5" read-only="true"></star-rating>
         <router-link :to="`/book/edit/${item.id}`" v-if="checkId(item.user_id)">編集する</router-link>
-        <router-link :to="`/book/edit/${item.id}`" v-if="checkId(item.user_id)">削除する</router-link>
+        <p @click="dataDelete(item.id)" v-if="checkId(item.user_id)">削除する</p>
     </div>
     <p>{{user.id}}</p>
 </div>    
@@ -40,6 +40,22 @@ export default ({
             }
             return false;
             
+        },
+        dataDelete(id){
+            const flag = confirm('本当に削除してもよろしいですか？？')
+
+            if(flag == true) {
+                axios.delete('http://localhost:8080/api/book/' +id)
+                .then((res) => {
+                    console.log(res);
+                    alert('削除しました!');
+                    this.$router.push({name:'book.list'});
+                })
+                .catch((error) => {
+                    console.log(error);
+                    alert('削除失敗です');
+                })
+            }   
         }
         
     },

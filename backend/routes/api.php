@@ -24,4 +24,5 @@ Route::get('/book',[bookController::class,'index']);
 Route::post('/book',[bookController::class,'store']);
 Route::get('/book/{id}',[bookController::class,'show']);
 Route::put('/book/{id}',[bookController::class,'update']);
+Route::delete('/book/{id}',[bookController::class,'delete']);
 

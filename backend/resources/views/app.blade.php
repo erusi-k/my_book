@@ -12,6 +12,15 @@
     <div id="app">
         <header-component></header-component>
         <router-view v-bind:user="{{Auth::user()}}"></router-view>
+        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
     </div>
 <script src="{{mix('js/app.js')}}"></script>    
 </body>

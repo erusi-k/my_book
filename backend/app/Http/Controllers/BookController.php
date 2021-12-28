@@ -41,8 +41,13 @@ class BookController extends Controller
             'rating'=>$request->rating,
             'author'=>$request->author,
         ]);
-        return $book;
+
     }
 
-    
+    public function delete($id) {
+        
+        $item = Book::find($id);
+        $item->delete();
+
+    }
 }

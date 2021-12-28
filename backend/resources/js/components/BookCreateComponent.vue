@@ -20,6 +20,7 @@
             <p @click="getBook">本情報取得ボタン</p>
             <p>{{rating}}</p>
         </form>
+        <button @click="openModal">モーダルを開く</button>
     </div>
 </template>
 
@@ -33,7 +34,7 @@
                     user_id:this.user.id,
                 },  
                 test:'',
-                
+                showContent:false,
         
             }
         },
@@ -60,13 +61,42 @@
                     this.test = res;
                     console.log(this.test)
                 })
-                .catch((eror) => {
+                .catch((error) => {
                     console.log(error);
                     alert('失敗です')
                 })
+            },
+            openModal(){
+                this.showModal = true;
+            },
+            closeModal(){
+                this.showModal = false;
             }
-            
-
         }
     }
 </script>
+
+<style>
+    
+    #overlay{
+        z-index:1;
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background-color:rgba(0,0,0,0.5);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        
+    }
+
+    #content{
+        z-index:2;
+        width:50%;
+        padding:1em;
+        background:#fff;
+    }
+    
+</style>
