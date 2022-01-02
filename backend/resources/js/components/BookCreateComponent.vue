@@ -1,5 +1,7 @@
 <template>
     <div>
+        <label for="book_search">本情報検索</label>
+        <input type="text" id="book_search" v-model="query">
         <form v-on:submit.prevent="submit">
             <div><p>評価</p>
                 <star-rating v-model="rating" v-bind:increment="0.5"></star-rating>
@@ -17,10 +19,25 @@
                 <input type="text" id="report" v-model="item.report">
             </div>
             <button type="submit">登録</button>
-            <p @click="getBook">本情報取得ボタン</p>
+            <p @click="getBook(query)">本情報取得ボタン</p>
             <p>{{rating}}</p>
         </form>
         <button @click="openModal">モーダルを開く</button>
+        <div id="overlay" v-show="showContent">
+            <div id="content">
+                <p>これがモーダルウィンドウです</p>
+                <p><button @click="closeModal">close</button></p>
+            </div>
+        </div>    
+        <p @click="test">setData表示</p>
+        <div v-if="st" >
+            <div v-for="searchData in searchDatas" :key="searchData.id">
+                <input type="radio" :value="searchData" v-model="setData">
+                <p>{{searchData.volumeInfo.authors}}</p>
+                <p>{{searchData.volumeInfo.title}}</p>
+                <img v-bind:src="searchData.volumeInfo.imageLinks.smallThumbnail">
+            </div>
+        </div>
     </div>
 </template>
 
@@ -33,8 +50,11 @@
                 item:{
                     user_id:this.user.id,
                 },  
-                test:'',
+                searchDatas:'',
                 showContent:false,
+                query:'',
+                st:true,
+                setData:'',
         
             }
         },
@@ -55,11 +75,13 @@
                     })
             },
 
-            getBook(){
-                axios.get("https://www.googleapis.com/books/v1/volumes?q=山下誠司")
+            getBook(query){
+                axios.get("https://www.googleapis.com/books/v1/volumes?q=serch" + query)
                 .then((res) => {
-                    this.test = res;
-                    console.log(this.test)
+                    this.st = true;
+                    this.searchDatas = res.data.items;
+                    
+                    console.log(this.searchDatas);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -71,6 +93,9 @@
             },
             closeModal(){
                 this.showModal = false;
+            },
+            test(){
+                console.log(this.setData);
             }
         }
     }
