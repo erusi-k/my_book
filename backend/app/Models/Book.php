@@ -12,6 +12,7 @@ class Book extends Model
         'user_id',
         'rating',
         'title',
+        'imge',
         'author',
         'report',
     ];

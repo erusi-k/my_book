@@ -15,12 +15,20 @@ class BookController extends Controller
         ]);
     }
 
+    public function other(Request $request){
+        $data = book::where('user_id','<>','1')->get();
+        return response()->json([
+            'data'=>$data
+        ]);
+    }
+
     public function store(Request $request){
         $id = Auth::id();
         return Book::create([
             'user_id' =>$request->user_id,
             'rating'=>$request->rating,
             'title' => $request->title,
+            'imge'=> $request->imge,
             'author' => $request->author,
             'report' => $request->report
             
