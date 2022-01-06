@@ -22,6 +22,8 @@
                             </x-dropdown-link>
                         </form>
     </div>
-<script src="{{mix('js/app.js')}}"></script>    
+<script src="{{mix('js/app.js')}}"></script>  
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>  
 </body>
 </html>

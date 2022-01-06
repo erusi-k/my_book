@@ -8,7 +8,8 @@
             </div>
             <div>
                 <lable for="title">タイトル</lable>
-                <input type="text" id="title" v-model="item.title">
+                <input type="text" id="title" v-model="item.title" @blur='onBlur'>
+                <span>{{errors.title}}</span>
             </div>
             <div>
                 <lable for="author">著者</lable>
@@ -58,6 +59,7 @@
                 query:'',
                 st:true,
                 selectData:'',
+                errors:{},
         
             }
         },
@@ -67,7 +69,7 @@
                 axios.post("http://localhost:8080/api/book",this.item)
                     .then((res)=>{
                         this.test = res;
-                        alert('登録が完了しました!');
+                        Swal.fire('登録が完了しました!');
                         console.log(this.item);
                         this.$router.push({name: 'book.list'});
                     })
@@ -103,6 +105,21 @@
                 this.item.author = this.selectData.volumeInfo.authors[0];
                 this.item.imge = this.selectData.volumeInfo.imageLinks.smallThumbnail;
                 console.log(this.item);
+            },
+            onBlurTitle(){
+                if(!this.item.title){
+                    this.$set(this.errors,'title','タイトルは必須です');
+                }
+                
+            }
+        },
+        watch:{
+            'item.title': function(title){
+                if(title) {
+                    this.$delete(this.errors,'title');
+                }else {
+                    this.$set(this.errors,'title','タイトルは必須です');
+                }
             }
         }
     }

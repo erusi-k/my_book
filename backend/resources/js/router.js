@@ -1,5 +1,8 @@
 import Router from 'vue-router';
-
+import BookCreateComponent from "./components/BookCreateComponent";
+import BookListComponent from "./components/BookListComponent";
+import BookShowComponent from "./components/BookShowComponent"
+import BookEditComponent from "./components/BookEditComponent"
 
 export default new Router({
     mode:'history',

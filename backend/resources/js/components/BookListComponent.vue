@@ -56,7 +56,6 @@ export default {
             })
             .catch((error) => {
                 console.log(error);
-                console.log('自分のデータ取得失敗です');
             })
         }
     },
