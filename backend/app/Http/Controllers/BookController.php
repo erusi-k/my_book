@@ -8,15 +8,15 @@ use App\Models\Book;
 
 class BookController extends Controller
 {
-    public function index(){
-        $data =  Book::all();
+    public function myData(Request $request){
+        $data =  Book::where('user_id',$request->user_id)->get();
         return response()->json([
             'data'=>$data
         ]);
     }
 
     public function other(Request $request){
-        $data = book::where('user_id','<>','1')->get();
+        $data = Book::where('user_id','<>',$request->user_id)->get();
         return response()->json([
             'data'=>$data
         ]);

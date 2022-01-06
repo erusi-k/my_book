@@ -2,12 +2,9 @@ require('./bootstrap');
 
 import Alpine from 'alpinejs';
 import Vue from 'vue';
-import VueRouter from 'vue-router';
-import BookCreateComponent from "./components/BookCreateComponent";
-import BookListComponent from "./components/BookListComponent";
-import BookShowComponent from "./components/BookShowComponent"
-import BookEditComponent from "./components/BookEditComponent"
 import StarRating from 'vue-star-rating';
+import VueRouter from 'vue-router';
+import router from './router';
 
 
 window.Alpine = Alpine;
@@ -27,33 +24,7 @@ Vue.component('star-rating',StarRating);
 
 Vue.use(VueRouter);
 
-const router = new VueRouter({
-    mode:'history',
-    routes:[
-        {
-            path: '/book/create',
-            name: 'book.create',
-            component: BookCreateComponent
-        },
-        {
-            path: '/book/list',
-            name: 'book.list',
-            component: BookListComponent
-        },
-        {
-            path:'/book/show/:bookId',
-            name: 'book.show',
-            component: BookShowComponent,
-            props:true
-        },
-        {
-            path:'/book/edit/:bookId',
-            name: 'book.edit',
-            component: BookEditComponent,
-            props:true
-        }
-    ]
-})
+
 
 const app = new Vue({
     el: '#app',
