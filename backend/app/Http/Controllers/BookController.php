@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use ILluminate\Support\Facades\Auth;
 use App\Models\Book;
+use App\Http\Requests\Api\PostRequest;
 
 class BookController extends Controller
 {
@@ -22,7 +23,7 @@ class BookController extends Controller
         ]);
     }
 
-    public function store(Request $request){
+    public function store(PostRequest $request){
         $id = Auth::id();
         return Book::create([
             'user_id' =>$request->user_id,

@@ -1,14 +1,35 @@
 <template>
     <div>
+        <div v-for="error in errors" :key="error.id">
+            <div class="error">{{error}}</div>
+        </div>
         <label for="book_search">本情報検索</label>
-            
-            <validation-observer tag="form" ref="obs" v-slot="ObserverProps" v-on:submit.prevent="submit">
+            <form v-on:submit.prevent="submit">
+            <div><p>評価</p>
+                <star-rating v-model="rating" v-bind:increment="0.5"></star-rating>
+            </div>
+            <div>
+                <lable for="title">タイトル</lable>
+                <input type="text" id="title" v-model="item.title" >
+            </div>
+            <div>
+                <lable for="author">著者</lable>
+                <input type="text" id="author" v-model="item.author">
+            </div>
+            <div>
+                <lable for="report">感想</lable>
+                <input type="text" id="report" v-model="item.report">
+            </div>
+            <button type="submit">登録</button>
+            <p>{{rating}}</p>
+            </form>
+            <!-- <validation-observer tag="form" ref="obs" v-slot="ObserverProps" v-on:submit.prevent="submit">
                 <div>
                     <p>評価</p>
                     <star-rating v-model="rating" v-bind:increment="0.5"></star-rating>
                 </div>
                 <div>
-                    <validation-provider v-slot="ProviderProps" rules="required|max:100">
+                    <validation-provider v-slot="ProviderProps" rules="required|max:50">
                         <lable for="title">タイトル</lable>
                         <input type="text" id="title" v-model="item.title" name="タイトル">
                         <div class="error">{{ProviderProps.errors[0]}}</div>
@@ -32,7 +53,7 @@
                 <button type="submit" :disabled="ObserverProps.invalid">登録</button>
             </validation-observer>
         
-        
+         -->
         <div id="overlay" v-show="showContent">
             <div id="content">
                 <input type="text" id="book_search" v-model="query">
@@ -85,9 +106,9 @@
                         this.$router.push({name: 'book.list'});
                     })
                     .catch((error) =>{
+                        this.errors = error.response.data.errors;
+                        console.log(this.errors);
                         console.log(error);
-                        console.log(this.item);
-                        alert('失敗です');
                     })
             },
 
@@ -117,22 +138,7 @@
                 this.item.imge = this.selectData.volumeInfo.imageLinks.smallThumbnail;
                 console.log(this.item);
             },
-            onBlurTitle(){
-                if(!this.item.title){
-                    this.$set(this.errors,'title','タイトルは必須です');
-                }
-                
-            }
         },
-        watch:{
-            'item.title': function(title){
-                if(title) {
-                    this.$delete(this.errors,'title');
-                }else {
-                    this.$set(this.errors,'title','タイトルは必須です');
-                }
-            }
-        }
     }
 </script>
 
