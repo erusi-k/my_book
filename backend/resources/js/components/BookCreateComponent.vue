@@ -1,27 +1,38 @@
 <template>
     <div>
         <label for="book_search">本情報検索</label>
+            
+            <validation-observer tag="form" ref="obs" v-slot="ObserverProps" v-on:submit.prevent="submit">
+                <div>
+                    <p>評価</p>
+                    <star-rating v-model="rating" v-bind:increment="0.5"></star-rating>
+                </div>
+                <div>
+                    <validation-provider v-slot="ProviderProps" rules="required|max:100">
+                        <lable for="title">タイトル</lable>
+                        <input type="text" id="title" v-model="item.title" name="タイトル">
+                        <div class="error">{{ProviderProps.errors[0]}}</div>
+                    </validation-provider>
+                    
+                </div>
+                <div>
+                    <validation-provider v-slot="ProviderProps" rules="required|max:30">
+                        <lable for="author">著者</lable>
+                        <input type="text" id="author" v-model="item.author" name="著者">
+                        <div class="error">{{ProviderProps.errors[0]}}</div>
+                    </validation-provider>
+                </div>
+                <div>
+                    <validation-provider v-slot="ProviderProps" rules="required|max:500">
+                        <lable for="report">感想</lable>
+                        <input type="text" id="report" v-model="item.report" name="感想">
+                        <div class="error">{{ProviderProps.errors[0]}}</div>
+                    </validation-provider>
+                </div>
+                <button type="submit" :disabled="ObserverProps.invalid">登録</button>
+            </validation-observer>
         
-        <form v-on:submit.prevent="submit">
-            <div><p>評価</p>
-                <star-rating v-model="rating" v-bind:increment="0.5"></star-rating>
-            </div>
-            <div>
-                <lable for="title">タイトル</lable>
-                <input type="text" id="title" v-model="item.title" @blur='onBlur'>
-                <span>{{errors.title}}</span>
-            </div>
-            <div>
-                <lable for="author">著者</lable>
-                <input type="text" id="author" v-model="item.author">
-            </div>
-            <div>
-                <lable for="report">感想</lable>
-                <input type="text" id="report" v-model="item.report">
-            </div>
-            <button type="submit">登録</button>
-            <p>{{rating}}</p>
-        </form>
+        
         <div id="overlay" v-show="showContent">
             <div id="content">
                 <input type="text" id="book_search" v-model="query">
