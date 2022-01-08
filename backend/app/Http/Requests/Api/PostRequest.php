@@ -37,7 +37,7 @@ class PostRequest extends FormRequest
             ],
             'report' => [
                 'required',
-                'mac:500',
+                'max:500',
             ]
         ];
     }

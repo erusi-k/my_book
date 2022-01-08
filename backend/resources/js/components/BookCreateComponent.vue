@@ -4,26 +4,7 @@
             <div class="error">{{error}}</div>
         </div>
         <label for="book_search">本情報検索</label>
-            <form v-on:submit.prevent="submit">
-            <div><p>評価</p>
-                <star-rating v-model="rating" v-bind:increment="0.5"></star-rating>
-            </div>
-            <div>
-                <lable for="title">タイトル</lable>
-                <input type="text" id="title" v-model="item.title" >
-            </div>
-            <div>
-                <lable for="author">著者</lable>
-                <input type="text" id="author" v-model="item.author">
-            </div>
-            <div>
-                <lable for="report">感想</lable>
-                <input type="text" id="report" v-model="item.report">
-            </div>
-            <button type="submit">登録</button>
-            <p>{{rating}}</p>
-            </form>
-            <!-- <validation-observer tag="form" ref="obs" v-slot="ObserverProps" v-on:submit.prevent="submit">
+            <validation-observer tag="form" ref="obs" v-slot="ObserverProps" v-on:submit.prevent="submit">
                 <div>
                     <p>評価</p>
                     <star-rating v-model="rating" v-bind:increment="0.5"></star-rating>
@@ -53,7 +34,7 @@
                 <button type="submit" :disabled="ObserverProps.invalid">登録</button>
             </validation-observer>
         
-         -->
+        
         <div id="overlay" v-show="showContent">
             <div id="content">
                 <input type="text" id="book_search" v-model="query">
