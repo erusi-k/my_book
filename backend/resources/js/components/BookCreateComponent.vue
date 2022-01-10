@@ -39,16 +39,15 @@
             <div id="content">
                 <input type="text" id="book_search" v-model="query">
                 <p @click="getBook(query)">本情報取得ボタン</p>
-                <div v-if="st" >
-                    <div v-for="searchData in searchDatas" :key="searchData.id">
-                        <input type="radio" :value="searchData" v-model="selectData">
-                        <p>{{searchData.volumeInfo.authors}}</p>
-                        <p>{{searchData.volumeInfo.title}}</p>
-                        <img v-bind:src="searchData.volumeInfo.imageLinks.smallThumbnail">
-                    </div>
-                    <p @click="setData">データセット</p>
-                    <p><button @click="closeModal">close</button></p>
+                <p v-if="bookEmpty">検索結果がありません</p>
+                <div v-for="searchData in searchDatas" :key="searchData.id">
+                    <input type="radio" :value="searchData" v-model="selectData">
+                    <p>{{searchData.volumeInfo.authors}}</p>
+                    <p>{{searchData.volumeInfo.title}}</p>
+                    <img v-bind:src="searchData.volumeInfo.imageLinks&&searchData.volumeInfo.imageLinks.smallThumbnail" >
                 </div>
+                <p @click="setData">データセット</p>
+                <p><button @click="closeModal">close</button></p>
             </div>
         </div>
         <button @click="openModal">本を検索する</button>    
@@ -70,8 +69,8 @@
                 searchDatas:'',
                 showContent:false,
                 query:'',
-                st:true,
-                selectData:'',
+                bookEmpty:false,
+                selectData:{},
                 errors:{},
         
             }
@@ -94,10 +93,15 @@
             },
 
             getBook(query){
-                axios.get("https://www.googleapis.com/books/v1/volumes?q=serch" + query)
+                axios.get(`https://www.googleapis.com/books/v1/volumes?q=serch+${query}&maxResults=15`)
                 .then((res) => {
-                    this.st = true;
-                    this.searchDatas = res.data.items;
+                    if(res.data.items != null){
+                        this.searchDatas = res.data.items;
+                        this.bookEmpty = false;
+                    }else{
+                        this.searchDatas = '';
+                        this.bookEmpty = true;
+                    }
                     
                     console.log(this.searchDatas);
                 })
