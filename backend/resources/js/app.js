@@ -5,6 +5,7 @@ import Vue from 'vue';
 import {ValidationProvider,ValidationObserver, extend,localize} from 'vee-validate';
 import * as originalRules from 'vee-validate/dist/rules';
 import ja from 'vee-validate/dist/locale/ja.json';
+import VueCarousel from 'vue-carousel';
 import StarRating from 'vue-star-rating';
 import VueRouter from 'vue-router';
 import router from './router';
@@ -39,6 +40,7 @@ Vue.component('ValidationProvider',ValidationProvider);
 Vue.component('ValidationObserver',ValidationObserver);
 
 Vue.use(VueRouter);
+Vue.use(VueCarousel);
 
 
 
