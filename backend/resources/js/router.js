@@ -1,8 +1,9 @@
 import Router from 'vue-router';
 import BookCreateComponent from "./components/BookCreateComponent";
-import BookListComponent from "./components/BookListComponent";
-import BookShowComponent from "./components/BookShowComponent"
-import BookEditComponent from "./components/BookEditComponent"
+import BookHomeComponent from "./components/BookHomeComponent";
+import BookShowComponent from "./components/BookShowComponent";
+import BookEditComponent from "./components/BookEditComponent";
+import BookOtherListComponent from "./components/BookOtherListComponent";
 
 export default new Router({
     mode:'history',
@@ -13,10 +14,10 @@ export default new Router({
                 component: BookCreateComponent
             },
             {
-                path: '/book/list',
-                name: 'book.list',
-                component: BookListComponent
-            },
+                path: '/book/home',
+                name: 'book.home',
+                component: BookHomeComponent
+            },                          
             {
                 path:'/book/show/:bookId',
                 name: 'book.show',
@@ -27,6 +28,13 @@ export default new Router({
                 path:'/book/edit/:bookId',
                 name: 'book.edit',
                 component: BookEditComponent,
+                props:true
+            },
+
+            {
+                path:'/book/other',
+                name: 'book.other   ',
+                component: BookOtherListComponent,
                 props:true
             }
     ]

@@ -110,10 +110,6 @@ export default {
 
 <style>
 
-.content {
-    background: #FAEBD7;
-    font-family: 'Hannotate SC','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,sans-serif;
-}
 
 .VueCarousel{
     height: 250px;

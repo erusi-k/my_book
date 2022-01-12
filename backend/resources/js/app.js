@@ -30,11 +30,11 @@ window.Vue = require('vue').default;
 
 
 Vue.component('bookcreaet-component', require('./components/BookCreateComponent.vue').default);
-Vue.component('booklist-component',require('./components/BookListComponent.vue').default);
-Vue.component('booklist-component',require('./components/BookListComponent.vue').default);
+Vue.component('bookhome-component',require('./components/BookHomeComponent.vue').default);
 Vue.component('bookshow-component',require('./components/BookShowComponent.vue').default);
 Vue.component('bookedit-component',require('./components/BookEditComponent.vue').default);
 Vue.component('header-component',require('./components/HeaderComponent.vue').default);
+Vue.component('bookOtherList-component',require('./components/BookOtherListComponent.vue').dafault);
 Vue.component('star-rating',StarRating);
 Vue.component('ValidationProvider',ValidationProvider);
 Vue.component('ValidationObserver',ValidationObserver);
