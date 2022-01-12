@@ -29,22 +29,25 @@
                     </div>
                     <div class="my_data-content_body">
                         <div class="my_data-content_body-title">
-                            <p>タイトル</p>
-                            <p>{{myData.title}}</p>
+                            <p class="tag">タイトル</p>
+                            <p class="content-main title">{{myData.title}}</p>
                         </div>
                         <div class="my_data-content_body-author">
-                            <p>著者</p>
-                            <p>{{myData.author}}</p>
+                            <p class="tag">著者</p>
+                            <p class="content-main author" >{{myData.author}}</p>
                         </div>
                         <div class="my_data-content_body-rating">
-                            <p>評価</p>
-                            <p>{{myData.rating}}</p>
+                            <p class="tag">評価</p>
+                            <p class="content-main rating">{{myData.rating}}</p>
                         </div>
-                        
+                        <div class="my_data-content_body-footer">
+                            <p class="tag">{{timeStamp(myData.created_at)}}</p>
+                            <router-link :to="`/book/show/${myData.id}`" >詳細へ</router-link>
+                        </div>
                     </div>
                 </div>
                 
-                <router-link :to="`/book/show/${myData.id}`" >詳細を見る</router-link>
+                
             </div>
         </div>
     </div>
@@ -84,8 +87,20 @@ export default {
             .catch((error) => {
                 console.log(error);
             })
-        }
+        },
+
+        
+
     },
+
+    computed:{
+            timeStamp:function(){
+                return function(value) {
+                    return value.substring(0,10);
+                }
+            }
+        },
+    
     created() {
         this.getOtherData();
         this.getMyData();
@@ -93,14 +108,15 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
 .content {
     background: #FAEBD7;
+    font-family: 'Hannotate SC','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,sans-serif;
 }
 
 .VueCarousel{
-    height: 300px;
+    height: 250px;
     width: 90%;
     margin: auto;
 }
@@ -152,7 +168,7 @@ export default {
 
 .slider-image {
     width: 100%;
-    height: 150px;
+    height: 100%;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
 }
@@ -165,10 +181,51 @@ export default {
 }
 
 .my_data-content,.my_data-content_body-title, 
-.my_data-content_body-author,.my_data-content_body-rating {
+.my_data-content_body-author,.my_data-content_body-rating,
+.my_data-content_body-footer {
     display: flex;
+
 }
 
+.my_data {
+    width: 100%;
+}
+
+.my_data-content {
+    width: 60%;
+    height: 150px;
+    background: #fff;
+    margin: auto;
+    background: #efefef;
+    border-radius :240px 15px 100px 15px / 15px 200px 15px 200px;
+    border: 2px solid #333;
+}
+
+.my_data-content_body {
+    margin: 1rem 0 0 4rem;
+}
+
+.my_data-content_image img {
+    height: 150px;
+    border-radius : 240px 15px 100px 15px / 15px 200px 15px 200px;
+    border-top: 1px solid #333;
+    border-left: 1px solid #333;
+    border-bottom: 1px solid #333;
+}
+
+.tag {
+    font-size: 1rem;
+    
+}
+
+.content-main {
+    font-size: 1.5rem;
+    margin-left: 5rem;
+}
+
+.author, .rating {
+    margin-left: 7rem;
+}
 
 
 

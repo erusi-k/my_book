@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="body">
         <div v-for="error in errors" :key="error.id">
             <div class="error">{{error}}</div>
         </div>
