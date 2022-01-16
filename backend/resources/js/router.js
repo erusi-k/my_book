@@ -4,6 +4,7 @@ import BookHomeComponent from "./components/BookHomeComponent";
 import BookShowComponent from "./components/BookShowComponent";
 import BookEditComponent from "./components/BookEditComponent";
 import BookOtherListComponent from "./components/BookOtherListComponent";
+import BookMyListComponent from "./components/BookMyListComponent";
 
 export default new Router({
     mode:'history',
@@ -33,8 +34,15 @@ export default new Router({
 
             {
                 path:'/book/other',
-                name: 'book.other   ',
+                name: 'book.other',
                 component: BookOtherListComponent,
+                props:true
+            },
+
+            {
+                path:'/book/mylist',
+                name: 'book.mylist',
+                component: BookMyListComponent,
                 props:true
             }
     ]

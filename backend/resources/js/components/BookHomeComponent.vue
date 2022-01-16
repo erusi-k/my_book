@@ -1,5 +1,5 @@
 <template>
-    <div class="content">
+    <div class="body">
         <div class="other">
             <p>みんなの投稿 </p>
             <carousel class="slider"   :per-page="3" :speed="3000" :autoplayTimeout="4000">
@@ -110,6 +110,9 @@ export default {
 
 <style>
 
+.body {
+    font-family: 'Hannotate SC','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,sans-serif;
+}
 
 .VueCarousel{
     height: 250px;
@@ -190,11 +193,12 @@ export default {
 .my_data-content {
     width: 60%;
     height: 150px;
-    background: #fff;
+    background: #d6edff;
+    padding: 0.2rem 0.5rem;
     margin: auto;
-    background: #efefef;
-    border-radius :240px 15px 100px 15px / 15px 200px 15px 200px;
-    border: 2px solid #333;
+    margin-top: 2rem;
+    box-shadow: 0px 0px 0px 10px #d6edff;
+    border: 2px dashed #fff;
 }
 
 .my_data-content_body {
@@ -202,11 +206,7 @@ export default {
 }
 
 .my_data-content_image img {
-    height: 150px;
-    border-radius : 240px 15px 100px 15px / 15px 200px 15px 200px;
-    border-top: 1px solid #333;
-    border-left: 1px solid #333;
-    border-bottom: 1px solid #333;
+    height: 100%;
 }
 
 .tag {

@@ -83,7 +83,7 @@
                         this.test = res;
                         Swal.fire('登録が完了しました!');
                         console.log(this.item);
-                        this.$router.push({name: 'book.list'});
+                        this.$router.push({name: 'book.home'});
                     })
                     .catch((error) =>{
                         this.errors = error.response.data.errors;

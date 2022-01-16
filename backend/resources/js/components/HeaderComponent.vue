@@ -17,8 +17,10 @@
                     </router-link>
                 </li>
                 <li class="header-list_content">
-                    <p>マイリスト</p>
-                    <img src="/images/mylist.jpg" alt="マイリストアイコン">
+                    <router-link v-bind:to="{name: 'book.mylist'}">
+                        <p>マイリスト</p>
+                        <img src="/images/mylist.jpg" alt="マイリストアイコン">
+                    </router-link>
                 </li>
                 <li class="header-list_content">
                     <router-link v-bind:to="{name: 'book.other'}">
