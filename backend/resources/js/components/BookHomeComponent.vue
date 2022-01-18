@@ -193,11 +193,11 @@ export default {
 .my_data-content {
     width: 60%;
     height: 150px;
-    background: #d6edff;
+    background: #FFDBC9;
     padding: 0.2rem 0.5rem;
     margin: auto;
     margin-top: 2rem;
-    box-shadow: 0px 0px 0px 10px #d6edff;
+    box-shadow: 0px 0px 0px 10px #FFDBC9;
     border: 2px dashed #fff;
 }
 

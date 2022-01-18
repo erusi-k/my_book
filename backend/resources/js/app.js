@@ -35,7 +35,8 @@ Vue.component('bookshow-component',require('./components/BookShowComponent.vue')
 Vue.component('bookedit-component',require('./components/BookEditComponent.vue').default);
 Vue.component('header-component',require('./components/HeaderComponent.vue').default);
 Vue.component('bookOtherList-component',require('./components/BookOtherListComponent.vue').dafault);
-Vue.component('bookMylist-component',require('./components/BookMylistComponent.vue').default);
+Vue.component('bookMylist-component',require('./components/BookMyListComponent.vue').default);
+Vue.component('bookFadeIn-component',require('./components/BookFadeInComponent.vue').default);
 Vue.component('star-rating',StarRating);
 Vue.component('ValidationProvider',ValidationProvider);
 Vue.component('ValidationObserver',ValidationObserver);
