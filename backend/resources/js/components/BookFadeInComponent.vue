@@ -20,8 +20,8 @@
                                 <p class="content-main rating">{{myData.rating}}</p>
                             </div>
                             <div class="my_data-content_body-footer">
-                                <!-- <p class="tag">{{timeStamp(myData.created_at)}}</p> -->
-                                <router-link :to="`/book/show/${myData.id}`" >詳細へ</router-link>
+                                <p class="tag">{{timeStamp(myData.created_at)}}</p>
+                                <router-link class="btn" :to="`/book/show/${myData.id}`" >詳細へ</router-link>
                             </div>
                         </div>
                     </div> 
@@ -65,7 +65,15 @@ export default({
                 this.visible = false;
             }
         }
-    }
+    },
+
+    computed:{
+            timeStamp:function(){
+                return function(value) {
+                    return value.substring(0,10);
+                }
+            }
+        },
 })
 </script>
 

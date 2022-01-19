@@ -1,39 +1,46 @@
 <template>
     <div class="body">
-        <div v-for="error in errors" :key="error.id">
-            <div class="error">{{error}}</div>
+        <div class="test"></div>
+        <div class="input">
+            <div class="input-content">
+                <div v-for="error in errors" :key="error.id">
+                    <div class="error"><p>{{error}}</p></div>
+                </div>
+                <div class="input-content_header">
+                    <h2 class="input-content_header-title">新規作成</h2>
+                    <button class="search-btn" @click="openModal">本を検索する</button> 
+                </div>
+                <validation-observer tag="form" ref="obs" v-slot="ObserverProps" v-on:submit.prevent="submit">  
+                    <div class="input-content_body">
+                        <validation-provider v-slot="ProviderProps" rules="required|max:50">
+                            <p>タイトル</p>
+                            <input type="text" v-model="item.title" name="タイトル">
+                            <div class="error">{{ProviderProps.errors[0]}}</div>
+                        </validation-provider>
+                        
+                    </div>
+                    <div class="input-content_body">
+                        <validation-provider v-slot="ProviderProps" rules="required|max:30">
+                            <p>著者</p>
+                            <input type="text"  v-model="item.author" name="著者">
+                            <div class="error">{{ProviderProps.errors[0]}}</div>
+                        </validation-provider>
+                    </div>
+                    <div class="input-content_body">
+                        <p class="input_rating-title">評価</p>
+                        <star-rating v-model="rating" v-bind:increment="0.5"></star-rating>
+                    </div>
+                    <div class="input-content_body">
+                        <validation-provider v-slot="ProviderProps" rules="required|max:500">
+                            <p>感想</p>
+                            <textarea v-model="item.report" name="感想"></textarea>
+                            <div class="error">{{ProviderProps.errors[0]}}</div>
+                        </validation-provider>
+                    </div>
+                    <button class="input-btn" type="submit" :disabled="ObserverProps.invalid">登録</button>
+                </validation-observer>
+            </div>
         </div>
-        <label for="book_search">本情報検索</label>
-            <validation-observer tag="form" ref="obs" v-slot="ObserverProps" v-on:submit.prevent="submit">
-                <div>
-                    <p>評価</p>
-                    <star-rating v-model="rating" v-bind:increment="0.5"></star-rating>
-                </div>
-                <div>
-                    <validation-provider v-slot="ProviderProps" rules="required|max:50">
-                        <lable for="title">タイトル</lable>
-                        <input type="text" id="title" v-model="item.title" name="タイトル">
-                        <div class="error">{{ProviderProps.errors[0]}}</div>
-                    </validation-provider>
-                    
-                </div>
-                <div>
-                    <validation-provider v-slot="ProviderProps" rules="required|max:30">
-                        <lable for="author">著者</lable>
-                        <input type="text" id="author" v-model="item.author" name="著者">
-                        <div class="error">{{ProviderProps.errors[0]}}</div>
-                    </validation-provider>
-                </div>
-                <div>
-                    <validation-provider v-slot="ProviderProps" rules="required|max:500">
-                        <lable for="report">感想</lable>
-                        <input type="text" id="report" v-model="item.report" name="感想">
-                        <div class="error">{{ProviderProps.errors[0]}}</div>
-                    </validation-provider>
-                </div>
-                <button type="submit" :disabled="ObserverProps.invalid">登録</button>
-            </validation-observer>
-        
         
         <div id="overlay" v-show="showContent">
             <div id="content">
@@ -50,7 +57,6 @@
                 <p><button @click="closeModal">close</button></p>
             </div>
         </div>
-        <button @click="openModal">本を検索する</button>    
     </div>
 </template>
 
@@ -128,6 +134,18 @@
 </script>
 
 <style>
+
+    input,textarea {
+        width: 100%;
+    }
+
+    textarea {
+        height: 200px;
+    }
+
+    .error {
+        color: #666666;
+    }
     
     #overlay{
         z-index:1;
@@ -152,5 +170,73 @@
         overflow: auto;
         overflow: scroll;
     }
+
+    .create {
+        font-weight: bold;
+        font-size: 2rem;
+    }
+
+    .input {
+        margin: 3rem auto 0;
+        width: 70%;
+        background :#FFF6e6;
+        box-shadow: 0 2px 3px rgba(0,0,0,.22);
+        padding: 2.2rem 0.8rem 2.2rem 0.8rem;
+    }
+
+    .input:after {
+        position: absolute;
+        content: '';
+        top: 185px;
+        width: 30%;
+        height: 35px;
+        opacity: 0.3;
+        margin: -35px auto 10px 35%;
+        background: #db7093;
+        transform: rotate(-2deg);
+        left: 10px;
+        right: 10px;
+    }
+
+    .input-content {
+        width: 50%;
+        margin: auto;
+    }
+
+    .input-content_header {
+        display: flex;
+        justify-content: space-between;
+    }
     
+    .input-content_header-title {
+        font-size: 2rem;
+        font-weight: bold;
+        border-bottom: 2px solid #fff;
+    }
+
+    .input-content_body {
+        margin-top : 1rem;
+    }
+
+    .search-btn {
+        color: #fff;
+        padding: 1rem;
+        background-color: #eb6100;
+        border-radius: 10px;
+    }
+
+    .search-btn:hover {
+        background: #f56500;
+    }
+
+    .input-btn{
+        padding: 0.5rem 1rem;
+        background-color: #FFC7AF;
+        border-radius: 10px;
+    }
+
+    :disabled {
+        opacity:0.3;
+        cursor: not-allowed;
+    }
 </style>

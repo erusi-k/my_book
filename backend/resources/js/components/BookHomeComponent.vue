@@ -1,24 +1,26 @@
 <template>
     <div class="body">
         <div class="other">
-            <p>みんなの投稿 </p>
-            <carousel class="slider"   :per-page="3" :speed="3000" :autoplayTimeout="4000">
+            <p>みんなの投稿</p>
+            <carousel class="slider" :autoplay="true"   :per-page="3" :speed="3000" :autoplayTimeout="4000">
                 <slide v-for="other in others" :key="other.id">
-                    <div class="slider-inner">
-                        <div class="slider-header">
-                            <img class="slider-image" v-bind:src="other.imge" alt="">
-                        </div>     
-                        <div class="slider-body"> 
-                            <p class="slider-title">{{other.title}}</p> 
-                            <p class="slider-author">作 {{other.author}}</p>
-                            <div class="slider-footer">
-                                <p class="slider-rating">{{other.rating}}</p>
-                                <router-link class="slider-show" :to="`/book/show/${other.id}`">詳細を見る</router-link>
+                    <router-link class="slider-show" :to="`/book/show/${other.id}`">
+                        <div class="slider-inner">
+                            <div class="slider-header">
+                                <img class="slider-image" v-bind:src="other.imge" alt="">
+                            </div>     
+                            <div class="slider-body"> 
+                                <p class="slider-title">{{other.title}}</p> 
+                                <p class="slider-author">作 {{other.author}}</p>
+                                <div class="slider-footer">
+                                    <star-rating v-model="other.rating" read-only="true" star-size=20 ></star-rating>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </router-link>
                 </slide>
             </carousel>
+            
         </div>
         <div class="my_data">
             <p>自分の投稿</p>
@@ -42,7 +44,7 @@
                         </div>
                         <div class="my_data-content_body-footer">
                             <p class="tag">{{timeStamp(myData.created_at)}}</p>
-                            <router-link :to="`/book/show/${myData.id}`" >詳細へ</router-link>
+                            <router-link class="btn" :to="`/book/show/${myData.id}`" >詳細へ</router-link>
                         </div>
                     </div>
                 </div>
@@ -66,7 +68,7 @@ export default {
     },
     methods:{
         async getOtherData(){
-            await axios.get("http://localhost:8080/api/book/other",{params:{user_id:this.user.id}})
+            await axios.get("http://localhost:8080/api/book/other/random",{params:{user_id:this.user.id}})
             .then((res)=>{
                 this.others = res.data.data
                 console.log('データ取得は動いています');
@@ -115,7 +117,7 @@ export default {
 }
 
 .VueCarousel{
-    height: 250px;
+    
     width: 90%;
     margin: auto;
 }
@@ -129,15 +131,17 @@ export default {
 }
 
 .VueCarousel-slide .slider-inner {
-    height: 100%;
+    height: 150px;
     width: 80%;
-    margin: auto;
-    background-color: #fff; 
+    margin: 2rem auto 2rem;
+    padding: 0.2rem 0.5rem;
+    background-color: #d6edff; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
     color: #000; 
-    border: 2px solid #fff;
+    box-shadow: 0px 0px 0px 10px #d6edff;
+    border: 2px dashed #fff;
     font-size: 30px; 
     border-radius: 10px;
 }
@@ -177,13 +181,20 @@ export default {
 .slider-footer {
     display: flex;
     font-size: 0.7rem; 
+    margin-top: 1rem;
 }
 
 .my_data-content,.my_data-content_body-title, 
-.my_data-content_body-author,.my_data-content_body-rating,
+.my_data-content_body-author,.my_data-content_body-rating {
+    display: flex;
+    margin-top: 0.6rem;
+    border-bottom: 1px dashed #fff;
+}
+
 .my_data-content_body-footer {
     display: flex;
-
+    margin-top: 0.6rem;
+    justify-content: space-between;
 }
 
 .my_data {
@@ -191,8 +202,8 @@ export default {
 }
 
 .my_data-content {
-    width: 60%;
-    height: 150px;
+    width: 900px;
+    height: 180px;
     background: #FFDBC9;
     padding: 0.2rem 0.5rem;
     margin: auto;
@@ -202,7 +213,8 @@ export default {
 }
 
 .my_data-content_body {
-    margin: 1rem 0 0 4rem;
+    margin: 1rem 0 0 6rem;
+    width: 70%;
 }
 
 .my_data-content_image img {
@@ -215,12 +227,79 @@ export default {
 }
 
 .content-main {
-    font-size: 1.5rem;
+    font-size: 2.3vmin;
     margin-left: 5rem;
 }
 
 .author, .rating {
     margin-left: 7rem;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 35px;
+    background-color: #d6edff;
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    line-height: 2.0;
+    text-decoration: none;
+    transition-duration: 0.3s;
+    position: relative;
+}
+
+.btn:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 15px 20px 0 0;
+    border-color: #ffffff transparent transparent transparent;
+}
+
+.btn:after {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 5px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 20px 15px;
+    border-color: transparent transparent #efefef transparent;
+    box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.15);
+    transform: rotate(16deg);
+}
+
+.btn:hover {
+    background-color: #e6de6b;
+}
+
+.btn span {
+    position: relative;
+    padding-left: 16px;
+    letter-spacing: 0.05em;
+}
+
+.btn span:before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border: 0;
+    border-top: solid 2px #fff;
+    border-right: solid 2px #fff;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -4px;
 }
 
 
