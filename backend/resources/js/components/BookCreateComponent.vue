@@ -42,19 +42,28 @@
             </div>
         </div>
         
-        <div id="overlay" v-show="showContent">
-            <div id="content">
-                <input type="text" id="book_search" v-model="query">
-                <p @click="getBook(query)">本情報取得ボタン</p>
-                <p v-if="bookEmpty">検索結果がありません</p>
-                <div v-for="searchData in searchDatas" :key="searchData.id">
-                    <input type="radio" :value="searchData" v-model="selectData">
-                    <p>{{searchData.volumeInfo.authors}}</p>
-                    <p>{{searchData.volumeInfo.title}}</p>
-                    <img v-bind:src="searchData.volumeInfo.imageLinks&&searchData.volumeInfo.imageLinks.smallThumbnail" >
+        <div id="overlay" v-show="showContent" @click.self="closeModal">
+            <div id="book">
+                <div class="book-search">
+                    <div class="book-search_main">
+                        <input type="text" class="book-search_main-input" placeholder="キーワード入力してください" v-model="query">
+                        <button class="book-search_main-btn" @click="getBook(query)">検索</button>
+                    </div>
+                    <img class="close" @click="closeModal" src="/images/close.png">
                 </div>
-                <p @click="setData">データセット</p>
-                <p><button @click="closeModal">close</button></p>
+                <p v-if="bookEmpty">検索結果がありません</p>
+                <div class="book-body">
+                    <div class="book-body_content" v-for="searchData in searchDatas" :key="searchData.id">
+                        <div class="book-body_content-img">
+                            <img v-bind:src="searchData.volumeInfo.imageLinks&&searchData.volumeInfo.imageLinks.smallThumbnail" >
+                        </div>
+                        <div class="book-body_content-main">
+                            <p>{{searchData.volumeInfo.title}}</p>
+                            <p>{{searchData.volumeInfo.authors}}</p>
+                            <button class="select-btn" @click="dataSet(searchData)">選択する</button>
+                        </div>  
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -76,7 +85,6 @@
                 showContent:false,
                 query:'',
                 bookEmpty:false,
-                selectData:{},
                 errors:{},
         
             }
@@ -123,12 +131,14 @@
             closeModal(){
                 this.showContent = false;
             },
-            setData(){
-                this.item.title = this.selectData.volumeInfo.title;
-                this.item.author = this.selectData.volumeInfo.authors[0];
-                this.item.imge = this.selectData.volumeInfo.imageLinks.smallThumbnail;
-                console.log(this.item);
-            },
+            
+            dataSet(data){
+                this.item.title = data.volumeInfo.title;
+                this.item.author = data.volumeInfo.authors[0];
+                this.item.imge = data.volumeInfo.imageLinks.smallThumbnail;
+                return this.closeModal();
+                
+            }
         },
     }
 </script>
@@ -161,12 +171,12 @@
         
     }
 
-    #content{
+    #book{
         z-index:2;
         width:50%;
         height:100vh;
         padding:1em;
-        background:#fff;
+        background:#FFF6e6;
         overflow: auto;
         overflow: scroll;
     }
@@ -236,7 +246,69 @@
     }
 
     :disabled {
-        opacity:0.3;
+        opacity: 0.3;
         cursor: not-allowed;
     }
+
+    .close {
+        width: 30px;
+        height: 30px; 
+    }
+
+    .select-btn {
+        color: #fff;
+        margin-top: 2rem;
+        padding: 0.5rem;
+        background-color: #eb6100;
+        border-radius: 10px;
+    }
+
+    .select-btn:hover {
+        background: #f56500;
+    }
+
+    .book-search {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .book-search_main {
+        display: flex;
+        margin-top: 2rem;
+        width: 80%;
+    }
+
+    .book-search_main-input {
+        margin: auto;
+        width: 80%;
+        border-radius: 30px;
+    }
+
+    .book-search_main-btn {
+        padding: 0.5rem 1rem;
+        background-color: #FFC7AF;
+        border-radius: 10px;
+    }
+
+    .book-body {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .book-body div {
+        width: 44.2%;
+    }
+
+    .book-body_content {
+        display: flex;
+        margin: 2rem 1rem;
+    }
+
+    .book-body_content-img img {
+        width: 80%;
+        height: 200px;
+    }
+
+
+    
 </style>
