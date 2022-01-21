@@ -27,9 +27,6 @@
                     </div> 
             </transition>
         </div>
-
-        <p @click="handleScroll()">テスト</p>
-        <p >どむテスト</p>
     </div>
 </template>
 
@@ -103,4 +100,122 @@ export default({
     .v-leave-to {
         opacity: 0;
     }
+
+    .my_data-content,.my_data-content_body-title, 
+.my_data-content_body-author,.my_data-content_body-rating {
+    display: flex;
+    margin-top: 0.6rem;
+    border-bottom: 1px dashed #fff;
+}
+
+.my_data-content_body-footer {
+    display: flex;
+    margin-top: 0.6rem;
+    justify-content: space-between;
+}
+
+.my_data {
+    width: 100%;
+}
+
+.my_data-content {
+    width: 900px;
+    height: 180px;
+    background: #FFDBC9;
+    padding: 0.2rem 0.5rem;
+    margin: auto;
+    margin-top: 2rem;
+    box-shadow: 0px 0px 0px 10px #FFDBC9;
+    border: 2px dashed #fff;
+}
+
+.my_data-content_body {
+    margin: 1rem 0 0 6rem;
+    width: 70%;
+}
+
+.my_data-content_image img {
+    height: 100%;
+}
+
+.tag {
+    font-size: 1rem;
+    
+}
+
+.content-main {
+    font-size: 2.3vmin;
+    margin-left: 5rem;
+}
+
+.author, .rating {
+    margin-left: 7rem;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 35px;
+    background-color: #d6edff;
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    line-height: 2.0;
+    text-decoration: none;
+    transition-duration: 0.3s;
+    position: relative;
+}
+
+.btn:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 15px 20px 0 0;
+    border-color: #ffffff transparent transparent transparent;
+}
+
+.btn:after {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 5px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 20px 15px;
+    border-color: transparent transparent #efefef transparent;
+    box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.15);
+    transform: rotate(16deg);
+}
+
+.btn:hover {
+    background-color: #e6de6b;
+}
+
+.btn span {
+    position: relative;
+    padding-left: 16px;
+    letter-spacing: 0.05em;
+}
+
+.btn span:before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border: 0;
+    border-top: solid 2px #fff;
+    border-right: solid 2px #fff;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -4px;
+}
 </style>

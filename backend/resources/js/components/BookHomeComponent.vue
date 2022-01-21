@@ -1,13 +1,13 @@
 <template>
     <div class="body">
         <div class="other">
-            <p>みんなの投稿</p>
-            <carousel class="slider" :autoplay="true"   :per-page="3" :speed="3000" :autoplayTimeout="4000">
-                <slide v-for="other in others" :key="other.id">
+            <p class="heading">みんなの投稿</p>
+            <carousel  :autoplay="true"   :per-page="3" :speed="3000" :autoplayTimeout="4000">
+                <slide class="slider" v-for="other in others" :key="other.id">
                     <router-link class="slider-show" :to="`/book/show/${other.id}`">
                         <div class="slider-inner">
                             <div class="slider-header">
-                                <img class="slider-image" v-bind:src="other.imge" alt="">
+                                <img v-bind:src="other.imge">
                             </div>     
                             <div class="slider-body"> 
                                 <p class="slider-title">{{other.title}}</p> 
@@ -23,7 +23,7 @@
             
         </div>
         <div class="my_data">
-            <p>自分の投稿</p>
+            <p class="heading">自分の投稿</p>
             <div v-for="myData in myDatas" :key="myData.id">
                 <div class="my_data-content">
                     <div class="my_data-content_image">
@@ -110,11 +110,24 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .body {
     font-family: 'Hannotate SC','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,sans-serif;
 }
+
+.heading {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #fff;
+}
+
+.heading:first-letter {
+    color: #FF5F17;
+    font-size: 3rem;
+}
+
 
 .VueCarousel{
     
@@ -134,11 +147,9 @@ export default {
     height: 150px;
     width: 80%;
     margin: 2rem auto 2rem;
-    padding: 0.2rem 0.5rem;
+    padding: 1rem 0.5rem;
     background-color: #d6edff; 
     display: flex; 
-    justify-content: center; 
-    align-items: center; 
     color: #000; 
     box-shadow: 0px 0px 0px 10px #d6edff;
     border: 2px dashed #fff;
@@ -153,9 +164,9 @@ export default {
 }
 
 .slider-header {
-    flex-shrink: 0;
-    width: 40%;
-    margin-right: auto;
+    width: 50%;
+    height: 100%;
+    /* padding: 0.2rem 0.5rem; */
 }
 
 .slider-title {
@@ -169,11 +180,9 @@ export default {
     text-align: right;
 }
 
-.slider-image {
+.slider-header img {
     width: 100%;
     height: 100%;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
 }
 
 

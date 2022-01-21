@@ -17,7 +17,8 @@ class BookController extends Controller
     }
 
     public function otherRandom(Request $request) {
-        $data = Book::where('user_id','<>',$request->user_id)->inRandomOrder()->take(9)->get();
+        $data = Book::where('user_id','<>',$request->user_id)->inRandomOrder()->take(9
+        )->get();
         return response()->json([
             'data'=>$data
         ]);
@@ -45,6 +46,7 @@ class BookController extends Controller
 
     public function show($id) {
     $data = Book::find($id);
+    $data['user_name'] = $data->user->name;
         return response()->json([
             'data'=>$data
         ]);

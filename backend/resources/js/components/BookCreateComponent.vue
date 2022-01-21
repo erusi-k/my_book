@@ -145,6 +145,10 @@
 
 <style>
 
+    .body {
+        font-family: 'Hannotate SC','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,sans-serif;
+    }   
+
     input,textarea {
         width: 100%;
     }
