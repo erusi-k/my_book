@@ -1,7 +1,7 @@
 <template>
     <div class="body">
         <div class="my_data">
-            <p>自分の投稿</p>
+            <p class="heading">自分の投稿</p>
             <bookFadeIn-component v-bind:myDatas="myDatas"></bookFadeIn-component>
         </div>
     </div>
@@ -35,5 +35,16 @@ export default ({
 
 <style scoped>
 
+.heading {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #fff;
+}
+
+.heading:first-letter {
+    color: #FF5F17;
+    font-size: 3rem;
+}
 
 </style>

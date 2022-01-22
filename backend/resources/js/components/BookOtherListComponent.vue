@@ -1,8 +1,7 @@
 <template>
     <div class="body">
-        <p>みなさんでーた表示リスto</p>
         <div class="other">
-            <p>みんなの投稿 </p>
+            <p class="heading">みんなの投稿 </p>
             <div v-for="other in others" :key="other.id">
                 <div class ="other_data" >
                     <div class="other_data-image">
@@ -76,6 +75,18 @@ export default {
 
 .body {
     font-family: 'Hannotate SC','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,sans-serif;
+}
+
+.heading {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #fff;
+}
+
+.heading:first-letter {
+    color: #FF5F17;
+    font-size: 3rem;
 }
 
 .other_data,.other_data_body-title, 

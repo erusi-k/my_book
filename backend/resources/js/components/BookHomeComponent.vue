@@ -2,7 +2,7 @@
     <div class="body">
         <div class="other">
             <p class="heading">みんなの投稿</p>
-            <carousel  :autoplay="true"   :per-page="3" :speed="3000" :autoplayTimeout="4000">
+            <carousel  :autoplay="true"   :per-page="3" :speed="3000" :autoplayTimeout="4000" pagination-color="#CCCCCC">
                 <slide class="slider" v-for="other in others" :key="other.id">
                     <router-link class="slider-show" :to="`/book/show/${other.id}`">
                         <div class="slider-inner">
@@ -139,6 +139,7 @@ export default {
     height: 100% !important;
 }
 
+.pagination
 .VueCarousel-dot {
     background-color: red;
 }

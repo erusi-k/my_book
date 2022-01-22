@@ -98,7 +98,11 @@ img {
 }
 
 .header-list_content:hover {
-    transform: scale(1.3,1.3);
+    background-image: url('/images/select.png');
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+
 }
 
 
