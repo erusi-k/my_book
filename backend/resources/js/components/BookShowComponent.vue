@@ -31,7 +31,7 @@
                 </div>
                 <div class="show-content_card-body_rating" >
                     <p class="tag">評価</p>
-                    <star-rating class="content-main rating"  v-model="item.rating" v-bind:increment="0.5" read-only="true" star-size=30></star-rating>
+                    <star-rating class="content-main rating"  v-model="item.rating" v-bind:increment="0.5" :read-only="true" :star-size=30></star-rating>
                 </div>
                 
             </div>

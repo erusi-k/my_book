@@ -44,7 +44,7 @@ export default {
 
     methods:{
         async getOtherData(){
-            await axios.get("http://localhost:8080/api/book/other/all",{params:{user_id:this.user.id}})
+            await axios.get("http://localhost:8080/api/book/other",{params:{user_id:this.user.id}})
             .then((res)=>{
                 this.others = res.data.data
                 console.log('データ取得は動いています');

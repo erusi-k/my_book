@@ -13,7 +13,10 @@
                                 <p class="slider-title">{{other.title}}</p> 
                                 <p class="slider-author">作 {{other.author}}</p>
                                 <div class="slider-footer">
-                                    <star-rating v-model="other.rating" read-only="true" star-size=20 ></star-rating>
+                                    <star-rating v-model="other.rating" :read-only="true" :star-size=20 ></star-rating>
+                                </div>
+                                <div class="slider-user">
+                                    <p class="test">ユーザ名:{{other.user_name}}</p>
                                 </div>
                             </div>
                         </div>
@@ -182,7 +185,7 @@ export default {
 }
 
 .slider-author {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     text-align: right;
 }
 
@@ -196,7 +199,13 @@ export default {
 .slider-footer {
     display: flex;
     font-size: 0.7rem; 
-    margin-top: 1rem;
+    margin-top: 0.6rem;
+}
+
+.slider-user {
+    margin-top: 0.6rem;
+    text-align: right;
+    font-size: 0.8rem;
 }
 
 .my_data-content,.my_data-content_body-title, 

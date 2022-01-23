@@ -5,27 +5,33 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use ILluminate\Support\Facades\Auth;
 use App\Models\Book;
+use App\Models\User;
 use App\Http\Requests\Api\PostRequest;
 
 class BookController extends Controller
 {
     public function myData(Request $request){
-        $data =  Book::where('user_id',$request->user_id)->get();
+        $data =  Book::where('user_id',$request->user_id)->latest()->get();
         return response()->json([
             'data'=>$data
         ]);
     }
 
     public function otherRandom(Request $request) {
-        $data = Book::where('user_id','<>',$request->user_id)->inRandomOrder()->take(9
-        )->get();
+        $datas = Book::where('user_id','<>',$request->user_id)->inRandomOrder()->take(9)->get();
+        $i =0;
+        foreach($datas as $data){
+            $user_name = User::find($data->user_id);
+            $datas[$i]['user_name'] = $user_name->name;  
+            $i++;
+            }
         return response()->json([
-            'data'=>$data
+            'data'=>$datas
         ]);
     }
 
     public function other(Request $request){
-        $data = Book::where('user_id','<>',$request->user_id)->get();
+        $data = Book::where('user_id','<>',$request->user_id)->latest()->get();
         return response()->json([
             'data'=>$data
         ]);
@@ -46,7 +52,8 @@ class BookController extends Controller
 
     public function show($id) {
     $data = Book::find($id);
-    $data['user_name'] = $data->user->name;
+    $user_name = User::find($data->user_id);
+    $data['user_name'] = $user_name->name;
         return response()->json([
             'data'=>$data
         ]);

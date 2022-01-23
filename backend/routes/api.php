@@ -21,7 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('book')->group(function(){
     Route::get('/other/random',[bookController::class,'otherRandom']);
-    Route::get('mydata/',[bookController::class,'myData']);
+    Route::get('/other',[bookController::class,'other']);
+    Route::get('/mydata',[bookController::class,'myData']);
     Route::post('/',[bookController::class,'store']);
     Route::get('/{id}',[bookController::class,'show']);
     Route::put('/{id}',[bookController::class,'update']);
