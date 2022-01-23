@@ -146,9 +146,9 @@ export default {
 
 .VueCarousel-slide .slider-inner {
     height: 150px;
-    width: 80%;
+    width: 85%;
     margin: 2rem auto 2rem;
-    padding: 1rem 0.5rem;
+    padding: 0.2rem 0.5rem;
     background-color: #d6edff; 
     display: flex; 
     color: #000; 
@@ -165,9 +165,14 @@ export default {
 }
 
 .slider-header {
-    width: 50%;
+    width: 40%;
     height: 100%;
     /* padding: 0.2rem 0.5rem; */
+}
+
+.slider-body {
+    width: 50%;
+    margin-left: 0.6rem;
 }
 
 .slider-title {

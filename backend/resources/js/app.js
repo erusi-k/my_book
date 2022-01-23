@@ -29,10 +29,10 @@ Alpine.start();
 window.Vue = require('vue').default;
 
 
-Vue.component('bookcreaet-component', require('./components/BookCreateComponent.vue').default);
-Vue.component('bookhome-component',require('./components/BookHomeComponent.vue').default);
-Vue.component('bookshow-component',require('./components/BookShowComponent.vue').default);
-Vue.component('bookedit-component',require('./components/BookEditComponent.vue').default);
+Vue.component('bookCreaet-component', require('./components/BookCreateComponent.vue').default);
+Vue.component('bookHome-component',require('./components/BookHomeComponent.vue').default);
+Vue.component('bookShow-component',require('./components/BookShowComponent.vue').default);
+Vue.component('bookEdit-component',require('./components/BookEditComponent.vue').default);
 Vue.component('header-component',require('./components/HeaderComponent.vue').default);
 Vue.component('bookOtherList-component',require('./components/BookOtherListComponent.vue').dafault);
 Vue.component('bookMylist-component',require('./components/BookMyListComponent.vue').default);

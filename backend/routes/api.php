@@ -19,11 +19,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::prefix('book')->group(function(){
+    Route::get('/other/random',[bookController::class,'otherRandom']);
+    Route::get('mydata/',[bookController::class,'myData']);
+    Route::post('/',[bookController::class,'store']);
+    Route::get('/{id}',[bookController::class,'show']);
+    Route::put('/{id}',[bookController::class,'update']);
+    Route::delete('/{id}',[bookController::class,'delete']);
+});
 
-Route::get('/book/other/random',[bookController::class,'otherRandom']);
-Route::get('/book/mydata/',[bookController::class,'myData']);
-Route::post('/book',[bookController::class,'store']);
-Route::get('/book/{id}',[bookController::class,'show']);
-Route::put('/book/{id}',[bookController::class,'update']);
-Route::delete('/book/{id}',[bookController::class,'delete']);
 
