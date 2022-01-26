@@ -80,7 +80,7 @@ export default ({
                 .then((res) => {
                     console.log(res);
                     alert('削除しました!');
-                    this.$router.push({name:'book.list'});
+                    this.$router.push({name:'book.home'});
                 })
                 .catch((error) => {
                     console.log(error);

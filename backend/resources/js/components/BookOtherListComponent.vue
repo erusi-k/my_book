@@ -25,6 +25,7 @@
                         </div>
                         <div class="other_data_body-footer">
                             <p class="tag">{{timeStamp(other.created_at)}}</p>
+                            <p>ユーザー名:{{other.user_name}}</p>
                             <router-link class="content-main btn"  :to="`/book/show/${other.id}`">詳細を見る！</router-link>
                         </div>    
                     
@@ -145,7 +146,12 @@ export default {
     width: 70%;
 }
 
+.other_data-image {
+    width: 15%;
+}
+
 .other_data-image img {
+    width: 100%;
     height: 100%;
 }
 
@@ -169,7 +175,7 @@ export default {
     align-items: center;
     width: 30%;
     height: 35px;
-    background-color: #FFDBC9;
+    background-color: #FF5F17;
     box-sizing: border-box;
     color: #fff;
     font-size: 16px;

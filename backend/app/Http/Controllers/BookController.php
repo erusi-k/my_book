@@ -31,9 +31,15 @@ class BookController extends Controller
     }
 
     public function other(Request $request){
-        $data = Book::where('user_id','<>',$request->user_id)->latest()->get();
+        $datas = Book::where('user_id','<>',$request->user_id)->latest()->get();
+        $i =0;
+        foreach($datas as $data){
+            $user_name = User::find($data->user_id);
+            $datas[$i]['user_name'] = $user_name->name;  
+            $i++;
+            }
         return response()->json([
-            'data'=>$data
+            'data'=>$datas
         ]);
     }
 
@@ -51,9 +57,9 @@ class BookController extends Controller
     }
 
     public function show($id) {
-    $data = Book::find($id);
-    $user_name = User::find($data->user_id);
-    $data['user_name'] = $user_name->name;
+        $data = Book::find($id);
+        $user_name = User::find($data->user_id);
+        $data['user_name'] = $user_name->name;  
         return response()->json([
             'data'=>$data
         ]);

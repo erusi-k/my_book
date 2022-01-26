@@ -50,12 +50,28 @@ body {
   margin: 0;
   background: #FAEBD7;
   font-family: 'Hannotate SC','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,sans-serif;
+  position: relative;
 }
 
 /**
 Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
 */
 
+.content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: right;
+  align-items: center;
+  border-radius: 10px;
+}
+
+
+
+img {
+  width: 35px;
+  height: 35px;
+}
 
 
 /*
@@ -546,12 +562,6 @@ object {
  *
  * https://github.com/mozdevs/cssremedy/issues/14
  */
-
-img,
-video {
-  max-width: 100%;
-  height: auto;
-}
 
 /**
  * Ensure the default browser behavior of the `hidden` attribute.

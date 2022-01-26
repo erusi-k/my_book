@@ -79,7 +79,7 @@
                     user_id:this.user.id,
                     title:'',
                     author:'',
-                    imge:'',
+                    imge:'/images/noimage.jpg',
                 },  
                 searchDatas:'',
                 showContent:false,

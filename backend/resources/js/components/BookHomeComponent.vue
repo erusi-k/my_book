@@ -55,8 +55,6 @@
                             </div>
                         </div>
                     </div>
-                    
-                    
                 </div>
             </div>
         </div>    
@@ -156,7 +154,6 @@ export default {
 
 
 .VueCarousel{
-    
     width: 90%;
     margin: auto;
 }
@@ -264,7 +261,12 @@ export default {
     width: 70%;
 }
 
+.my_data-content_image {
+    width: 15%;
+}
+
 .my_data-content_image img {
+    width: 100%;
     height: 100%;
 }
 
@@ -288,7 +290,7 @@ export default {
     align-items: center;
     width: 30%;
     height: 35px;
-    background-color: #d6edff;
+    background-color: #FF5F17;
     box-sizing: border-box;
     color: #fff;
     font-size: 16px;
@@ -347,6 +349,10 @@ export default {
     top: 50%;
     left: 0;
     margin-top: -4px;
+}
+
+@media screen and (max-width:480px) {
+
 }
 
 
