@@ -1,5 +1,8 @@
 <template>
     <div class="body">
+        <div v-show="isLoading" class="loading">   
+            <vue-loaders v-show='isLoading'  name ="ball-spin-fade-loader" color="#FF8856" scale="3"></vue-loaders>
+        </div>
         <div class="other">
             <p class="heading">みんなの投稿 </p>
             <div v-for="other in others" :key="other.id">
@@ -38,6 +41,7 @@ export default {
     data(){
         return{
             others:'',
+            isLoading: true,
         }
         
     },
@@ -47,6 +51,7 @@ export default {
             await axios.get("http://localhost:8080/api/book/other",{params:{user_id:this.user.id}})
             .then((res)=>{
                 this.others = res.data.data
+                this.isLoading = false;
                 console.log('データ取得は動いています');
                 console.log(this.others);
             })
@@ -75,6 +80,21 @@ export default {
 
 .body {
     font-family: 'Hannotate SC','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,sans-serif;
+}
+
+/* ローディングぐるぐる */
+.loading {
+    position:fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.7);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 
 .heading {

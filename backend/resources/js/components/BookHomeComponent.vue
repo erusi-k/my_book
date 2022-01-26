@@ -1,60 +1,65 @@
 <template>
     <div class="body">
-        <div class="other">
-            <p class="heading">みんなの投稿</p>
-            <carousel  :autoplay="true"   :per-page="3" :speed="3000" :autoplayTimeout="4000" pagination-color="#CCCCCC">
-                <slide class="slider" v-for="other in others" :key="other.id">
-                    <router-link class="slider-show" :to="`/book/show/${other.id}`">
-                        <div class="slider-inner">
-                            <div class="slider-header">
-                                <img v-bind:src="other.imge">
-                            </div>     
-                            <div class="slider-body"> 
-                                <p class="slider-title">{{other.title}}</p> 
-                                <p class="slider-author">作 {{other.author}}</p>
-                                <div class="slider-footer">
-                                    <star-rating v-model="other.rating" :read-only="true" :star-size=20 ></star-rating>
-                                </div>
-                                <div class="slider-user">
-                                    <p class="test">ユーザ名:{{other.user_name}}</p>
+        <div v-show="isLoading" class="loading">   
+            <vue-loaders v-show='isLoading'  name ="ball-spin-fade-loader" color="#FF8856" scale="3"></vue-loaders>
+        </div>
+        <div>
+            <div class="other">
+                <p class="heading">みんなの投稿</p>
+                <carousel  :autoplay="true"   :per-page="3" :speed="3000" :autoplayTimeout="4000" pagination-color="#CCCCCC">
+                    <slide class="slider" v-for="other in others" :key="other.id">
+                        <router-link class="slider-show" :to="`/book/show/${other.id}`">
+                            <div class="slider-inner">
+                                <div class="slider-header">
+                                    <img v-bind:src="other.imge">
+                                </div>     
+                                <div class="slider-body"> 
+                                    <p class="slider-title">{{other.title}}</p> 
+                                    <p class="slider-author">作 {{other.author}}</p>
+                                    <div class="slider-footer">
+                                        <star-rating v-model="other.rating" :read-only="true" :star-size=20 ></star-rating>
+                                    </div>
+                                    <div class="slider-user">
+                                        <p class="test">ユーザ名:{{other.user_name}}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </router-link>
-                </slide>
-            </carousel>
-            
-        </div>
-        <div class="my_data">
-            <p class="heading">自分の投稿</p>
-            <div v-for="myData in myDatas" :key="myData.id">
-                <div class="my_data-content">
-                    <div class="my_data-content_image">
-                        <img v-bind:src="myData.imge">
-                    </div>
-                    <div class="my_data-content_body">
-                        <div class="my_data-content_body-title">
-                            <p class="tag">タイトル</p>
-                            <p class="content-main title">{{myData.title}}</p>
-                        </div>
-                        <div class="my_data-content_body-author">
-                            <p class="tag">著者</p>
-                            <p class="content-main author" >{{myData.author}}</p>
-                        </div>
-                        <div class="my_data-content_body-rating">
-                            <p class="tag">評価</p>
-                            <p class="content-main rating">{{myData.rating}}</p>
-                        </div>
-                        <div class="my_data-content_body-footer">
-                            <p class="tag">{{timeStamp(myData.created_at)}}</p>
-                            <router-link class="btn" :to="`/book/show/${myData.id}`" >詳細へ</router-link>
-                        </div>
-                    </div>
-                </div>
-                
+                        </router-link>
+                    </slide>
+                </carousel>
                 
             </div>
-        </div>
+            <div class="my_data">
+                <p class="heading">自分の投稿</p>
+                <div v-for="myData in myDatas" :key="myData.id">
+                    <div class="my_data-content">
+                        <div class="my_data-content_image">
+                            <img v-bind:src="myData.imge">
+                        </div>
+                        <div class="my_data-content_body">
+                            <div class="my_data-content_body-title">
+                                <p class="tag">タイトル</p>
+                                <p class="content-main title">{{myData.title}}</p>
+                            </div>
+                            <div class="my_data-content_body-author">
+                                <p class="tag">著者</p>
+                                <p class="content-main author" >{{myData.author}}</p>
+                            </div>
+                            <div class="my_data-content_body-rating">
+                                <p class="tag">評価</p>
+                                <p class="content-main rating">{{myData.rating}}</p>
+                            </div>
+                            <div class="my_data-content_body-footer">
+                                <p class="tag">{{timeStamp(myData.created_at)}}</p>
+                                <router-link class="btn" :to="`/book/show/${myData.id}`" >詳細へ</router-link>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>    
     </div>
 </template>
 
@@ -66,6 +71,7 @@ export default {
         return{
             others:'',
             myDatas:'',
+            isLoading: true,
         }
         
     },
@@ -76,6 +82,7 @@ export default {
                 this.others = res.data.data
                 console.log('データ取得は動いています');
                 console.log(this.others);
+                this.isLoading = false;
             })
             .catch((error) => {
                 console.log(error);
@@ -118,6 +125,22 @@ export default {
 .body {
     font-family: 'Hannotate SC','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,sans-serif;
 }
+
+/* ローディングぐるぐる */
+.loading {
+    position:fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.7);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
 
 .heading {
     display: inline-block;

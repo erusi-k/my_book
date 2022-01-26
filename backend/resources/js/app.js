@@ -9,7 +9,8 @@ import VueCarousel from 'vue-carousel';
 import StarRating from 'vue-star-rating';
 import VueRouter from 'vue-router';
 import router from './router';
-
+import 'vue-loaders/dist/vue-loaders.css';
+import VueLoaders from 'vue-loaders';
 
 let rule;
 for(rule in originalRules) {
@@ -40,9 +41,11 @@ Vue.component('bookFadeIn-component',require('./components/BookFadeInComponent.v
 Vue.component('star-rating',StarRating);
 Vue.component('ValidationProvider',ValidationProvider);
 Vue.component('ValidationObserver',ValidationObserver);
+Vue.component('vue-loaders',VueLoaders);
 
 Vue.use(VueRouter);
 Vue.use(VueCarousel);
+Vue.use(VueLoaders);
 
 
 
