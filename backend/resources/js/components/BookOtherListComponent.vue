@@ -3,7 +3,7 @@
         <div v-show="isLoading" class="loading">   
             <vue-loaders v-show='isLoading'  name ="ball-spin-fade-loader" color="#FF8856" scale="3"></vue-loaders>
         </div>
-        <div class="other">
+        <div v-show="!resp" class="other">
             <p class="heading">みんなの投稿 </p>
             <div v-for="other in others" :key="other.id">
                 <div class ="other_data" >
@@ -28,10 +28,31 @@
                             <p>ユーザー名:{{other.user_name}}</p>
                             <router-link class="content-main btn"  :to="`/book/show/${other.id}`">詳細を見る！</router-link>
                         </div>    
-                    
                     </div>
                 </div>
             </div>
+        </div>
+        <div>
+            <div v-show="resp" class="responsive">
+                <p class="heading">みんなの投稿</p>
+                <div class="responsive_other" v-for="other in others" :key="other.id">
+                    <router-link class="responsive_other-show" :to="`/book/show/${other.id}`">
+                        <div class="responsive_other_inner">
+                            <div class="responsive_other_inner-header">
+                                <img v-bind:src="other.imge">
+                            </div>     
+                            <div class="responsive_other_body"> 
+                                <p class="responsive_other_body-title">{{other.title}}</p> 
+                                <p class="responsive_other_body-author">作 {{other.author}}</p>
+                                <div class="responsive_other_body-footer">
+                                    <star-rating v-model="other.rating" :read-only="true" :star-size=20 ></star-rating>
+                                </div>
+                                <p class="responsive_other_body-name">ユーザー名:{{other.user_name}}</p>
+                            </div>
+                        </div>
+                    </router-link>
+                </div>    
+            </div>  
         </div>
     </div>
 </template>
@@ -43,6 +64,7 @@ export default {
         return{
             others:'',
             isLoading: true,
+            resp: false,
         }
         
     },
@@ -61,6 +83,13 @@ export default {
                 alert('失敗です');
             })
         },
+
+        handleResize(){
+            if(window.innerWidth <= 480){
+                this.resp = true;
+            }
+        }
+
     },
 
     computed:{
@@ -72,6 +101,8 @@ export default {
         },
 
     created(){
+        window.addEventListener('resize',this.handleResize);
+        this.handleResize();
         this.getOtherData();
     }
 }
@@ -235,4 +266,65 @@ export default {
     left: 0;
     margin-top: -4px;
 }
+
+/* otherレスポンシブ */
+
+.responsive_other_inner {
+    height: 180px;
+    width: 70%;
+    margin: 4rem auto 4rem;
+    padding: 0.2rem 0.5rem;
+    background-color: #d6edff; 
+    display: flex; 
+    color: #000; 
+    box-shadow: 0px 0px 0px 10px #d6edff;
+    border: 2px dashed #fff;
+    font-size: 30px; 
+    border-radius: 10px;
+}
+
+.responsive_other_inner:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 14px rgba(50,50,93,1), 0 3px 6px rgba(0,0,0,.08);
+    transition: all .5s;
+}
+
+.responsive_other_inner-header {
+    width: 40%;
+    height: 100%;
+    /* padding: 0.2rem 0.5rem; */
+}
+
+.responsive_other_inner-header img {
+    width: 100%;
+    height: 100%;
+}
+
+.responsive_other_body {
+    width: 50%;
+    margin-left: 0.6rem;
+}
+
+.responsive_other_body-name {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+.responsive_other_body-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-left: 0.3rem;
+}
+
+.responsive_other_body-author {
+    font-size: 0.8rem;
+    text-align: right;
+}
+
+.responsive_other_body-footer {
+    display: flex;
+    font-size: 0.7rem; 
+    margin-top: 0.6rem;
+}
+
 </style>
