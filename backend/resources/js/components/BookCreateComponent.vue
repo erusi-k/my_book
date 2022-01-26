@@ -314,5 +314,66 @@
     }
 
 
+    @media screen and (max-width:480px) {
+        .input {
+            width:90%;
+            padding: 1rem 0.5rem;
+            
+        }
+
+        .input:after {
+            position: absolute;
+            content: '';
+            top: 20px;
+            width: 50%;
+            height: 35px;
+            opacity: 0.3;
+            margin: -35px auto 10px;
+            background: #db7093;
+            transform: rotate(-2deg);
+        }
+
+        .input-content_header-title {
+            border: none;
+            width: 80%;
+        }
+
+        .input-content {
+            width: 100%;
+        }
+
+        .input-content_header {
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+
+        /* モーダル */
+
+        
+
+        #book {
+            width:100%;
+        }
+
+        .book-search_main {
+            width: 100%;
+        }
+
+        .book-search_main-btn {
+            margin-left: 0.3rem;
+        }
+
+        .book-body {
+            display: block;
+        }
+
+
+
+        .book-body div {
+            width: 80%;
+            margin: 1rem auto;
+        }
+    }
+
     
 </style>

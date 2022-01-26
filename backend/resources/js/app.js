@@ -11,6 +11,7 @@ import VueRouter from 'vue-router';
 import router from './router';
 import 'vue-loaders/dist/vue-loaders.css';
 import VueLoaders from 'vue-loaders';
+import { Slide } from 'vue-burger-menu';
 
 let rule;
 for(rule in originalRules) {
@@ -42,10 +43,12 @@ Vue.component('star-rating',StarRating);
 Vue.component('ValidationProvider',ValidationProvider);
 Vue.component('ValidationObserver',ValidationObserver);
 Vue.component('vue-loaders',VueLoaders);
+Vue.component('slide',Slide);
 
 Vue.use(VueRouter);
 Vue.use(VueCarousel);
 Vue.use(VueLoaders);
+Vue.use(Slide);
 
 
 

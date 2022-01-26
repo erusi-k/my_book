@@ -11,7 +11,7 @@
 <body>
     <div id="app">
         <div class="header">
-            <header-component></header-component>
+            <!-- <header-component></header-component> -->
             <div class="content">
                 <div class="logout">
                     <form method="POST" action="{{ route('logout') }}">
