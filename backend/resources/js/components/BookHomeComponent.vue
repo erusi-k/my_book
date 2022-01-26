@@ -6,7 +6,7 @@
         <div>
             <div class="other">
                 <p class="heading">みんなの投稿</p>
-                <carousel  :autoplay="true"   :per-page="3" :speed="3000" :autoplayTimeout="4000" pagination-color="#CCCCCC">
+                <carousel  :autoplay="true"   :per-page="page" :speed="3000" :autoplayTimeout="4000" pagination-color="#CCCCCC">
                     <slide class="slider" v-for="other in others" :key="other.id">
                         <router-link class="slider-show" :to="`/book/show/${other.id}`">
                             <div class="slider-inner">
@@ -27,9 +27,8 @@
                         </router-link>
                     </slide>
                 </carousel>
-                
             </div>
-            <div class="my_data">
+            <div v-show="!resp" class="my_data">
                 <p class="heading">自分の投稿</p>
                 <div v-for="myData in myDatas" :key="myData.id">
                     <div class="my_data-content">
@@ -57,6 +56,25 @@
                     </div>
                 </div>
             </div>
+            <div v-show="resp" class="responsive">
+                <p class="heading">自分の投稿</p>
+                <div class="responsive_my-data" v-for="myData in myDatas" :key="myData.id">
+                    <router-link class="responsive_my-data-show" :to="`/book/show/${myData.id}`">
+                        <div class="responsive_my-data_inner">
+                            <div class="responsive_my-data_inner-header">
+                                <img v-bind:src="myData.imge">
+                            </div>     
+                            <div class="responsive_my-data_body"> 
+                                <p class="responsive_my-data_body-title">{{myData.title}}</p> 
+                                <p class="responsive_my-data_body-author">作 {{myData.author}}</p>
+                                <div class="responsive_my-data_body-footer">
+                                    <star-rating v-model="myData.rating" :read-only="true" :star-size=20 ></star-rating>
+                                </div>
+                            </div>
+                        </div>
+                    </router-link>
+                </div>
+            </div>
         </div>    
     </div>
 </template>
@@ -70,6 +88,8 @@ export default {
             others:'',
             myDatas:'',
             isLoading: true,
+            page: 3,
+            resp: false,
         }
         
     },
@@ -99,6 +119,13 @@ export default {
             })
         },
 
+        handleResize(){
+            if(window.innerWidth <= 480){
+                this.page = 1;
+                this.resp = true;
+            }
+        }
+
         
 
     },
@@ -112,6 +139,8 @@ export default {
         },
     
     created() {
+        window.addEventListener('resize',this.handleResize);
+        this.handleResize();
         this.getOtherData();
         this.getMyData();
     }
@@ -169,7 +198,7 @@ export default {
 
 .VueCarousel-slide .slider-inner {
     height: 150px;
-    width: 85%;
+    width: 70%;
     margin: 2rem auto 2rem;
     padding: 0.2rem 0.5rem;
     background-color: #d6edff; 
@@ -351,8 +380,89 @@ export default {
     margin-top: -4px;
 }
 
+/* mydataレスポンシブ */
+
+.responsive_my-data_inner {
+    height: 150px;
+    width: 70%;
+    margin: 2rem auto 2rem;
+    padding: 0.2rem 0.5rem;
+    background-color: #FFDBC9; 
+    display: flex; 
+    color: #000; 
+    box-shadow: 0px 0px 0px 10px #FFDBC9;
+    border: 2px dashed #fff;
+    font-size: 30px; 
+    border-radius: 10px;
+}
+
+.responsive_my-data_inner:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 14px rgba(50,50,93,1), 0 3px 6px rgba(0,0,0,.08);
+    transition: all .5s;
+}
+
+.responsive_my-data_inner-header {
+    width: 40%;
+    height: 100%;
+    /* padding: 0.2rem 0.5rem; */
+}
+
+.responsive_my-data_inner-header img {
+    width: 100%;
+    height: 100%;
+}
+
+.responsive_my-data_body {
+    width: 50%;
+    margin-left: 0.6rem;
+}
+
+.responsive_my-data_body-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-left: 0.3rem;
+}
+
+.responsive_my-data_body-author {
+    font-size: 0.8rem;
+    text-align: right;
+}
+
+.responsive_my-data_body-footer {
+    display: flex;
+    font-size: 0.7rem; 
+    margin-top: 0.6rem;
+}
+
 @media screen and (max-width:480px) {
 
+/* .my_data-content {
+    width: 300px;
+    background: #FFDBC9;
+    padding: 0;
+    margin: auto;
+    margin-top: 1rem;
+    box-shadow: 0px 0px 0px 10px #FFDBC9;
+    border: 2px dashed #fff;
+}
+
+.my_data-content_image {
+    width: 40%;
+}
+
+.my_data-content_body {
+    width: 60%;
+    margin: 0;
+}
+
+.my_data-content,.my_data-content_body-title, 
+.my_data-content_body-author,.my_data-content_body-rating {
+    display: flex;
+    margin-top: 0;
+    border-bottom: 1px dashed #fff;
+    font-size: 30px;
+} */
 }
 
 
