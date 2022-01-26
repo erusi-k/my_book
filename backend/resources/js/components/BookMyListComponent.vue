@@ -4,43 +4,84 @@
             <vue-loaders v-show='isLoading'  name ="ball-spin-fade-loader" color="#FF8856" scale="3"></vue-loaders>
         </div>
         <div class="my_data">
-            <p class="heading">自分の投稿</p>
-            <bookFadeIn-component v-bind:myDatas="myDatas"></bookFadeIn-component>
+            <div v-show="resp" class="responsive">
+                <p class="heading">自分の投稿</p>
+                <div class="responsive_my-data" v-for="myData in myDatas" :key="myData.id">
+                    <router-link class="responsive_my-data-show" :to="`/book/show/${myData.id}`">
+                        <div class="responsive_my-data_inner">
+                            <div class="responsive_my-data_inner-header">
+                                <img v-bind:src="myData.imge">
+                            </div>     
+                            <div class="responsive_my-data_body"> 
+                                <p class="responsive_my-data_body-title">{{myData.title}}</p> 
+                                <p class="responsive_my-data_body-author">作 {{myData.author}}</p>
+                                <div class="responsive_my-data_body-footer">
+                                <star-rating v-model="myData.rating" :read-only="true" :star-size=20 ></star-rating>
+                                </div>
+                            </div>
+                        </div>
+                    </router-link>
+                </div>    
+            </div>  
         </div>
-    </div>
+    </div>    
 </template>
 
+
 <script>
-export default ({
+export default({
     props:['user'],
     data(){
         return{
             myDatas: '',
             isLoading: true,
+            resp: false,
         }
     },
-    methods:{
+    
+
+    
+
+    methods: {
         async getMyData(){
             await axios.get("http://localhost:8080/api/book/mydata",{params:{user_id:this.user.id}})
             .then((res) => {
                 this.myDatas = res.data.data;
-                this.isLoading = false;
                 console.log(this.myDatas);
+                this.isLoading = false;
             })
             .catch((error) => {
                 console.log(error);
             })
         },
+
+        handleResize(){
+            if(window.innerWidth <= 480){
+                this.resp = true;
+            }
+        }
+
+
     },
-    created(){
+
+    computed:{
+            timeStamp:function(){
+                return function(value) {
+                    return value.substring(0,10);
+                }
+            }
+        },
+
+    created() {
+        window.addEventListener('resize',this.handleResize);
+        this.handleResize();
         this.getMyData();
-    }
+    }    
 })
 </script>
 
-<style scoped>
+<style>
 
-/* ローディングぐるぐる */
 .loading {
     position:fixed;
     top:0;
@@ -55,6 +96,7 @@ export default ({
 
 }
 
+
 .heading {
     display: inline-block;
     font-weight: bold;
@@ -65,6 +107,185 @@ export default ({
 .heading:first-letter {
     color: #FF5F17;
     font-size: 3rem;
+}
+
+
+.my_data-content,.my_data-content_body-title, 
+.my_data-content_body-author,.my_data-content_body-rating {
+    display: flex;
+    margin-top: 0.6rem;
+    border-bottom: 1px dashed #fff;
+}
+
+.my_data-content_body-footer {
+    display: flex;
+    margin-top: 0.6rem;
+    justify-content: space-between;
+}
+
+.my_data {
+    width: 100%;
+}
+
+.my_data-content {
+    width: 900px;
+    height: 180px;
+    background: #FFDBC9;
+    padding: 0.2rem 0.5rem;
+    margin: auto;
+    margin-top: 2rem;
+    box-shadow: 0px 0px 0px 10px #FFDBC9;
+    border: 2px dashed #fff;
+}
+
+.my_data-content_body {
+    margin: 1rem 0 0 6rem;
+    width: 70%;
+}
+
+.my_data-content_image {
+    width: 15%;
+}
+
+.my_data-content_image img {
+    width: 100%;
+    height: 100%;
+}
+
+.tag {
+    font-size: 1rem;
+    
+}
+
+.content-main {
+    font-size: 2.3vmin;
+    margin-left: 5rem;
+}
+
+.author, .rating {
+    margin-left: 7rem;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 35px;
+    background-color: #FF5F17;
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    line-height: 2.0;
+    text-decoration: none;
+    transition-duration: 0.3s;
+    position: relative;
+}
+
+.btn:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 15px 20px 0 0;
+    border-color: #ffffff transparent transparent transparent;
+}
+
+.btn:after {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 5px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 20px 15px;
+    border-color: transparent transparent #efefef transparent;
+    box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.15);
+    transform: rotate(16deg);
+}
+
+.btn:hover {
+    background-color: #e6de6b;
+}
+
+.btn span {
+    position: relative;
+    padding-left: 16px;
+    letter-spacing: 0.05em;
+}
+
+.btn span:before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border: 0;
+    border-top: solid 2px #fff;
+    border-right: solid 2px #fff;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -4px;
+}
+
+/* mydataレスポンシブ */
+
+.responsive_my-data_inner {
+    height: 150px;
+    width: 70%;
+    margin: 4rem auto 4rem;
+    padding: 0.2rem 0.5rem;
+    background-color: #FFDBC9; 
+    display: flex; 
+    color: #000; 
+    box-shadow: 0px 0px 0px 10px #FFDBC9;
+    border: 2px dashed #fff;
+    font-size: 30px; 
+    border-radius: 10px;
+}
+
+.responsive_my-data_inner:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 14px rgba(50,50,93,1), 0 3px 6px rgba(0,0,0,.08);
+    transition: all .5s;
+}
+
+.responsive_my-data_inner-header {
+    width: 40%;
+    height: 100%;
+    /* padding: 0.2rem 0.5rem; */
+}
+
+.responsive_my-data_inner-header img {
+    width: 100%;
+    height: 100%;
+}
+
+.responsive_my-data_body {
+    width: 50%;
+    margin-left: 0.6rem;
+}
+
+.responsive_my-data_body-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-left: 0.3rem;
+}
+
+.responsive_my-data_body-author {
+    font-size: 0.8rem;
+    text-align: right;
+}
+
+.responsive_my-data_body-footer {
+    display: flex;
+    font-size: 0.7rem; 
+    margin-top: 0.6rem;
 }
 
 </style>
