@@ -22,8 +22,8 @@
             </div>
             <div class="show-content_card-body">
                 <div class="show-content_card-body_title">
-                    <p class="tag">タイトル</p>
-                    <p class="content-main">{{item.title}}</p>
+                    <p class="tag">タイ<br>トル</p>
+                    <p class="content-main title" >{{item.title}}</p>
                 </div>
                 <div class="show-content_card-body_author">
                     <p class="tag">著者</p>
@@ -271,4 +271,42 @@ export default ({
     margin-left :7rem;
 }
 
+
+@media screen and (max-width:480px) {
+
+    .show-content {
+        width: 90%;
+    }
+
+    .show-content:after {
+        top: 120px;
+    }   
+
+    .show-content_card-image {
+        width: 25%;
+    }
+
+    .show-content_card-image img {
+        width: 100%;
+    }
+
+    .show-content_card-body {
+        margin: 0;
+        margin-left: 0.5rem;
+        width: 70%;
+    }
+
+    .content-main {
+        margin: 0;
+        margin-left: 0.7rem;
+    }
+
+    .title {
+        margin-top: 0.6rem;
+    }
+
+    .title,.author {
+        font-size: 0.8rem;
+    }
+}
 </style>
