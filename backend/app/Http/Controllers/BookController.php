@@ -71,6 +71,7 @@ class BookController extends Controller
             'title' =>$request->title,
             'rating'=>$request->rating,
             'author'=>$request->author,
+            'report'=>$request->report,
         ]);
 
     }

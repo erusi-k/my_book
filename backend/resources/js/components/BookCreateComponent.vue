@@ -95,7 +95,9 @@
                 axios.post("http://localhost:8080/api/book",this.item)
                     .then((res)=>{
                         this.test = res;
-                        Swal.fire('登録が完了しました!');
+                        this.$swal('登録が完了しました!',{
+                            icon: "success",
+                        });
                         console.log(this.item);
                         this.$router.push({name: 'book.home'});
                     })
@@ -103,6 +105,9 @@
                         this.errors = error.response.data.errors;
                         console.log(this.errors);
                         console.log(error);
+                        this.$swal('登録に失敗しました。もう一度お試しください',{
+                            icon: "error"
+                        })
                     })
             },
 

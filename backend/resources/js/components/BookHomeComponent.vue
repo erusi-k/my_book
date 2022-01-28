@@ -3,6 +3,9 @@
         <div v-show="isLoading" class="loading">   
             <vue-loaders v-show='isLoading'  name ="ball-spin-fade-loader" color="#FF8856" scale="3"></vue-loaders>
         </div>
+        <div id="page_top">
+            <a href="#"></a>
+        </div>
         <div>
             <div class="other">
                 <p class="heading">みんなの投稿</p>
@@ -166,6 +169,44 @@ export default {
     align-items: center;
     justify-content: center;
 
+}
+
+/* ページトップボタン */
+
+#page_top {
+    width:50px;
+    height: 50px;
+    position: fixed;
+    right: 0;
+    bottom: 50px;
+    background: #FF570D;
+    opacity: 0.8;
+    border-radius: 50px;
+}
+
+#page_top a {
+    position: relative;
+    display: block;
+    width: 50px;
+    height: 50px;
+    text-decoration: none;
+}
+
+#page_top a::before {
+    font-family: 'Font Awesome 5 Free';
+    content:'f106';
+    font-weight: 900;
+    font-size: 25px;
+    color: #fff;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    text-align: center;
 }
 
 

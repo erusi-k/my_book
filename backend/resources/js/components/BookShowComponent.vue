@@ -1,5 +1,8 @@
 <template>
 <div class="body">
+    <div v-show="isLoading" class="loading">   
+        <vue-loaders v-show='isLoading'  name ="ball-spin-fade-loader" color="#FF8856" scale="3"></vue-loaders>
+    </div>
     <div class="show-content" v-for="item in items" :key="item.id">
         <div class="show-content-header">
             <p class="show-content-header_title">感想</p>
@@ -13,9 +16,9 @@
         </div>
         </div>
         <div class="show-content_footer" >
-                    <router-link :to="`/book/edit/${item.id}`" v-if="checkId(item.user_id)">編集する</router-link>
-                    <p @click="dataDelete(item.id)" v-if="checkId(item.user_id)">削除する</p>
-                </div>
+            <router-link class="show-content_footer-edit" :to="`/book/edit/${item.id}`" v-if="checkId(item.user_id)">編集する</router-link>
+            <p class="show-content_footer-delete"  @click="dataDelete(item.id)" v-if="checkId(item.user_id)">削除する</p>
+        </div>
         <div :class="[checkId(item.user_id) ? 'show-content_mycard' : 'show-content_othercard']">
             <div class="show-content_card-image">
             <img v-bind:src="item.imge">
@@ -33,11 +36,10 @@
                     <p class="tag">評価</p>
                     <star-rating class="content-main rating"  v-model="item.rating" v-bind:increment="0.5" :read-only="true" :star-size=30></star-rating>
                 </div>
-                
             </div>
         </div>
-        
     </div>
+    <a class="back_btn" @click="$router.back()">戻る</a>
 </div>    
 </template>
 
@@ -47,6 +49,7 @@ export default ({
     data(){
         return {
             items:'',
+            isLoading: true,
         }
     },
     methods:{
@@ -54,8 +57,8 @@ export default ({
             const id = this.bookId
             axios.get("http://localhost:8080/api/book/"+id)
             .then((res) => {
-                
                 this.items = res.data;
+                this.isLoading = false;
                 console.log(this.items);
             })
             .catch((error) => {
@@ -115,6 +118,21 @@ export default ({
     font-family: 'Hannotate SC','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,sans-serif;
 }
 
+/* ローディングぐるぐる */
+.loading {
+    position:fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.7);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
 .show-content {
         margin: 3rem auto 0;
         width: 70%;
@@ -135,6 +153,22 @@ export default ({
         transform: rotate(-2deg);
         left: 10px;
         right: 10px;
+}
+
+/* 戻るボタン */
+
+.back_btn {
+    display: inline-block;
+    background: #FFC7AF;
+    padding: 1rem 1.5rem;
+    color: #000;
+    border: 1px solid #FFC7AF;
+    border-radius: 15px;
+    margin: 5rem 0  0 10rem;
+}
+
+.back_btn {
+    cursor: pointer;
 }
 
 /* 自分の投稿の時のスタイル */
@@ -243,10 +277,38 @@ export default ({
 
 .show-content_footer {
     display: flex;
-    text-align: right;
+    justify-content: right;
+}
+.show-content_footer p {
+    margin-left: 0.6rem;
+}
+
+.show-content_footer-edit {
+    background: #fff;
+    padding: 0.3rem 0.8rem;
+    color: #BBBBBB;
+    border: 1px solid #BBBBBB;
+    border-radius: 15px;
+}
+
+.show-content_footer-delete {
+    background: #555555;
+    padding: 0.3rem 0.8rem;
+    color: #fff;
+    border: 1px solid #555555;
+    border-radius: 15px;
+}
+
+.show-content_footer-delete:hover {
+    cursor: pointer;
+}
+
+.show-content_card-image {
+    width: 20%;
 }
 
 .show-content_card-image img {
+    width: 100%;
     height: 100%;
 }
 
@@ -307,6 +369,10 @@ export default ({
 
     .title,.author {
         font-size: 0.8rem;
+    }
+
+    .tag  {
+        width: 30%;
     }
 }
 </style>

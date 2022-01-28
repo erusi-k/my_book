@@ -12,6 +12,7 @@ import router from './router';
 import 'vue-loaders/dist/vue-loaders.css';
 import VueLoaders from 'vue-loaders';
 import { Slide } from 'vue-burger-menu';
+import VueSwal from 'vue-swal';
 
 let rule;
 for(rule in originalRules) {
@@ -49,7 +50,7 @@ Vue.use(VueRouter);
 Vue.use(VueCarousel);
 Vue.use(VueLoaders);
 Vue.use(Slide);
-
+Vue.use(VueSwal);
 
 
 
