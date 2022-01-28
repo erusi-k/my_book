@@ -29,7 +29,7 @@ class PostRequest extends FormRequest
         return [
             'title' => [
                 'required',
-                'max:30'
+                'max:50'
             ],
             'author' => [
                 'required',
@@ -46,7 +46,7 @@ class PostRequest extends FormRequest
     {
         return [
             'title.required' =>'タイトルを入力してください',
-            'title.max'=>'タイトルは30文字以内で入力してください',
+            'title.max'=>'タイトルは50文字以内で入力してください',
             'author.required'=>'著者を入力してださい',
             'author.max'=>'著者は30文字以内で入力してください',
             'report.required'=>'感想を入力してください',

@@ -249,6 +249,7 @@ export default ({
 
 
 .show-content-header_title {
+
     font-weight: bold;
     font-size: 3rem;
     letter-spacing: 0.5rem;
@@ -333,6 +334,10 @@ export default ({
     margin-left :7rem;
 }
 
+.tag  {
+    width: 30%;
+}
+
 
 @media screen and (max-width:480px) {
 
@@ -371,8 +376,6 @@ export default ({
         font-size: 0.8rem;
     }
 
-    .tag  {
-        width: 30%;
-    }
+
 }
 </style>

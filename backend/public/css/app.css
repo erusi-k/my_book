@@ -57,20 +57,25 @@ body {
 Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
 */
 
+
+
+
 .content {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   text-align: right;
   align-items: center;
   border-radius: 10px;
+  z-index: 60;
 }
 
 
 
+
 img {
-  width: 35px;
-  height: 35px;
+  width: 50px;
+  height: 50px;
 }
 
 

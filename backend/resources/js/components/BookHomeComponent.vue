@@ -126,6 +126,12 @@ export default {
             if(window.innerWidth <= 480){
                 this.page = 1;
                 this.resp = true;
+            }else if(window.innerWidth <= 1024) {
+                this.page = 2
+                this.resp = true;
+            }else {
+                this.page = 3
+                this.resp = false;
             }
         }
 
@@ -154,6 +160,7 @@ export default {
 
 .body {
     font-family: 'Hannotate SC','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,sans-serif;
+    margin-top: 5rem;
 }
 
 /* ローディングぐるぐる */

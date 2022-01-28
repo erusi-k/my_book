@@ -11,26 +11,23 @@
 </head>
 <body>
     <div id="app">
-        <div class="header">
-            <!-- <header-component></header-component> -->
-            <div class="content">
-                <div class="logout">
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <x-dropdown-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                            this.closest('form').submit();">
-                            <div class="logout-content"> 
-                                <img src="/images/logout.png">
-                                {{ __('') }}
-                            </div>
-                        </x-dropdown-link>
-                    </form>
-                </div>
+        <div class="content">
+            <div class="logout">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <x-dropdown-link :href="route('logout')"
+                        onclick="event.preventDefault();
+                        this.closest('form').submit();">
+                        <div class="logout-content"> 
+                            <img src="/images/logout.png">
+                            {{ __('') }}
+                        </div>
+                    </x-dropdown-link>
+                </form>
             </div>
-        </div>
+        </div>  
+        <header-component></header-component>
         <router-view v-bind:user="{{Auth::user()}}"></router-view>
-        
     </div>
 <script src="{{mix('js/app.js')}}"></script>  
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
