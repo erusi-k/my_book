@@ -224,6 +224,11 @@ textarea {
 
 
 @media screen and (max-width:480px) {
+    body {
+        margin-top: 5rem;
+    }
+
+
     .input {
         width:90%;
         padding: 1rem 0.5rem;
@@ -254,6 +259,12 @@ textarea {
     .input-content_header {
         margin-top: 1rem;
         font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    body {
+        margin-top: 5rem;
     }
 }
 

@@ -239,6 +239,7 @@
 
     .search-btn {
         color: #fff;
+        width: 40%;
         padding: 1rem;
         background-color: #eb6100;
         border-radius: 10px;
@@ -319,11 +320,15 @@
     }
 
 
-    @media screen and (max-width:480px) {
+    @media screen and (max-width:1024px) {
+        body {
+            margin-top: 5rem;
+        }
+        
         .input {
             width:90%;
             padding: 1rem 0.5rem;
-            
+            margin-top: 8rem;
         }
 
         .input:after {
@@ -358,6 +363,7 @@
 
         #book {
             width:100%;
+            margin-top: 7rem;
         }
 
         .book-search_main {
@@ -380,5 +386,11 @@
         }
     }
 
+
+@media screen and (max-width: 1024px) {
+    body {
+        margin-top: 5rem;
+    }
+}
     
 </style>

@@ -34,7 +34,7 @@
                 </div>
                 <div class="show-content_card-body_rating" >
                     <p class="tag">評価</p>
-                    <star-rating class="content-main rating"  v-model="item.rating" v-bind:increment="0.5" :read-only="true" :star-size=30></star-rating>
+                    <star-rating class="content-main rating"  v-model="item.rating" v-bind:increment="0.5" :read-only="true" :star-size=29></star-rating>
                 </div>
             </div>
         </div>
@@ -50,6 +50,7 @@ export default ({
         return {
             items:'',
             isLoading: true,
+            resp: false,
         }
     },
     methods:{
@@ -90,6 +91,16 @@ export default ({
                     alert('削除失敗です');
                 })
             }   
+        },
+        handleResize(){
+            if(window.innerWidth <= 480){
+                this.resp = true;
+            }else if(window.innerWidth <= 1024) {
+                this.resp = true;
+            }else {
+                this.resp = false;
+            }
+            
         }
         
     },
@@ -196,7 +207,7 @@ export default ({
 .show-content_mycard {
     display: flex;
     width: 100%;
-    height: 150px;
+    height: 160px;
     background: #FFDBC9;
     padding: 0.2rem 0.5rem;
     margin: auto;
@@ -318,6 +329,7 @@ export default ({
     width: 70%;
 }
 
+
 .show-content_card-body_title,
 .show-content_card-body_author,
 .show-content_card-body_rating {
@@ -330,7 +342,11 @@ export default ({
     margin-left: 5rem;
 }
 
-.author,.rating {
+.title {
+    padding-top: 0.5rem;
+}
+
+.title,.author,.rating {
     margin-left :7rem;
 }
 
@@ -339,7 +355,21 @@ export default ({
 }
 
 
+@media screen and (max-width: 1024px) {
+    body {
+        margin-top: 5rem;
+    }
+
+    .title,.author,.rating {
+        margin-left: 0;
+    }   
+}
+
 @media screen and (max-width:480px) {
+    body {
+        margin-top: 5rem;
+    }
+
 
     .show-content {
         width: 90%;
@@ -359,7 +389,7 @@ export default ({
 
     .show-content_card-body {
         margin: 0;
-        margin-left: 0.5rem;
+        margin-left: 1rem;
         width: 70%;
     }
 
@@ -375,7 +405,6 @@ export default ({
     .title,.author {
         font-size: 0.8rem;
     }
-
 
 }
 </style>

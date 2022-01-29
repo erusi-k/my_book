@@ -12,7 +12,7 @@
                     </div>     
                     <div class="other_data_body"> 
                         <div class="other_data_body-title">
-                            <p class="tag">タイトル</p>
+                            <p class="tag">タイ<br>トル</p>
                             <p class="content-main title">{{other.title}}</p> 
                         </div>
                         <div class="other_data_body-author" >
@@ -25,7 +25,7 @@
                         </div>
                         <div class="other_data_body-footer">
                             <p class="tag">{{timeStamp(other.created_at)}}</p>
-                            <p>ユーザー名:{{other.user_name}}</p>
+                            <p class="other_data_body-footer-name name">ユーザー名:{{other.user_name}}</p>
                             <router-link class="content-main btn"  :to="`/book/show/${other.id}`">詳細を見る！</router-link>
                         </div>    
                     </div>
@@ -47,7 +47,7 @@
                                 <div class="responsive_other_body-footer">
                                     <star-rating v-model="other.rating" :read-only="true" :star-size=20 ></star-rating>
                                 </div>
-                                <p class="responsive_other_body-name">ユーザー名:{{other.user_name}}</p>
+                                <p class="responsive_other_body-name name">ユーザー名:{{other.user_name}}</p>
                             </div>
                         </div>
                     </router-link>
@@ -85,8 +85,10 @@ export default {
         },
 
         handleResize(){
-            if(window.innerWidth <= 480){
+            if(window.innerWidth <= 1024){
                 this.resp = true;
+            }else {
+                this.resp = false;
             }
         }
 
@@ -163,11 +165,11 @@ export default {
 
 .other_data {
     width: 900px;
-    height: 180px;
+    height: 210px;
     background: #d6edff;
     padding: 0.2rem 0.5rem;
     margin: auto;
-    margin-top: 2rem;
+    margin-top: 6rem;
     box-shadow: 0px 0px 0px 10px #d6edff;
     border: 2px dashed #fff;
 }
@@ -188,7 +190,7 @@ export default {
 
 .tag {
     font-size: 1rem;
-    
+    width: 20%;
 }
 
 .content-main {
@@ -196,8 +198,12 @@ export default {
     margin-left: 5rem;
 }
 
-.author, .rating {
+.title,.author, .rating {
     margin-left: 7rem;
+}
+
+.name {
+    background:linear-gradient(transparent 30%, #FFCCCC 60%);
 }
 
 .btn {
@@ -306,6 +312,7 @@ export default {
 }
 
 .responsive_other_body-name {
+    display: inline-block;
     font-size: 0.8rem;
     margin-top: 0.5rem;
 }
@@ -325,6 +332,48 @@ export default {
     display: flex;
     font-size: 0.7rem; 
     margin-top: 0.6rem;
+}
+
+@media screen and (max-width: 1024px) {
+    body {
+        margin-top: 5rem;
+    }
+
+    .responsive_other_inner-header img {
+        width: 70%;
+    }
+
+    .responsive_other_body-title {
+        margin-top: 1rem;
+        font-size: 1.1rem
+    }
+
+    .responsive_other_body-author {
+        font-size: 0.9rem;
+    }
+
+    .responsive_other_body-footer {
+        font-size: 0.8rem; 
+    }
+}
+
+@media screen and (max-width: 600px) {
+    body {
+        margin-top: 5rem;
+    }
+
+    .responsive_other_body-title {
+        margin-top: 0.3rem;
+        font-size: 1rem
+    }
+
+    .responsive_other_body-author {
+        font-size: 0.8rem;
+    }
+
+    .responsive_ohter_body-footer {
+        font-size: 0.7rem; 
+    }
 }
 
 </style>

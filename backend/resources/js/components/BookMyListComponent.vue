@@ -13,7 +13,7 @@
                         </div>
                         <div class="my_data-content_body">
                             <div class="my_data-content_body-title">
-                                <p class="tag">タイトル</p>
+                                <p class="tag">タイ<br>トル</p>
                                 <p class="content-main title">{{myData.title}}</p>
                             </div>
                             <div class="my_data-content_body-author">
@@ -22,7 +22,7 @@
                             </div>
                             <div class="my_data-content_body-rating">
                                 <p class="tag">評価</p>
-                                <p class="content-main rating">{{myData.rating}}</p>
+                                <star-rating class="content-main rating" v-model="myData.rating" :read-only="true" :star-size=30 ></star-rating>
                             </div>
                             <div class="my_data-content_body-footer">
                                 <p class="tag">{{timeStamp(myData.created_at)}}</p>
@@ -46,7 +46,7 @@
                                 <p class="responsive_my-data_body-title">{{myData.title}}</p> 
                                 <p class="responsive_my-data_body-author">作 {{myData.author}}</p>
                                 <div class="responsive_my-data_body-footer">
-                                <star-rating v-model="myData.rating" :read-only="true" :star-size=20 ></star-rating>
+                                    <star-rating v-model="myData.rating" :read-only="true" :star-size=20 ></star-rating>
                                 </div>
                             </div>
                         </div>
@@ -86,8 +86,10 @@ export default({
         },
 
         handleResize(){
-            if(window.innerWidth <= 480){
+            if(window.innerWidth <= 1024){
                 this.resp = true;
+            }else {
+                this.resp = false;
             }
         }
 
@@ -111,6 +113,10 @@ export default({
 </script>
 
 <style>
+
+body {
+    font-family: 'Hannotate SC','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,sans-serif;
+}
 
 .loading {
     position:fixed;
@@ -159,11 +165,11 @@ export default({
 
 .my_data-content {
     width: 900px;
-    height: 180px;
+    height: 210px;
     background: #FFDBC9;
     padding: 0.2rem 0.5rem;
     margin: auto;
-    margin-top: 2rem;
+    margin-top: 6rem;
     box-shadow: 0px 0px 0px 10px #FFDBC9;
     border: 2px dashed #fff;
 }
@@ -184,15 +190,19 @@ export default({
 
 .tag {
     font-size: 1rem;
-    
+    width: 15%;
 }
 
 .content-main {
     font-size: 2.3vmin;
-    margin-left: 5rem;
+    margin-left: 3rem;
 }
 
-.author, .rating {
+.title {
+    padding: 0.1rem;
+}
+
+.title,.author, .rating {
     margin-left: 7rem;
 }
 
@@ -286,7 +296,7 @@ export default({
 }
 
 .responsive_my-data_inner-header {
-    width: 40%;
+    width: 30%;
     height: 100%;
     /* padding: 0.2rem 0.5rem; */
 }
@@ -297,8 +307,8 @@ export default({
 }
 
 .responsive_my-data_body {
-    width: 50%;
-    margin-left: 0.6rem;
+    width: 70%;
+    margin-left: 0.3rem;
 }
 
 .responsive_my-data_body-title {
@@ -316,6 +326,50 @@ export default({
     display: flex;
     font-size: 0.7rem; 
     margin-top: 0.6rem;
+}
+
+
+
+@media screen and (max-width: 1024px) {
+    body {
+        margin-top: 5rem;
+    }
+
+    .responsive_my-data_inner-header img {
+        width: 70%;
+    }
+
+    .responsive_my-data_body-title {
+        margin-top: 1rem;
+        font-size: 1.1rem
+    }
+
+    .responsive_my-data_body-author {
+        font-size: 0.9rem;
+    }
+
+    .responsive_my-data_body-footer {
+        font-size: 0.8rem; 
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        margin-top: 5rem;
+    }
+
+    .responsive_my-data_body-title {
+        margin-top: 0.3rem;
+        font-size: 1rem
+    }
+
+    .responsive_my-data_body-author {
+        font-size: 0.8rem;
+    }
+
+    .responsive_my-data_body-footer {
+        font-size: 0.7rem; 
+    }
 }
 
 </style>

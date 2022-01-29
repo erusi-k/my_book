@@ -124,15 +124,17 @@ export default {
 
         handleResize(){
             if(window.innerWidth <= 480){
-                this.page = 1;
                 this.resp = true;
+            }else if(window.innerWidth <= 705) {
+                this.page = 1;
             }else if(window.innerWidth <= 1024) {
-                this.page = 2
+                this.page = 2;
                 this.resp = true;
             }else {
-                this.page = 3
+                this.page = 3;
                 this.resp = false;
             }
+            
         }
 
         
@@ -160,7 +162,6 @@ export default {
 
 .body {
     font-family: 'Hannotate SC','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,sans-serif;
-    margin-top: 5rem;
 }
 
 /* ローディングぐるぐる */
@@ -245,8 +246,8 @@ export default {
 }
 
 .VueCarousel-slide .slider-inner {
-    height: 150px;
-    width: 70%;
+    height: 180px;
+    width: 80%;
     margin: 2rem auto 2rem;
     padding: 0.2rem 0.5rem;
     background-color: #d6edff; 
@@ -484,34 +485,21 @@ export default {
 }
 
 @media screen and (max-width:480px) {
-
-/* .my_data-content {
-    width: 300px;
-    background: #FFDBC9;
-    padding: 0;
-    margin: auto;
-    margin-top: 1rem;
-    box-shadow: 0px 0px 0px 10px #FFDBC9;
-    border: 2px dashed #fff;
+    body {
+        margin-top: 5rem;
+    }
 }
 
-.my_data-content_image {
-    width: 40%;
+@media screen and (max-width: 1024px) {
+    body {
+        margin-top: 5rem;
+    }
+
+    .responsive_my-data_inner-header img {
+    width: 70%;
+}
 }
 
-.my_data-content_body {
-    width: 60%;
-    margin: 0;
-}
-
-.my_data-content,.my_data-content_body-title, 
-.my_data-content_body-author,.my_data-content_body-rating {
-    display: flex;
-    margin-top: 0;
-    border-bottom: 1px dashed #fff;
-    font-size: 30px;
-} */
-}
 
 
 

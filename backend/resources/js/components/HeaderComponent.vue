@@ -124,7 +124,7 @@ export default ({
 .header-title_resp {
     position: fixed; 
     top: 0;
-    left: 30%;
+    left: 35%;
     align-items: center;
     font-size: 3rem;
     color: #FF5F17;
