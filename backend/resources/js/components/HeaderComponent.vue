@@ -8,7 +8,9 @@
                 <span class="line line-bottom" :class="{'rotate-bottom' :active}"></span>
             </div> 
             <div>
-                <h1 class="header-title_resp">mybook</h1>
+                <router-link v-bind:to="{name: 'book.home'}">
+                    <h1 class="header-title_resp">mybook</h1>
+                </router-link>
             </div>
         </div>        
             <transition name="header-menu">
@@ -43,7 +45,9 @@
             </transition>
         
         <div v-show="!resp" class="header">
-            <h1 class="header-title">mybook</h1>
+            <router-link v-bind:to="{name: 'book.home'}">
+                <h1 class="header-title">mybook</h1>
+            </router-link>
             <ul class="header-list">
                 <li class="header-list_content">
                     <router-link v-bind:to="{name: 'book.home'}">
@@ -91,7 +95,7 @@ export default ({
             }else {
                 this.resp = false;
             }
-        }
+        },
     },
     created(){
         window.addEventListener('resize',this.handleResize);
@@ -107,7 +111,6 @@ export default ({
     font-family: 'Hannotate SC','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,sans-serif;
     background-color: #FFDBC9;
 }
-
 
 /* スマホタイトル css  */
 

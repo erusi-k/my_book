@@ -1,5 +1,8 @@
 <template>
     <div class="body">
+        <div class="top-btn" @click="scrollTop">
+            <i class="fas fa-chevron-up Page-Btn-Icon"></i>
+        </div>
         <div v-show="isLoading" class="loading">   
             <vue-loaders v-show='isLoading'  name ="ball-spin-fade-loader" color="#FF8856" scale="3"></vue-loaders>
         </div>
@@ -91,6 +94,13 @@ export default({
             }else {
                 this.resp = false;
             }
+        },
+
+        scrollTop(){
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
 
 
@@ -124,12 +134,25 @@ body {
     left:0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255,255,255,0.7);
+    background-color: rgba(255,255,255,1);
     z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
 
+}
+
+.top-btn {
+    color: #fff;
+    position: fixed;
+    right: 14px;
+    bottom: 35px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    border-radius: 50%;
+    background: #5bc8ac;
 }
 
 
@@ -276,9 +299,9 @@ body {
 /* mydataレスポンシブ */
 
 .responsive_my-data_inner {
-    height: 150px;
-    width: 70%;
-    margin: 4rem auto 4rem;
+    height: 155px;
+    width: 75%;
+    margin: 5rem auto 4rem;
     padding: 0.2rem 0.5rem;
     background-color: #FFDBC9; 
     display: flex; 

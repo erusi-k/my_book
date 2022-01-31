@@ -1,10 +1,10 @@
 <template>
     <div class="body">
+        <div class="top-btn" @click="scrollTop">
+            <i class="fas fa-chevron-up Page-Btn-Icon"></i>
+        </div>
         <div v-show="isLoading" class="loading">   
             <vue-loaders v-show='isLoading'  name ="ball-spin-fade-loader" color="#FF8856" scale="3"></vue-loaders>
-        </div>
-        <div id="page_top">
-            <a href="#"></a>
         </div>
         <div>
             <div class="other">
@@ -30,9 +30,14 @@
                         </router-link>
                     </slide>
                 </carousel>
+                <div class="list-link">
+                    <router-link v-bind:to="{name: 'book.other'}">
+                        <p class="list-link_btn">一覧表示する</p>
+                    </router-link>
+                </div>
             </div>
             <div v-show="!resp" class="my_data">
-                <p class="heading">自分の投稿</p>
+                <p class="heading">自分の投稿(最近の投稿）</p>
                 <div v-for="myData in myDatas" :key="myData.id">
                     <div class="my_data-content">
                         <div class="my_data-content_image">
@@ -40,7 +45,7 @@
                         </div>
                         <div class="my_data-content_body">
                             <div class="my_data-content_body-title">
-                                <p class="tag">タイトル</p>
+                                <p class="tag">タイ<br>トル</p>
                                 <p class="content-main title">{{myData.title}}</p>
                             </div>
                             <div class="my_data-content_body-author">
@@ -49,7 +54,7 @@
                             </div>
                             <div class="my_data-content_body-rating">
                                 <p class="tag">評価</p>
-                                <p class="content-main rating">{{myData.rating}}</p>
+                                <star-rating class="content-main rating" v-model="myData.rating" :read-only="true" :star-size=30 ></star-rating>
                             </div>
                             <div class="my_data-content_body-footer">
                                 <p class="tag">{{timeStamp(myData.created_at)}}</p>
@@ -58,9 +63,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="list-link">
+                    <router-link v-bind:to="{name: 'book.mylist'}">
+                        <p class="list-link_btn">一覧表示する</p>
+                    </router-link>
+                </div>
             </div>
             <div v-show="resp" class="responsive">
-                <p class="heading">自分の投稿</p>
+                <p class="heading">自分の投稿(最近の投稿）</p>
                 <div class="responsive_my-data" v-for="myData in myDatas" :key="myData.id">
                     <router-link class="responsive_my-data-show" :to="`/book/show/${myData.id}`">
                         <div class="responsive_my-data_inner">
@@ -75,6 +85,11 @@
                                 </div>
                             </div>
                         </div>
+                    </router-link>
+                </div>
+                <div class="list-link">
+                    <router-link v-bind:to="{name: 'book.mylist'}">
+                        <p class="list-link_btn">一覧表示する</p>
                     </router-link>
                 </div>
             </div>
@@ -112,7 +127,7 @@ export default {
         },
 
         async getMyData(){
-            await axios.get("http://localhost:8080/api/book/mydata",{params:{user_id:this.user.id}})
+            await axios.get("http://localhost:8080/api/book/new_mydata",{params:{user_id:this.user.id}})
             .then((res) => {
                 this.myDatas = res.data.data;
                 console.log(this.myDatas);
@@ -124,6 +139,7 @@ export default {
 
         handleResize(){
             if(window.innerWidth <= 480){
+                this.page = 1;
                 this.resp = true;
             }else if(window.innerWidth <= 705) {
                 this.page = 1;
@@ -133,12 +149,15 @@ export default {
             }else {
                 this.page = 3;
                 this.resp = false;
-            }
-            
+            } 
+        },
+
+        scrollTop(){
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
-
-        
-
     },
 
     computed:{
@@ -164,6 +183,19 @@ export default {
     font-family: 'Hannotate SC','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,sans-serif;
 }
 
+.top-btn {
+    color: #fff;
+    position: fixed;
+    right: 14px;
+    bottom: 35px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    border-radius: 50%;
+    background: #5bc8ac;
+}
+
 /* ローディングぐるぐる */
 .loading {
     position:fixed;
@@ -171,50 +203,12 @@ export default {
     left:0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255,255,255,0.7);
+    background-color: rgba(255,255,255,1);
     z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
 
-}
-
-/* ページトップボタン */
-
-#page_top {
-    width:50px;
-    height: 50px;
-    position: fixed;
-    right: 0;
-    bottom: 50px;
-    background: #FF570D;
-    opacity: 0.8;
-    border-radius: 50px;
-}
-
-#page_top a {
-    position: relative;
-    display: block;
-    width: 50px;
-    height: 50px;
-    text-decoration: none;
-}
-
-#page_top a::before {
-    font-family: 'Font Awesome 5 Free';
-    content:'f106';
-    font-weight: 900;
-    font-size: 25px;
-    color: #fff;
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    margin: auto;
-    text-align: center;
 }
 
 
@@ -325,7 +319,7 @@ export default {
 
 .my_data-content {
     width: 900px;
-    height: 180px;
+    height: 210px;
     background: #FFDBC9;
     padding: 0.2rem 0.5rem;
     margin: auto;
@@ -350,7 +344,7 @@ export default {
 
 .tag {
     font-size: 1rem;
-    
+    width: 15%;
 }
 
 .content-main {
@@ -358,7 +352,7 @@ export default {
     margin-left: 5rem;
 }
 
-.author, .rating {
+.title,.author, .rating {
     margin-left: 7rem;
 }
 
@@ -429,12 +423,45 @@ export default {
     margin-top: -4px;
 }
 
+.list-link {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.list-link_btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+    margin-right: 1rem;
+    padding: 1rem 2rem;
+    width: 180px;
+    color: #fff;
+    font-size: 0.8rem;
+    background-color: #FF6600;
+    transition: 0.3s;
+}
+
+.list-link_btn::after {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-top: 3px solid #333333;
+    border-right: 3px solid #333333;
+    transform: rotate(45deg);
+}
+
+.list-link_btn:hover {
+    text-decoration: none;
+    background-color: #bbbbbb;
+}
+
 /* mydataレスポンシブ */
 
 .responsive_my-data_inner {
-    height: 150px;
-    width: 70%;
-    margin: 2rem auto 2rem;
+    height: 155px;
+    width: 75%;
+    margin: 5rem auto 2rem;
     padding: 0.2rem 0.5rem;
     background-color: #FFDBC9; 
     display: flex; 
@@ -484,11 +511,7 @@ export default {
     margin-top: 0.6rem;
 }
 
-@media screen and (max-width:480px) {
-    body {
-        margin-top: 5rem;
-    }
-}
+
 
 @media screen and (max-width: 1024px) {
     body {
@@ -496,11 +519,41 @@ export default {
     }
 
     .responsive_my-data_inner-header img {
-    width: 70%;
-}
+        width: 70%;
+    }
+
+    .responsive_my-data_body-title {
+        margin-top: 1rem;
+        font-size: 1.1rem
+    }
+
+    .responsive_my-data_body-author {
+        font-size: 0.9rem;
+    }
+
+    .responsive_my-data_body-footer {
+        font-size: 0.8rem; 
+    }
 }
 
+@media screen and (max-width: 480px) {
+    body {
+        margin-top: 5rem;
+    }
 
+    .responsive_my-data_body-title {
+        margin-top: 0.3rem;
+        font-size: 1rem
+    }
+
+    .responsive_my-data_body-author {
+        font-size: 0.8rem;
+    }
+
+    .responsive_my-data_body-footer {
+        font-size: 0.7rem; 
+    }
+}
 
 
 </style>

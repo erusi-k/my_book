@@ -23,6 +23,7 @@ Route::prefix('book')->group(function(){
     Route::get('/other/random',[bookController::class,'otherRandom']);
     Route::get('/other',[bookController::class,'other']);
     Route::get('/mydata',[bookController::class,'myData']);
+    Route::get('/new_mydata',[bookController::class,'newMyData']);
     Route::post('/',[bookController::class,'store']);
     Route::get('/{id}',[bookController::class,'show']);
     Route::put('/{id}',[bookController::class,'update']);

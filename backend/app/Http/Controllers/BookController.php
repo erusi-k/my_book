@@ -17,6 +17,14 @@ class BookController extends Controller
         ]);
     }
 
+    public function newMyData(Request $request) {
+        $data = Book::where('user_id',$request->user_id)->latest()->take(5)->get();
+        return response()->json([
+            'data'=>$data
+        ]);
+
+    }
+
     public function otherRandom(Request $request) {
         $datas = Book::where('user_id','<>',$request->user_id)->inRandomOrder()->take(9)->get();
         $i =0;

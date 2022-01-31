@@ -1,5 +1,8 @@
 <template>
     <div class="body">
+        <div class="top-btn" @click="scrollTop">
+            <i class="fas fa-chevron-up Page-Btn-Icon"></i>
+        </div>
         <div v-show="isLoading" class="loading">   
             <vue-loaders v-show='isLoading'  name ="ball-spin-fade-loader" color="#FF8856" scale="3"></vue-loaders>
         </div>
@@ -90,6 +93,13 @@ export default {
             }else {
                 this.resp = false;
             }
+        },
+
+        scrollTop(){
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
 
     },
@@ -116,6 +126,20 @@ export default {
     font-family: 'Hannotate SC','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,sans-serif;
 }
 
+
+.top-btn {
+    color: #fff;
+    position: fixed;
+    right: 14px;
+    bottom: 35px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    border-radius: 50%;
+    background: #5bc8ac;
+}
+
 /* ローディングぐるぐる */
 .loading {
     position:fixed;
@@ -123,7 +147,7 @@ export default {
     left:0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255,255,255,0.7);
+    background-color: rgba(255,255,255,1);
     z-index: 2;
     display: flex;
     align-items: center;
@@ -277,8 +301,8 @@ export default {
 
 .responsive_other_inner {
     height: 180px;
-    width: 70%;
-    margin: 4rem auto 4rem;
+    width: 75%;
+    margin: 5rem auto 4rem;
     padding: 0.2rem 0.5rem;
     background-color: #d6edff; 
     display: flex; 

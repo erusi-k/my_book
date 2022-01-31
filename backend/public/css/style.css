@@ -1,0 +1,54 @@
+
+.form_error {
+    color: #F00;
+}
+
+
+.login_title_content, .register_title_content {
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 30px;
+    color: #000000
+}
+
+.login-input, .register-input {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.login-input_content, .register-input_content {
+    width: 70%;
+    height: 30px;
+    border: 1px solid #dddddd;
+    border-radius: 7px;
+}
+
+.login-btn, .register-btn {
+    text-align: center;
+    margin-top: 5rem;
+}
+
+.login-btn_content, .register-btn_content {
+    width: 30%;
+    height: 30px;
+    background-color: #0099FF;
+    border: 1px solid #dddddd;
+    border-radius: 7px;
+    color: #fff;
+    font-size: 1em;
+}
+
+.link { 
+    text-align: center;
+    color: #bbbbbb;
+    margin-top: 3rem;
+}
+
+.link-url {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #0066FF;
+    margin-top: 1rem;
+    cursor: pointer;
+}
