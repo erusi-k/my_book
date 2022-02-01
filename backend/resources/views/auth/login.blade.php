@@ -4,6 +4,8 @@
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
+        <h1 class="main-title">mybook</h1>
+        
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4 form_error" :errors="$errors" />
 

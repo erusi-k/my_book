@@ -212,7 +212,7 @@ export default ({
 .show-content_mycard {
     display: flex;
     width: 100%;
-    height: 160px;
+    height: 180px;
     background: #FFDBC9;
     padding: 0.2rem 0.5rem;
     margin: auto;
@@ -248,7 +248,7 @@ export default ({
 .show-content_othercard {
     display: flex;
     width: 100%;
-    height: 150px;
+    height: 180px;
     background: #d6edff;
     padding: 0.2rem 0.5rem;
     margin: auto;
@@ -331,7 +331,7 @@ export default ({
 
 .show-content_card-body {
     margin: 1rem 0 0 3rem;
-    width: 70%;
+    width: 75%;
 }
 
 
@@ -344,6 +344,7 @@ export default ({
 }
 
 .content-main {
+    width: 80%;
     margin-left: 5rem;
 }
 
@@ -352,11 +353,13 @@ export default ({
 }
 
 .title,.author,.rating {
-    margin-left :7rem;
+    font-size: 1.2rem;
+    margin-left :4rem;
 }
 
 .tag  {
-    width: 30%;
+    font-size: 1.3rem;
+    width: 20%;
 }
 
 
@@ -364,13 +367,19 @@ export default ({
     body {
         margin-top: 5rem;
     }
+    
 
     .title,.author,.rating {
         margin-left: 0;
-    }   
+        font-size: 1rem;
+    }  
+    
+    .tag {
+        font-size: 1rem;
+    }
 }
 
-@media screen and (max-width:480px) {
+@media screen and (max-width:800px) {
     body {
         margin-top: 5rem;
     }
@@ -382,7 +391,11 @@ export default ({
 
     .show-content:after {
         top: 120px;
-    }   
+    } 
+    
+    .show-content_mycard, .show-content_othercard {
+        height: 150px;
+    }
 
     .show-content_card-image {
         width: 25%;

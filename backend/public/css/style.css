@@ -3,15 +3,24 @@ html {
     background: #FAEBD7;
 }
 
-//エラー表示
+/* mybookタイトル */
+.main-title {
+    align-items: center;
+    font-size: 3.5rem;
+    color: #FF5F17;
+    font-weight:bold;
+    margin-top: 0;
+}
+
+/* エラー表示 */
 .form_error {
     color: #F00;
 }
 
-//ログイン、新規登録css
+/* ログイン、新規登録css */
 .login_title_content, .register_title_content {
     text-align: center;
-    font-size: 3rem;
+    font-size: 2rem;
     margin-top: 30px;
     color: #000000
 }

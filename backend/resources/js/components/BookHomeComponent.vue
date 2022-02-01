@@ -239,7 +239,7 @@ export default {
     left:0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255,255,255,1);
+    background-color: rgba(255,255,255,0.9);
     z-index: 2;
     display: flex;
     align-items: center;
@@ -365,11 +365,11 @@ export default {
 
 .my_data-content {
     width: 900px;
-    height: 210px;
+    height: 220px;
     background: #FFDBC9;
     padding: 0.2rem 0.5rem;
     margin: auto;
-    margin-top: 2rem;
+    margin-top: 5rem;
     box-shadow: 0px 0px 0px 10px #FFDBC9;
     border: 2px dashed #fff;
 }
@@ -470,7 +470,7 @@ export default {
 }
 
 
-/* 投稿を書いてみましょう */
+/* 投稿を書いてみましょう,一覧表示 */
 .list-link {
     display: flex;
     justify-content: flex-end;
@@ -480,7 +480,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 1rem;
+    margin-top: 2rem;
     margin-right: 3rem;
     padding: 1rem 2rem;
     width: 180px;

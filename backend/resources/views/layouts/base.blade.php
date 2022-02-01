@@ -8,7 +8,7 @@
     <title>@yield('title')</title>
 </head>
 <body>
-    <div class="start">
+    <div>
         <main>
             @yield('content')
         </main>

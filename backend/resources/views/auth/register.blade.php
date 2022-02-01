@@ -3,6 +3,8 @@
 @section('title','新規登録ページ')
 @section('content')
 
+    <h1 class="main-title">mybook</h1>
+
     <!-- Validation Errors -->
     <x-auth-validation-errors class="errors form_error" :errors="$errors" />
 
