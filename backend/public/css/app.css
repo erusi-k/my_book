@@ -45,6 +45,10 @@ Sections
 /**
 Remove the margin in all browsers.
 */
+#app {
+    background: #FAEBD7;
+}
+
 
 body {
   margin: 0;

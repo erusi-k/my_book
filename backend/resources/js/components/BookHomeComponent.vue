@@ -9,87 +9,106 @@
         <div>
             <div class="other">
                 <p class="heading">みんなの投稿</p>
-                <carousel  :autoplay="true"   :per-page="page" :speed="3000" :autoplayTimeout="4000" pagination-color="#CCCCCC">
-                    <slide class="slider" v-for="other in others" :key="other.id">
-                        <router-link class="slider-show" :to="`/book/show/${other.id}`">
-                            <div class="slider-inner">
-                                <div class="slider-header">
-                                    <img v-bind:src="other.imge">
-                                </div>     
-                                <div class="slider-body"> 
-                                    <p class="slider-title">{{other.title}}</p> 
-                                    <p class="slider-author">作 {{other.author}}</p>
-                                    <div class="slider-footer">
-                                        <star-rating v-model="other.rating" :read-only="true" :star-size=20 ></star-rating>
-                                    </div>
-                                    <div class="slider-user">
-                                        <p class="test">ユーザ名:{{other.user_name}}</p>
+                <p class="not_data" v-show="!checkOtherData">投稿がありません</p>
+                <div v-show="checkOtherData">
+                    <carousel  :autoplay="true"   :per-page="page" :speed="3000" :autoplayTimeout="4000" pagination-color="#CCCCCC">
+                        <slide class="slider" v-for="other in others" :key="other.id">
+                            <router-link class="slider-show" :to="`/book/show/${other.id}`">
+                                <div class="slider-inner">
+                                    <div class="slider-header">
+                                        <img v-bind:src="other.imge">
+                                    </div>     
+                                    <div class="slider-body"> 
+                                        <p class="slider-title">{{other.title}}</p> 
+                                        <p class="slider-author">作 {{other.author}}</p>
+                                        <div class="slider-footer">
+                                            <star-rating v-model="other.rating" :read-only="true" :star-size=20 ></star-rating>
+                                        </div>
+                                        <div class="slider-user">
+                                            <p class="test">ユーザ名:{{other.user_name}}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </router-link>
+                        </slide>
+                    </carousel>
+                    <div class="list-link">
+                        <router-link v-bind:to="{name: 'book.other'}">
+                            <p class="list-link_btn">一覧表示する</p>
                         </router-link>
-                    </slide>
-                </carousel>
-                <div class="list-link">
-                    <router-link v-bind:to="{name: 'book.other'}">
-                        <p class="list-link_btn">一覧表示する</p>
-                    </router-link>
+                    </div>
                 </div>
             </div>
             <div v-show="!resp" class="my_data">
                 <p class="heading">自分の投稿(最近の投稿）</p>
-                <div v-for="myData in myDatas" :key="myData.id">
-                    <div class="my_data-content">
-                        <div class="my_data-content_image">
-                            <img v-bind:src="myData.imge">
-                        </div>
-                        <div class="my_data-content_body">
-                            <div class="my_data-content_body-title">
-                                <p class="tag">タイ<br>トル</p>
-                                <p class="content-main title">{{myData.title}}</p>
+                <p class="not_data" v-show="!checkMyData">投稿がありません</p>
+                <div v-show="checkMyData">
+                    <div v-for="myData in myDatas" :key="myData.id">
+                        <div class="my_data-content">
+                            <div class="my_data-content_image">
+                                <img v-bind:src="myData.imge">
                             </div>
-                            <div class="my_data-content_body-author">
-                                <p class="tag">著者</p>
-                                <p class="content-main author" >{{myData.author}}</p>
-                            </div>
-                            <div class="my_data-content_body-rating">
-                                <p class="tag">評価</p>
-                                <star-rating class="content-main rating" v-model="myData.rating" :read-only="true" :star-size=30 ></star-rating>
-                            </div>
-                            <div class="my_data-content_body-footer">
-                                <p class="tag">{{timeStamp(myData.created_at)}}</p>
-                                <router-link class="btn" :to="`/book/show/${myData.id}`" >詳細へ</router-link>
+                            <div class="my_data-content_body">
+                                <div class="my_data-content_body-title">
+                                    <p class="tag">タイ<br>トル</p>
+                                    <p class="content-main title">{{myData.title}}</p>
+                                </div>
+                                <div class="my_data-content_body-author">
+                                    <p class="tag">著者</p>
+                                    <p class="content-main author" >{{myData.author}}</p>
+                                </div>
+                                <div class="my_data-content_body-rating">
+                                    <p class="tag">評価</p>
+                                    <star-rating class="content-main rating" v-model="myData.rating" :read-only="true" :star-size=30 ></star-rating>
+                                </div>
+                                <div class="my_data-content_body-footer">
+                                    <p class="tag">{{timeStamp(myData.created_at)}}</p>
+                                    <router-link class="btn" :to="`/book/show/${myData.id}`" >詳細へ</router-link>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="list-link">
+                        <router-link v-bind:to="{name: 'book.mylist'}">
+                            <p class="list-link_btn">一覧表示する</p>
+                        </router-link>
+                    </div>
                 </div>
-                <div class="list-link">
-                    <router-link v-bind:to="{name: 'book.mylist'}">
-                        <p class="list-link_btn">一覧表示する</p>
+                <div v-show="!checkMyData" class="list-link">
+                    <router-link v-bind:to="{name: 'book.create'}">
+                        <p class="list-link_btn">感想を書いてみましょう！</p>
                     </router-link>
                 </div>
             </div>
             <div v-show="resp" class="responsive">
                 <p class="heading">自分の投稿(最近の投稿）</p>
-                <div class="responsive_my-data" v-for="myData in myDatas" :key="myData.id">
-                    <router-link class="responsive_my-data-show" :to="`/book/show/${myData.id}`">
-                        <div class="responsive_my-data_inner">
-                            <div class="responsive_my-data_inner-header">
-                                <img v-bind:src="myData.imge">
-                            </div>     
-                            <div class="responsive_my-data_body"> 
-                                <p class="responsive_my-data_body-title">{{myData.title}}</p> 
-                                <p class="responsive_my-data_body-author">作 {{myData.author}}</p>
-                                <div class="responsive_my-data_body-footer">
-                                    <star-rating v-model="myData.rating" :read-only="true" :star-size=20 ></star-rating>
+                <p class="not_data" v-show="!checkMyData">投稿がありません</p>
+                <div v-show="checkMyData">
+                    <div class="responsive_my-data" v-for="myData in myDatas" :key="myData.id">
+                        <router-link class="responsive_my-data-show" :to="`/book/show/${myData.id}`">
+                            <div class="responsive_my-data_inner">
+                                <div class="responsive_my-data_inner-header">
+                                    <img v-bind:src="myData.imge">
+                                </div>     
+                                <div class="responsive_my-data_body"> 
+                                    <p class="responsive_my-data_body-title">{{myData.title}}</p> 
+                                    <p class="responsive_my-data_body-author">作 {{myData.author}}</p>
+                                    <div class="responsive_my-data_body-footer">
+                                        <star-rating v-model="myData.rating" :read-only="true" :star-size=20 ></star-rating>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </router-link>
-                </div>
-                <div class="list-link">
-                    <router-link v-bind:to="{name: 'book.mylist'}">
-                        <p class="list-link_btn">一覧表示する</p>
+                            </div>f
+                        </router-link>
+                    </div>
+                    <div class="list-link">
+                        <router-link v-bind:to="{name: 'book.mylist'}">
+                            <p class="list-link_btn">一覧表示する</p>
+                        </router-link>
+                    </div>
+                </div>    
+                <div v-show="!checkMyData" class="list-link">
+                    <router-link v-bind:to="{name: 'book.create'}">
+                        <p class="list-link_btn">感想を書いてみましょう！</p>
                     </router-link>
                 </div>
             </div>
@@ -100,43 +119,58 @@
 <script>
 export default {
     props:['user'],
-    
     data(){
         return{
             others:'',
+            checkOtherData: '',
+            checkMyData: '',
             myDatas:'',
             isLoading: true,
             page: 3,
             resp: false,
-        }
-        
+        } 
     },
     methods:{
+
+    // みんなのデータ取得    
         async getOtherData(){
             await axios.get("http://localhost:8080/api/book/other/random",{params:{user_id:this.user.id}})
             .then((res)=>{
                 this.others = res.data.data
-                console.log('データ取得は動いています');
+                if(!this.others.length == 0){
+                    this.checkOtherData = true;
+                } else {
+                    this.checkOtherData = false;
+                }
                 console.log(this.others);
                 this.isLoading = false;
             })
             .catch((error) => {
                 console.log(error);
-                alert('失敗です');
+                alert('みんなの投稿のデータ取得に失敗しました');
             })
         },
 
+    // 自分のデータ取得
         async getMyData(){
             await axios.get("http://localhost:8080/api/book/new_mydata",{params:{user_id:this.user.id}})
             .then((res) => {
                 this.myDatas = res.data.data;
+                if(!this.myDatas.length == 0) {
+                    this.checkMyData = true;
+                } else {
+                    this.checkMyData = false;
+                }
+                console.log(this.myDatas.length);
                 console.log(this.myDatas);
+                console.log(this.checkMyData);
             })
             .catch((error) => {
                 console.log(error);
             })
         },
 
+    // 画面幅検知
         handleResize(){
             if(window.innerWidth <= 480){
                 this.page = 1;
@@ -152,6 +186,7 @@ export default {
             } 
         },
 
+    //topに戻るボタン
         scrollTop(){
             window.scrollTo({
                 top: 0,
@@ -183,6 +218,7 @@ export default {
     font-family: 'Hannotate SC','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,sans-serif;
 }
 
+/* topに戻るボタン */
 .top-btn {
     color: #fff;
     position: fixed;
@@ -211,7 +247,15 @@ export default {
 
 }
 
+/* 投稿がありません */
+.not_data {
+    color: #999999;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 3rem;
+}
 
+/* 見出し */
 .heading {
     display: inline-block;
     font-weight: bold;
@@ -225,6 +269,7 @@ export default {
 }
 
 
+/* スライダー */
 .VueCarousel{
     width: 90%;
     margin: auto;
@@ -262,7 +307,6 @@ export default {
 .slider-header {
     width: 40%;
     height: 100%;
-    /* padding: 0.2rem 0.5rem; */
 }
 
 .slider-body {
@@ -300,6 +344,8 @@ export default {
     font-size: 0.8rem;
 }
 
+
+/* 自分の投稿 */
 .my_data-content,.my_data-content_body-title, 
 .my_data-content_body-author,.my_data-content_body-rating {
     display: flex;
@@ -423,6 +469,8 @@ export default {
     margin-top: -4px;
 }
 
+
+/* 投稿を書いてみましょう */
 .list-link {
     display: flex;
     justify-content: flex-end;
@@ -432,8 +480,8 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 0.5rem;
-    margin-right: 1rem;
+    margin-top: 1rem;
+    margin-right: 3rem;
     padding: 1rem 2rem;
     width: 180px;
     color: #fff;
@@ -457,7 +505,6 @@ export default {
 }
 
 /* mydataレスポンシブ */
-
 .responsive_my-data_inner {
     height: 155px;
     width: 75%;

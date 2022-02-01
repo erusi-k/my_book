@@ -1,7 +1,7 @@
 <template>
     <div class="body">
         <div v-show="isLoading" class="loading">   
-            <vue-loaders v-show='isLoading'  name ="ball-spin-fade-loader" color="#FF8856" scale="3"></vue-loaders>
+            <vue-loaders v-show='isLoading' name ="ball-spin-fade-loader" color="#FF8856" scale="3"></vue-loaders>
         </div>
         <div class="input">
             <div class="input-content">
@@ -11,35 +11,34 @@
                 <div class="input-content_header">
                     <h2 class="input-content_header-title">編集</h2>
                 </div>
-                    <validation-observer tag="form" ref="obs" v-slot="ObserverProps" v-on:submit.prevent="submit">  
-                        <div class="input-content_body">
-                            <validation-provider v-slot="ProviderProps" rules="required|max:50">
-                                <p>タイトル</p>
-                                <input type="text" v-model="item.title" name="タイトル">
-                                <div class="error">{{ProviderProps.errors[0]}}</div>
-                            </validation-provider>
-                            
-                        </div>
-                        <div class="input-content_body">
-                            <validation-provider v-slot="ProviderProps" rules="required|max:30">
-                                <p>著者</p>
-                                <input type="text"  v-model="item.author" name="著者">
-                                <div class="error">{{ProviderProps.errors[0]}}</div>
-                            </validation-provider>
-                        </div>
-                        <div class="input-content_body">
-                            <p class="input_rating-title">評価</p>
-                            <star-rating v-model="rating" v-bind:increment="0.5"></star-rating>
-                        </div>
-                        <div class="input-content_body">
-                            <validation-provider v-slot="ProviderProps" rules="required|max:500">
-                                <p>感想</p>
-                                <textarea v-model="item.report" name="感想"></textarea>
-                                <div class="error">{{ProviderProps.errors[0]}}</div>
-                            </validation-provider>
-                        </div>
-                        <button class="input-btn" type="submit" :disabled="ObserverProps.invalid">更新</button>
-                    </validation-observer>
+                <validation-observer tag="form" ref="obs" v-slot="ObserverProps" v-on:submit.prevent="submit">  
+                    <div class="input-content_body">
+                        <validation-provider v-slot="ProviderProps" rules="required|max:50">
+                            <p>タイトル</p>
+                            <input type="text" v-model="item.title" name="タイトル">
+                            <div class="error">{{ProviderProps.errors[0]}}</div>
+                        </validation-provider>
+                    </div>
+                    <div class="input-content_body">
+                        <validation-provider v-slot="ProviderProps" rules="required|max:30">
+                            <p>著者</p>
+                            <input type="text"  v-model="item.author" name="著者">
+                            <div class="error">{{ProviderProps.errors[0]}}</div>
+                        </validation-provider>
+                    </div>
+                    <div class="input-content_body">
+                        <p class="input_rating-title">評価</p>
+                        <star-rating v-model="rating" v-bind:increment="0.5"></star-rating>
+                    </div>
+                    <div class="input-content_body">
+                        <validation-provider v-slot="ProviderProps" rules="required|max:500">
+                            <p>感想</p>
+                            <textarea v-model="item.report" name="感想"></textarea>
+                            <div class="error">{{ProviderProps.errors[0]}}</div>
+                        </validation-provider>
+                    </div>
+                    <button class="input-btn" type="submit" :disabled="ObserverProps.invalid">更新</button>
+                </validation-observer>
             </div>
         </div>
         <a class="back_btn" @click="$router.back()">戻る</a>
@@ -58,11 +57,15 @@ export default ({
         }
     },
     methods:{
+
+    // ログインユーザーチェック処理    
         checkId(id){
             if(this.user_id !== id) {
-                alert('IDはあってません')
+                this.$router.push({name: 'book.home'});
             }
         },
+
+    // 編集データ取得    
         getData() {
             const id = this.bookId;
             axios.get("http://localhost:8080/api/book/"+id)
@@ -74,10 +77,11 @@ export default ({
             })
             .catch((error) => {
                 console.log(error);
-                alert('データ所得失敗です');
+                alert('データ取得に失敗しました')
             })
         },
 
+    // 編集内容データベース登録処理
         submit(){
             this.$swal({
                 title: "確認",
@@ -147,6 +151,7 @@ export default ({
     margin: 2rem 0  0 10rem;
 }
 
+/* form */
 input,textarea {
     width: 100%;
     }

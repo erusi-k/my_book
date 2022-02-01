@@ -54,7 +54,9 @@ export default ({
         }
     },
     methods:{
-        getData() {
+
+    //詳細データ取得    
+        getData(){
             const id = this.bookId
             axios.get("http://localhost:8080/api/book/"+id)
             .then((res) => {
@@ -66,6 +68,8 @@ export default ({
                 console.log(error);
             })
         },
+
+    //ログインユーザー確認    
         checkId(user_id){
             if(this.user.id == user_id){
                 console.log('真です')
@@ -76,22 +80,33 @@ export default ({
             return false;
             
         },
-        dataDelete(id){
-            const flag = confirm('本当に削除してもよろしいですか？？')
 
-            if(flag == true) {
-                axios.delete('http://localhost:8080/api/book/' +id)
-                .then((res) => {
+     //投稿削除処理   
+        dataDelete(id){
+            this.$swal({
+                title: "確認",
+                text: '本当に削除してもよろしいですか？',
+                icon: "warning",
+                buttons: true,
+                dangerMde: true,
+            })
+            .then((willDelete) => {
+                if(willDelete) {
+                    axios.delete('http://localhost:8080/api/book/' +id)
+                    .then((res) => {
                     console.log(res);
-                    alert('削除しました!');
+                    this.$swal('削除しました!');
                     this.$router.push({name:'book.home'});
                 })
-                .catch((error) => {
+                    .catch((error) => {
                     console.log(error);
                     alert('削除失敗です');
-                })
-            }   
+                });
+                }
+            });
         },
+
+    //画面検知    
         handleResize(){
             if(window.innerWidth <= 480){
                 this.resp = true;
@@ -105,19 +120,8 @@ export default ({
         
     },
 
-    computed:{
-
-    },
-
-    mounted(){
-        
-    },
-
-
     created(){
         this.getData();
-        
-        
     }
 })
 </script>
@@ -143,6 +147,7 @@ export default ({
     justify-content: center;
 
 }
+
 
 .show-content {
         margin: 3rem auto 0;

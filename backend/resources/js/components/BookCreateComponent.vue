@@ -1,6 +1,5 @@
 <template>
     <div class="body">
-        <div class="test"></div>
         <div class="input">
             <div class="input-content">
                 <div v-for="error in errors" :key="error.id">
@@ -17,7 +16,6 @@
                             <input type="text" v-model="item.title" name="タイトル">
                             <div class="error">{{ProviderProps.errors[0]}}</div>
                         </validation-provider>
-                        
                     </div>
                     <div class="input-content_body">
                         <validation-provider v-slot="ProviderProps" rules="required|max:30">
@@ -90,6 +88,7 @@
             }
         },
         methods: {
+        // データーベース登録処理
             submit(){
                 this.item.rating = this.rating;
                 axios.post("http://localhost:8080/api/book",this.item)
@@ -106,11 +105,12 @@
                         console.log(this.errors);
                         console.log(error);
                         this.$swal('登録に失敗しました。もう一度お試しください',{
-                            icon: "error"
+                            icon: "error",
                         })
                     })
             },
 
+        // 本情報検索処理
             getBook(query){
                 axios.get(`https://www.googleapis.com/books/v1/volumes?q=serch+${query}&maxResults=15`)
                 .then((res) => {
@@ -136,7 +136,8 @@
             closeModal(){
                 this.showContent = false;
             },
-            
+
+        // 本検索結果form反映処理
             dataSet(data){
                 this.item.title = data.volumeInfo.title;
                 this.item.author = data.volumeInfo.authors[0];
@@ -166,6 +167,7 @@
         color: #666666;
     }
     
+/* モーダルcss     */
     #overlay{
         z-index:1;
         position:fixed;
@@ -190,6 +192,8 @@
         overflow: scroll;
     }
 
+
+/* フォーム */
     .create {
         font-weight: bold;
         font-size: 2rem;
@@ -237,6 +241,7 @@
         margin-top : 1rem;
     }
 
+/* 本検索ボタン */
     .search-btn {
         color: #fff;
         width: 40%;
@@ -249,6 +254,7 @@
         background: #f56500;
     }
 
+/* 送信ボタン */
     .input-btn{
         padding: 0.5rem 1rem;
         background-color: #FFC7AF;
@@ -265,6 +271,7 @@
         height: 30px; 
     }
 
+/* 本選択ボタン */
     .select-btn {
         color: #fff;
         margin-top: 2rem;
@@ -277,6 +284,7 @@
         background: #f56500;
     }
 
+/* 本検索結果 */
     .book-search {
         display: flex;
         justify-content: space-between;
@@ -358,9 +366,6 @@
         }
 
         /* モーダル */
-
-        
-
         #book {
             width:100%;
             margin-top: 7rem;
@@ -377,8 +382,6 @@
         .book-body {
             display: block;
         }
-
-
 
         .book-body div {
             width: 80%;

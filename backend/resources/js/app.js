@@ -11,7 +11,6 @@ import VueRouter from 'vue-router';
 import router from './router';
 import 'vue-loaders/dist/vue-loaders.css';
 import VueLoaders from 'vue-loaders';
-import { Slide } from 'vue-burger-menu';
 import VueSwal from 'vue-swal';
 
 let rule;
@@ -39,17 +38,14 @@ Vue.component('bookEdit-component',require('./components/BookEditComponent.vue')
 Vue.component('header-component',require('./components/HeaderComponent.vue').default);
 Vue.component('bookOtherList-component',require('./components/BookOtherListComponent.vue').dafault);
 Vue.component('bookMylist-component',require('./components/BookMyListComponent.vue').default);
-Vue.component('bookFadeIn-component',require('./components/BookFadeInComponent.vue').default);
 Vue.component('star-rating',StarRating);
 Vue.component('ValidationProvider',ValidationProvider);
 Vue.component('ValidationObserver',ValidationObserver);
 Vue.component('vue-loaders',VueLoaders);
-Vue.component('slide',Slide);
 
 Vue.use(VueRouter);
 Vue.use(VueCarousel);
 Vue.use(VueLoaders);
-Vue.use(Slide);
 Vue.use(VueSwal);
 
 

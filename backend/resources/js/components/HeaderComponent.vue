@@ -89,6 +89,8 @@ export default ({
         }
     },
     methods: {
+
+    //画面検知    
         handleResize(){
             if(window.innerWidth <= 1024){
                 this.resp = true;
@@ -113,7 +115,6 @@ export default ({
 }
 
 /* スマホタイトル css  */
-
 .header-resp {
     position: fixed; 
     top: 0;
@@ -137,7 +138,6 @@ export default ({
 
 
 /* ハンバーガーメニューcss */
-
 .header-btn {
     position: fixed;
     top: 5px;
@@ -282,8 +282,6 @@ img {
     border-left: 2px dotted #FAEBD7;
 }
 
-
-
 .header-list_content p {
     margin-bottom: 0.5rem;
 }
@@ -293,7 +291,6 @@ img {
     background-size: 70px;
     background-repeat: no-repeat;
     background-position: 50% 50%;
-
 }
 
 

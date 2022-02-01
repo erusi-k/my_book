@@ -8,53 +8,59 @@
         </div>
         <div v-show="!resp" class="other">
             <p class="heading">みんなの投稿 </p>
-            <div v-for="other in others" :key="other.id">
-                <div class ="other_data" >
-                    <div class="other_data-image">
-                        <img  v-bind:src="other.imge" alt="">
-                    </div>     
-                    <div class="other_data_body"> 
-                        <div class="other_data_body-title">
-                            <p class="tag">タイ<br>トル</p>
-                            <p class="content-main title">{{other.title}}</p> 
+            <p class="not_data" v-show="!checkOtherData">投稿がありません</p>
+            <div v-show="checkOtherData">
+                <div v-for="other in others" :key="other.id">
+                    <div class ="other_data" >
+                        <div class="other_data-image">
+                            <img  v-bind:src="other.imge" alt="">
+                        </div>     
+                        <div class="other_data_body"> 
+                            <div class="other_data_body-title">
+                                <p class="tag">タイ<br>トル</p>
+                                <p class="content-main title">{{other.title}}</p> 
+                            </div>
+                            <div class="other_data_body-author" >
+                                <p class="tag">著者</p>
+                                <p class="content-main author">作 {{other.author}}</p>
+                            </div>
+                            <div class="other_data_body-rating">
+                                <p class="tag">評価</p>
+                                <p class="content-main rating">{{other.rating}}</p>
+                            </div>
+                            <div class="other_data_body-footer">
+                                <p class="tag">{{timeStamp(other.created_at)}}</p>
+                                <p class="other_data_body-footer-name name">ユーザー名:{{other.user_name}}</p>
+                                <router-link class="content-main btn"  :to="`/book/show/${other.id}`">詳細を見る！</router-link>
+                            </div>    
                         </div>
-                        <div class="other_data_body-author" >
-                            <p class="tag">著者</p>
-                            <p class="content-main author">作 {{other.author}}</p>
-                        </div>
-                        <div class="other_data_body-rating">
-                            <p class="tag">評価</p>
-                            <p class="content-main rating">{{other.rating}}</p>
-                        </div>
-                        <div class="other_data_body-footer">
-                            <p class="tag">{{timeStamp(other.created_at)}}</p>
-                            <p class="other_data_body-footer-name name">ユーザー名:{{other.user_name}}</p>
-                            <router-link class="content-main btn"  :to="`/book/show/${other.id}`">詳細を見る！</router-link>
-                        </div>    
                     </div>
                 </div>
-            </div>
+            </div>    
         </div>
         <div>
             <div v-show="resp" class="responsive">
                 <p class="heading">みんなの投稿</p>
-                <div class="responsive_other" v-for="other in others" :key="other.id">
-                    <router-link class="responsive_other-show" :to="`/book/show/${other.id}`">
-                        <div class="responsive_other_inner">
-                            <div class="responsive_other_inner-header">
-                                <img v-bind:src="other.imge">
-                            </div>     
-                            <div class="responsive_other_body"> 
-                                <p class="responsive_other_body-title">{{other.title}}</p> 
-                                <p class="responsive_other_body-author">作 {{other.author}}</p>
-                                <div class="responsive_other_body-footer">
-                                    <star-rating v-model="other.rating" :read-only="true" :star-size=20 ></star-rating>
+                <p class="not_data" v-show="!checkOtherData">投稿がありません</p>
+                <div v-show="checkOtherData">
+                    <div class="responsive_other" v-for="other in others" :key="other.id">
+                        <router-link class="responsive_other-show" :to="`/book/show/${other.id}`">
+                            <div class="responsive_other_inner">
+                                <div class="responsive_other_inner-header">
+                                    <img v-bind:src="other.imge">
+                                </div>     
+                                <div class="responsive_other_body"> 
+                                    <p class="responsive_other_body-title">{{other.title}}</p> 
+                                    <p class="responsive_other_body-author">作 {{other.author}}</p>
+                                    <div class="responsive_other_body-footer">
+                                        <star-rating v-model="other.rating" :read-only="true" :star-size=20 ></star-rating>
+                                    </div>
+                                    <p class="responsive_other_body-name name">ユーザー名:{{other.user_name}}</p>
                                 </div>
-                                <p class="responsive_other_body-name name">ユーザー名:{{other.user_name}}</p>
                             </div>
-                        </div>
-                    </router-link>
-                </div>    
+                        </router-link>
+                    </div>
+                </div>        
             </div>  
         </div>
     </div>
@@ -68,17 +74,23 @@ export default {
             others:'',
             isLoading: true,
             resp: false,
+            checkOtherData: '',
         }
-        
     },
 
     methods:{
+
+    // データ取得    
         async getOtherData(){
             await axios.get("http://localhost:8080/api/book/other",{params:{user_id:this.user.id}})
             .then((res)=>{
                 this.others = res.data.data
+                if(!this.others.length == 0) {
+                    this.checkOtherData = true;
+                } else {
+                    this.checkOtherData = false;
+                }
                 this.isLoading = false;
-                console.log('データ取得は動いています');
                 console.log(this.others);
             })
             .catch((error) => {
@@ -87,6 +99,7 @@ export default {
             })
         },
 
+    // 画面幅検知
         handleResize(){
             if(window.innerWidth <= 1024){
                 this.resp = true;
@@ -95,13 +108,13 @@ export default {
             }
         },
 
+    // topに戻る処理
         scrollTop(){
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
         }
-
     },
 
     computed:{
@@ -126,7 +139,7 @@ export default {
     font-family: 'Hannotate SC','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,sans-serif;
 }
 
-
+/* topに戻る */
 .top-btn {
     color: #fff;
     position: fixed;
@@ -155,6 +168,7 @@ export default {
 
 }
 
+/* 見出し */
 .heading {
     display: inline-block;
     font-weight: bold;
@@ -167,6 +181,7 @@ export default {
     font-size: 3rem;
 }
 
+/* みんなのデータ */
 .other_data,.other_data_body-title, 
 .other_data_body-author,.other_data_body-rating
 {
@@ -298,9 +313,8 @@ export default {
 }
 
 /* otherレスポンシブ */
-
 .responsive_other_inner {
-    height: 180px;
+    height: 190px;
     width: 75%;
     margin: 5rem auto 4rem;
     padding: 0.2rem 0.5rem;

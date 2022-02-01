@@ -10,6 +10,7 @@ use App\Http\Requests\Api\PostRequest;
 
 class BookController extends Controller
 {
+//mylistのデータ取得    
     public function myData(Request $request){
         $data =  Book::where('user_id',$request->user_id)->latest()->get();
         return response()->json([
@@ -17,14 +18,15 @@ class BookController extends Controller
         ]);
     }
 
+//homeの自分とデータ取得
     public function newMyData(Request $request) {
         $data = Book::where('user_id',$request->user_id)->latest()->take(5)->get();
         return response()->json([
             'data'=>$data
         ]);
-
     }
 
+//homeのみんなの投稿ランダム取得
     public function otherRandom(Request $request) {
         $datas = Book::where('user_id','<>',$request->user_id)->inRandomOrder()->take(9)->get();
         $i =0;
@@ -38,6 +40,7 @@ class BookController extends Controller
         ]);
     }
 
+//otherlistデータ取得
     public function other(Request $request){
         $datas = Book::where('user_id','<>',$request->user_id)->latest()->get();
         $i =0;
@@ -51,6 +54,7 @@ class BookController extends Controller
         ]);
     }
 
+//投稿新規作成
     public function store(PostRequest $request){
         $id = Auth::id();
         return Book::create([
@@ -64,6 +68,7 @@ class BookController extends Controller
         ]);
     }
 
+//投稿詳細
     public function show($id) {
         $data = Book::find($id);
         $user_name = User::find($data->user_id);
@@ -73,6 +78,7 @@ class BookController extends Controller
         ]);
     }
 
+//投稿update    
     public function update(Request $request, Book $book) {
         $item = Book::find($request->id);
         $item->update([
@@ -81,13 +87,11 @@ class BookController extends Controller
             'author'=>$request->author,
             'report'=>$request->report,
         ]);
-
     }
 
+//投稿削除
     public function delete($id) {
-        
         $item = Book::find($id);
         $item->delete();
-
     }
 }

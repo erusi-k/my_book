@@ -8,54 +8,65 @@
         </div>
         <div v-show="!resp">
             <p class="heading">自分の投稿</p>
-            <div v-for="myData in myDatas" :key="myData.id">
-                <div>
-                    <div   class="my_data-content">
-                        <div class="my_data-content_image">
-                            <img v-bind:src="myData.imge">
-                        </div>
-                        <div class="my_data-content_body">
-                            <div class="my_data-content_body-title">
-                                <p class="tag">タイ<br>トル</p>
-                                <p class="content-main title">{{myData.title}}</p>
+            <p class="not_data" v-show="!checkMyData">投稿がありません</p>
+            <div v-show="checkMyData">
+                <div v-for="myData in myDatas" :key="myData.id">
+                    <div>
+                        <div class="my_data-content">
+                            <div class="my_data-content_image">
+                                <img v-bind:src="myData.imge">
                             </div>
-                            <div class="my_data-content_body-author">
-                                <p class="tag">著者</p>
-                                <p class="content-main author" >{{myData.author}}</p>
+                            <div class="my_data-content_body">
+                                <div class="my_data-content_body-title">
+                                    <p class="tag">タイ<br>トル</p>
+                                    <p class="content-main title">{{myData.title}}</p>
+                                </div>
+                                <div class="my_data-content_body-author">
+                                    <p class="tag">著者</p>
+                                    <p class="content-main author" >{{myData.author}}</p>
+                                </div>
+                                <div class="my_data-content_body-rating">
+                                    <p class="tag">評価</p>
+                                    <star-rating class="content-main rating" v-model="myData.rating" :read-only="true" :star-size=30 ></star-rating>
+                                </div>
+                                <div class="my_data-content_body-footer">
+                                    <p class="tag">{{timeStamp(myData.created_at)}}</p>
+                                    <router-link class="btn" :to="`/book/show/${myData.id}`" >詳細へ</router-link>
+                                </div>
                             </div>
-                            <div class="my_data-content_body-rating">
-                                <p class="tag">評価</p>
-                                <star-rating class="content-main rating" v-model="myData.rating" :read-only="true" :star-size=30 ></star-rating>
-                            </div>
-                            <div class="my_data-content_body-footer">
-                                <p class="tag">{{timeStamp(myData.created_at)}}</p>
-                                <router-link class="btn" :to="`/book/show/${myData.id}`" >詳細へ</router-link>
-                            </div>
-                        </div>
-                    </div> 
+                        </div> 
+                    </div>
                 </div>
             </div>      
         </div>
         <div class="my_data">
             <div v-show="resp" class="responsive">
                 <p class="heading">自分の投稿</p>
-                <div class="responsive_my-data" v-for="myData in myDatas" :key="myData.id">
-                    <router-link class="responsive_my-data-show" :to="`/book/show/${myData.id}`">
-                        <div class="responsive_my-data_inner">
-                            <div class="responsive_my-data_inner-header">
-                                <img v-bind:src="myData.imge">
-                            </div>     
-                            <div class="responsive_my-data_body"> 
-                                <p class="responsive_my-data_body-title">{{myData.title}}</p> 
-                                <p class="responsive_my-data_body-author">作 {{myData.author}}</p>
-                                <div class="responsive_my-data_body-footer">
-                                    <star-rating v-model="myData.rating" :read-only="true" :star-size=20 ></star-rating>
+                <p class="not_data" v-show="!checkMyData">投稿がありません</p>
+                <div v-show="checkMyData">
+                    <div class="responsive_my-data" v-for="myData in myDatas" :key="myData.id">
+                        <router-link class="responsive_my-data-show" :to="`/book/show/${myData.id}`">
+                            <div class="responsive_my-data_inner">
+                                <div class="responsive_my-data_inner-header">
+                                    <img v-bind:src="myData.imge">
+                                </div>     
+                                <div class="responsive_my-data_body"> 
+                                    <p class="responsive_my-data_body-title">{{myData.title}}</p> 
+                                    <p class="responsive_my-data_body-author">作 {{myData.author}}</p>
+                                    <div class="responsive_my-data_body-footer">
+                                        <star-rating v-model="myData.rating" :read-only="true" :star-size=20 ></star-rating>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </router-link>
+                        </router-link>
+                    </div>
                 </div>    
             </div>  
+            <div class="new">
+                <router-link v-bind:to="{name: 'book.create'}">
+                    <p class="new_btn" v-show="!checkMyData">感想を書いてみる！</p>
+                </router-link>
+            </div>
         </div>
     </div>    
 </template>
@@ -69,17 +80,22 @@ export default({
             myDatas: '',
             isLoading: true,
             resp: false,
+            checkMyData: '',
         }
     },
     
-
-    
-
     methods: {
+
+    // データ取得    
         async getMyData(){
             await axios.get("http://localhost:8080/api/book/mydata",{params:{user_id:this.user.id}})
             .then((res) => {
                 this.myDatas = res.data.data;
+                if(!this.myDatas.length == 0) {
+                    this.checkMyData = true;
+                } else {
+                    this.checkMyData = false;
+                }
                 console.log(this.myDatas);
                 this.isLoading = false;
             })
@@ -88,6 +104,7 @@ export default({
             })
         },
 
+    //画面幅検知
         handleResize(){
             if(window.innerWidth <= 1024){
                 this.resp = true;
@@ -96,14 +113,13 @@ export default({
             }
         },
 
+    //topに戻る処理
         scrollTop(){
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
         }
-
-
     },
 
     computed:{
@@ -128,6 +144,7 @@ body {
     font-family: 'Hannotate SC','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,sans-serif;
 }
 
+/* ローディングぐるぐる */
 .loading {
     position:fixed;
     top:0;
@@ -142,6 +159,7 @@ body {
 
 }
 
+/* topに戻るボタン */
 .top-btn {
     color: #fff;
     position: fixed;
@@ -155,7 +173,15 @@ body {
     background: #5bc8ac;
 }
 
+/* 投稿がありません */
+.not_data {
+    color: #999999;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 3rem;
+}
 
+/* 見出し */
 .heading {
     display: inline-block;
     font-weight: bold;
@@ -169,6 +195,7 @@ body {
 }
 
 
+/* 投稿データ */
 .my_data-content,.my_data-content_body-title, 
 .my_data-content_body-author,.my_data-content_body-rating {
     display: flex;
@@ -296,8 +323,51 @@ body {
     margin-top: -4px;
 }
 
-/* mydataレスポンシブ */
 
+/* 感想を書いてみましょう！ */
+.new {
+    text-align: center;
+}
+
+.new_btn {
+    font-size: 18px;
+    display: inline-block;
+    margin-top: 5rem;
+    padding: 0.5rem 1rem 0.3rem;
+    position: relative;
+    color: #990000;
+    border: solid 2px #990000;
+    border-radius: 5px;
+    background-color: transparent;
+    cursor: pointer;
+    animation: fluffy1 3s ease infinite;
+}
+
+.new_btn:before {
+    background-color: #FF9966;
+    border-radius: 5px;
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    z-index: -1;
+    animation: fluffy1 3s ease infinite;
+}
+
+@keyframes fluffy1 {
+    0% { transform:translateY(0) }
+    5% { transform:translateY(0) }
+    10% { transform:translateY(0) }
+    20% { transform:translateY(-15px) }
+    25% { transform:translateY(0) }
+    30% { transform:translateY(-15px) }
+    50% { transform:translateY(0) }
+    100% { transform:translateY(0) }
+}
+
+/* mydataレスポンシブ */
 .responsive_my-data_inner {
     height: 155px;
     width: 75%;
@@ -321,7 +391,6 @@ body {
 .responsive_my-data_inner-header {
     width: 30%;
     height: 100%;
-    /* padding: 0.2rem 0.5rem; */
 }
 
 .responsive_my-data_inner-header img {
@@ -394,5 +463,4 @@ body {
         font-size: 0.7rem; 
     }
 }
-
 </style>
