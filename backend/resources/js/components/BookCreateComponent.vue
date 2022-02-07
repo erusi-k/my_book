@@ -44,7 +44,7 @@
             <div id="book">
                 <div class="book-search">
                     <div class="book-search_main">
-                        <input type="text" class="book-search_main-input" placeholder="キーワード入力してください" v-model="query">
+                        <input type="text" class="book-search_main-input" placeholder="キーワード入力してください。" v-model="query">
                         <button class="book-search_main-btn" @click="getBook(query)">検索</button>
                     </div>
                     <img class="close" @click="closeModal" src="/images/close.png">
