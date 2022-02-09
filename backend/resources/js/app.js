@@ -30,7 +30,8 @@ Alpine.start();
 
 window.Vue = require('vue').default;
 
-
+Vue.component('login-component',require('./components/login.vue').default);
+Vue.component('about',require('./components/about.vue').default);
 Vue.component('bookCreaet-component', require('./components/BookCreateComponent.vue').default);
 Vue.component('bookHome-component',require('./components/BookHomeComponent.vue').default);
 Vue.component('bookShow-component',require('./components/BookShowComponent.vue').default);

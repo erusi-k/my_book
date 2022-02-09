@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\bookController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,7 @@ use App\Http\Controllers\bookController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function(Request $request) {
     return $request->user();
 });
 
@@ -29,5 +30,10 @@ Route::prefix('book')->group(function(){
     Route::put('/{id}',[bookController::class,'update']);
     Route::delete('/{id}',[bookController::class,'delete']);
 });
+
+
+
+Route::post('/login',[LoginController::class,'login']);
+Route::post('/logout',[LoginController::class,'logout']);
 
 

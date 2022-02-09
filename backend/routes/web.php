@@ -13,16 +13,16 @@ use App\Http\Controllers\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',function(){
+Route::get('/login',function(){
     return view('welcome');
 });
 
 Route::get('/book/{any}',function(){
     return view('app');
-})->where('any','.*')->middleware(['auth']);
+})->where('any','.*');
 
 
 
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';
 
 

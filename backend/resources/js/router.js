@@ -5,6 +5,8 @@ import BookShowComponent from "./components/BookShowComponent";
 import BookEditComponent from "./components/BookEditComponent";
 import BookOtherListComponent from "./components/BookOtherListComponent";
 import BookMyListComponent from "./components/BookMyListComponent";
+import login from "./components/login.vue";
+import about from "./components/about.vue";
 
 export default new Router({
     mode:'history',
@@ -45,5 +47,19 @@ export default new Router({
                 component: BookMyListComponent,
                 props:true
             },
+
+            {
+                path: "/book/login",
+                name: "login",
+                component: login,
+                meta: {guestOnly: true}
+            },
+
+            {
+                path: "/book/about",
+                name: "about",
+                component: about,
+                meta: {authOnly: true}
+            }
     ]
 })
