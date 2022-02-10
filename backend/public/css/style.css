@@ -3,6 +3,36 @@ html {
     background: #FAEBD7;
 }
 
+#app {
+    height: 100%;
+}
+
+/* ログアウト */
+.content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: right;
+    align-items: center;
+    border-radius: 10px;
+    z-index: 60;
+}
+
+.logout-content {
+    display: inline-block;
+    position: relative;
+    font-wight: bold;
+    padding: 7px 10px 10px 10px;
+    color: #FFF;
+    background: #ff7f7f;
+    border-radius: 30px;
+}
+
+.logout-content:hover {
+    background: #ffc25c;
+}
+
+
 /* mybookタイトル */
 .main-title {
     align-items: center;
@@ -66,3 +96,23 @@ html {
     margin-top: 1rem;
     cursor: pointer;
 }
+
+@media screen and (max-width: 1024px) {
+
+    .content {
+    position: absolute;
+    top: -68px;
+    right: 0;
+    text-align: right;
+    align-items: center;
+    border-radius: 10px;
+    z-index: 60;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logout-content {
+        font-size: 1px;
+    }
+}
+

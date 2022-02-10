@@ -7,6 +7,7 @@
     <meta name ="crsfk-token" content="{{csrf_token()}}">
     <title>Mybook</title>
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" >
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 </head>
 <body>
@@ -18,9 +19,10 @@
                     <x-dropdown-link :href="route('logout')"
                         onclick="event.preventDefault();
                         this.closest('form').submit();">
-                        <div class="logout-content"> 
-                            <img src="/images/logout.png">
-                            {{ __('') }}
+                        <div class="logout-content">
+                            <span>
+                                {{ __('ログアウト') }}
+                            </span> 
                         </div>
                     </x-dropdown-link>
                 </form>

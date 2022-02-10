@@ -361,6 +361,7 @@ export default {
 
 .my_data {
     width: 100%;
+    margin-top: 5rem;
 }
 
 .my_data-content {
@@ -505,6 +506,10 @@ export default {
 }
 
 /* mydataレスポンシブ */
+.responsive {
+    margin-top: 5rem;
+}
+
 .responsive_my-data_inner {
     height: 155px;
     width: 75%;
