@@ -109,6 +109,11 @@ html {
     }
 }
 
+/* @media screen and (max-width: 480px) {
+    .logout-content {
+        font-size: 1rem;
+    }
+} */
 
 /*! tailwindcss v2.2.19 | MIT License | https://tailwindcss.com */
 

@@ -110,7 +110,7 @@ export default ({
 
 .body {
     width: 100%;
-    font-family: 'Hannotate SC','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,sans-serif;
+    font-family: 'Hannotate SC', 'Arial','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,sans-serif;
     background-color: #FFDBC9;
 }
 
@@ -128,7 +128,7 @@ export default ({
 .header-title_resp {
     position: fixed; 
     top: 0;
-    left: 35%;
+    left: 25%;
     align-items: center;
     font-size: 3rem;
     color: #FF5F17;
@@ -140,7 +140,7 @@ export default ({
 /* ハンバーガーメニューcss */
 .header-btn {
     position: fixed;
-    top: 5px;
+    top: 10px;
     left: 0;
     width: 70px;
     height: 70px;
@@ -293,7 +293,21 @@ img {
     background-position: 50% 50%;
 }
 
+@media screen and (max-width: 1024px) {
+    .header-title_resp {
+        position: fixed; 
+        top: 0;
+        left: 40%;
+    }
+}
 
+@media screen and (max-width: 480px) {
+    .header-title_resp {
+        position: fixed; 
+        top: 0;
+        left: 25%;
+    }
+}
 
 
 </style>
