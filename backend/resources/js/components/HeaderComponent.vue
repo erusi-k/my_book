@@ -110,7 +110,7 @@ export default ({
 
 .body {
     width: 100%;
-    font-family: 'Hannotate SC', 'Arial','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,sans-serif;
+    font-family: 'Avenir','Arial Rounded MT Bold','Comic Sans MS','Hannotate SC','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','Yu Gothic UI',sans-serif;
     background-color: #FFDBC9;
 }
 
@@ -306,7 +306,7 @@ img {
         position: fixed; 
         top: 8px;
         left: 25%;
-        font-size: 2.3rem;
+        font-size: 2.5rem;
     }
 }
 
