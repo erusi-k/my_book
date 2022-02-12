@@ -304,9 +304,9 @@ img {
 @media screen and (max-width: 480px) {
     .header-title_resp {
         position: fixed; 
-        top: 0;
+        top: 8px;
         left: 25%;
-        font-size: 2rem;
+        font-size: 2.3rem;
     }
 }
 
