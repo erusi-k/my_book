@@ -306,6 +306,7 @@ img {
         position: fixed; 
         top: 0;
         left: 25%;
+        font-size: 2rem;
     }
 }
 
