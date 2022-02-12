@@ -305,7 +305,7 @@ img {
     .header-title_resp {
         position: fixed; 
         top: 8px;
-        left: 25%;
+        left: 28%;
         font-size: 2.5rem;
     }
 }
