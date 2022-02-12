@@ -1,71 +1,73 @@
 <template>
     <div class="body">
-        <div class="top-btn" @click="scrollTop">
-            <i class="fas fa-chevron-up Page-Btn-Icon"></i>
-        </div>
-        <div v-show="isLoading" class="loading">   
-            <vue-loaders v-show='isLoading'  name ="ball-spin-fade-loader" color="#FF8856" scale="3"></vue-loaders>
-        </div>
-        <div v-show="!resp">
-            <p class="heading">自分の投稿</p>
-            <p class="not_data" v-show="!checkMyData">投稿がありません</p>
-            <div v-show="checkMyData">
-                <div v-for="myData in myDatas" :key="myData.id">
-                    <div>
-                        <div class="my_data-content">
-                            <div class="my_data-content_image">
-                                <img v-bind:src="myData.imge">
-                            </div>
-                            <div class="my_data-content_body">
-                                <div class="my_data-content_body-title">
-                                    <p class="tag">タイ<br>トル</p>
-                                    <p class="content-main title">{{myData.title}}</p>
-                                </div>
-                                <div class="my_data-content_body-author">
-                                    <p class="tag">著者</p>
-                                    <p class="content-main author" >{{myData.author}}</p>
-                                </div>
-                                <div class="my_data-content_body-rating">
-                                    <p class="tag">評価</p>
-                                    <star-rating class="content-main rating" v-model="myData.rating" :read-only="true" :star-size=30 ></star-rating>
-                                </div>
-                                <div class="my_data-content_body-footer">
-                                    <p class="tag">{{timeStamp(myData.created_at)}}</p>
-                                    <router-link class="btn" :to="`/book/show/${myData.id}`" >詳細へ</router-link>
-                                </div>
-                            </div>
-                        </div> 
-                    </div>
-                </div>
-            </div>      
-        </div>
-        <div class="my_data">
-            <div v-show="resp" class="responsive">
+        <div class="bod">
+            <div class="top-btn" @click="scrollTop">
+                <i class="fas fa-chevron-up Page-Btn-Icon"></i>
+            </div>
+            <div v-show="isLoading" class="loading">   
+                <vue-loaders v-show='isLoading'  name ="ball-spin-fade-loader" color="#FF8856" scale="3"></vue-loaders>
+            </div>
+            <div v-show="!resp">
                 <p class="heading">自分の投稿</p>
                 <p class="not_data" v-show="!checkMyData">投稿がありません</p>
                 <div v-show="checkMyData">
-                    <div class="responsive_my-data" v-for="myData in myDatas" :key="myData.id">
-                        <router-link class="responsive_my-data-show" :to="`/book/show/${myData.id}`">
-                            <div class="responsive_my-data_inner">
-                                <div class="responsive_my-data_inner-header">
+                    <div v-for="myData in myDatas" :key="myData.id">
+                        <div>
+                            <div class="my_data-content">
+                                <div class="my_data-content_image">
                                     <img v-bind:src="myData.imge">
-                                </div>     
-                                <div class="responsive_my-data_body"> 
-                                    <p class="responsive_my-data_body-title">{{myData.title}}</p> 
-                                    <p class="responsive_my-data_body-author">作 {{myData.author}}</p>
-                                    <div class="responsive_my-data_body-footer">
-                                        <star-rating v-model="myData.rating" :read-only="true" :star-size=20 ></star-rating>
+                                </div>
+                                <div class="my_data-content_body">
+                                    <div class="my_data-content_body-title">
+                                        <p class="tag">タイ<br>トル</p>
+                                        <p class="content-main title">{{myData.title}}</p>
+                                    </div>
+                                    <div class="my_data-content_body-author">
+                                        <p class="tag">著者</p>
+                                        <p class="content-main author" >{{myData.author}}</p>
+                                    </div>
+                                    <div class="my_data-content_body-rating">
+                                        <p class="tag">評価</p>
+                                        <star-rating class="content-main rating" v-model="myData.rating" :read-only="true" :star-size=30 ></star-rating>
+                                    </div>
+                                    <div class="my_data-content_body-footer">
+                                        <p class="tag">{{timeStamp(myData.created_at)}}</p>
+                                        <router-link class="btn" :to="`/book/show/${myData.id}`" >詳細へ</router-link>
                                     </div>
                                 </div>
-                            </div>
-                        </router-link>
+                            </div> 
+                        </div>
                     </div>
-                </div>    
-            </div>  
-            <div class="new">
-                <router-link v-bind:to="{name: 'book.create'}">
-                    <p class="new_btn" v-show="!checkMyData">感想を書いてみる！</p>
-                </router-link>
+                </div>      
+            </div>
+            <div class="my_data">
+                <div v-show="resp" class="responsive">
+                    <p class="heading">自分の投稿</p>
+                    <p class="not_data" v-show="!checkMyData">投稿がありません</p>
+                    <div v-show="checkMyData">
+                        <div class="responsive_my-data" v-for="myData in myDatas" :key="myData.id">
+                            <router-link class="responsive_my-data-show" :to="`/book/show/${myData.id}`">
+                                <div class="responsive_my-data_inner">
+                                    <div class="responsive_my-data_inner-header">
+                                        <img v-bind:src="myData.imge">
+                                    </div>     
+                                    <div class="responsive_my-data_body"> 
+                                        <p class="responsive_my-data_body-title">{{myData.title}}</p> 
+                                        <p class="responsive_my-data_body-author">作 {{myData.author}}</p>
+                                        <div class="responsive_my-data_body-footer">
+                                            <star-rating v-model="myData.rating" :read-only="true" :star-size=20 ></star-rating>
+                                        </div>
+                                    </div>
+                                </div>
+                            </router-link>
+                        </div>
+                    </div>    
+                </div>  
+                <div class="new">
+                    <router-link v-bind:to="{name: 'book.create'}">
+                        <p class="new_btn" v-show="!checkMyData">感想を書いてみる！</p>
+                    </router-link>
+                </div>
             </div>
         </div>
     </div>    
@@ -423,7 +425,7 @@ body {
 
 
 @media screen and (max-width: 1024px) {
-    body {
+    .body {
         margin-top: 5rem;
     }
 
@@ -446,7 +448,7 @@ body {
 }
 
 @media screen and (max-width: 480px) {
-    body {
+    .bod {
         margin-top: 5rem;
     }
 

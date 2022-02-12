@@ -7,9 +7,9 @@ html {
 }
 
 /* ログアウト */
-.content {
-    position: absolute;
-    top: 0;
+.c {
+    position: fixed;
+    top: 15px;
     right: 0;
     text-align: right;
     align-items: center;

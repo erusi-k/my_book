@@ -329,9 +329,9 @@
 
 
     @media screen and (max-width:1024px) {
-        body {
+        /* body {
             margin-top: 5rem;
-        }
+        } */
         
         .input {
             width:90%;
@@ -389,11 +389,5 @@
         }
     }
 
-
-@media screen and (max-width: 1024px) {
-    body {
-        margin-top: 5rem;
-    }
-}
     
 </style>
