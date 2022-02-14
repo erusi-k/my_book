@@ -90,8 +90,9 @@
         methods: {
         // データーベース登録処理
             submit(){
+                const baseUrl = process.env.MIX_API_URL;
                 this.item.rating = this.rating;
-                axios.post("http://localhost:8080/api/book",this.item)
+                axios.post(baseUrl,this.item)
                     .then((res)=>{
                         this.test = res;
                         this.$swal('登録が完了しました!',{

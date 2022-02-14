@@ -12,6 +12,8 @@ import router from './router';
 import 'vue-loaders/dist/vue-loaders.css';
 import VueLoaders from 'vue-loaders';
 import VueSwal from 'vue-swal';
+import axios from 'axios';
+import { process_params } from 'express/lib/router';
 
 let rule;
 for(rule in originalRules) {
@@ -57,3 +59,10 @@ const app = new Vue({
     el: '#app',
     router
 });
+
+export const instance = axios.create({
+    baseURL: process.env.MIX_API_URL,
+    headers: {
+        'Content-Type':'application/json',
+    }
+})

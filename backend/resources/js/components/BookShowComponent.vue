@@ -83,6 +83,7 @@ export default ({
 
      //投稿削除処理   
         dataDelete(id){
+            const baseUrl = process.env.MIX_API_URL;
             this.$swal({
                 title: "確認",
                 text: '本当に削除してもよろしいですか？',
@@ -92,7 +93,7 @@ export default ({
             })
             .then((willDelete) => {
                 if(willDelete) {
-                    axios.delete('http://localhost:8080/api/book/' +id)
+                    axios.delete(baseUrl +id)
                     .then((res) => {
                     console.log(res);
                     this.$swal('削除しました!');
@@ -141,7 +142,7 @@ export default ({
     width: 100%;
     height: 100%;
     background-color: rgba(255,255,255,1);
-    z-index: 2;
+    z-index: 80;
     display: flex;
     align-items: center;
     justify-content: center;

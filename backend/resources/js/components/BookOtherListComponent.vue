@@ -82,7 +82,8 @@ export default {
 
     // データ取得    
         async getOtherData(){
-            await axios.get("http://localhost:8080/api/book/other",{params:{user_id:this.user.id}})
+            const baseUrl = process.env.MIX_API_URL;
+            await axios.get(`${baseUrl}other`,{params:{user_id:this.user.id}})
             .then((res)=>{
                 this.others = res.data.data
                 if(!this.others.length == 0) {
@@ -160,8 +161,8 @@ export default {
     left:0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255,255,255,0.9);
-    z-index: 2;
+    background-color: rgba(255,255,255,1);
+    z-index: 80;
     display: flex;
     align-items: center;
     justify-content: center;

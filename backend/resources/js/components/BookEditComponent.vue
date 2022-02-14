@@ -67,8 +67,9 @@ export default ({
 
     // 編集データ取得    
         getData() {
+            const baseUrl = process.env.MIX_API_URL;
             const id = this.bookId;
-            axios.get("http://localhost:8080/api/book/"+id)
+            axios.get(baseUrl+id)
             .then((res) => {
                 console.log(res.data.data);
                 this.item = res.data.data;
@@ -83,6 +84,7 @@ export default ({
 
     // 編集内容データベース登録処理
         submit(){
+            const baseUrl = process.env.MIX_API_URL;
             this.$swal({
                 title: "確認",
                 text: 'こちらの内容で更新しますか？',
@@ -92,7 +94,7 @@ export default ({
             }).then((willDelete) =>{
                 if(willDelete){
                     this.item.rating = this.rating;
-                    axios.put("http://localhost:8080/api/book/" +this.bookId,this.item)
+                    axios.put(baseUrl+this.bookId,this.item)
                     .then((res) => {
                     console.log(res);
                     this.$swal('更新に成功しました',{
@@ -131,8 +133,8 @@ export default ({
     left:0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255,255,255,0.7);
-    z-index: 2;
+    background-color: rgba(255,255,255,1);
+    z-index: 80;
     display: flex;
     align-items: center;
     justify-content: center;
