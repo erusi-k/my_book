@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="app">
-        <div class="c">
+        <div class="main-content">
             <div class="logout">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
