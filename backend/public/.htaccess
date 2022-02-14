@@ -34,7 +34,4 @@
     </FilesMatch>
 
     Header append Vary Accept-Encoding env=!dont-vary
-
-    #Set APP_ENV 
-    SetEnvIf Host "mybook9321.herokuapp.com" APP_ENV=production
 </IfModule>
