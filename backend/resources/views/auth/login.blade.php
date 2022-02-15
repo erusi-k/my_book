@@ -32,6 +32,6 @@
                 </div>
             </div>   
         </form>
-        <p class="link">アカウントをお持ちでない方はこちらから</p>
+        <p class="link">アカウントをお持ちでない方はこちらから!</p>
         <a class="link-url" href="{{url('/register')}}">会員登録</a>
 @endsection
