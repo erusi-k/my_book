@@ -14,7 +14,7 @@ use App\Http\Controllers\HomeController;
 |
 */
 Route::get('/',function(){
-    return view('register');
+    return view('login');
 });
 
 Route::get('/book/{any}',function(){
