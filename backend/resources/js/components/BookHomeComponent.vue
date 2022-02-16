@@ -136,7 +136,7 @@ export default {
     // みんなのデータ取得    
         async getOtherData(){
             const baseUrl = process.env.MIX_API_URL
-            await axios.get(`${baseUrl}other/random`,{params:{user_id:this.user.id}})
+            await axios.get(`${baseUrl}/other/random`,{params:{user_id:this.user.id}})
             .then((res)=>{
                 this.others = res.data.data
                 if(!this.others.length == 0){
@@ -156,7 +156,7 @@ export default {
     // 自分のデータ取得
         async getMyData(){
             const baseUrl = process.env.MIX_API_URL
-            await axios.get(`${baseUrl}new_mydata`,{params:{user_id:this.user.id}})
+            await axios.get(`${baseUrl}/new_mydata`,{params:{user_id:this.user.id}})
             .then((res) => {
                 this.myDatas = res.data.data;
                 if(!this.myDatas.length == 0) {
