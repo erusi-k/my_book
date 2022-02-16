@@ -121,17 +121,15 @@
                         this.searchDatas = '';
                         this.bookEmpty = true;
                     }
-                    
                     console.log(this.searchDatas);
                 })
                 .catch((error) => {
                     console.log(error);
-                    alert('失敗です')
+                    alert('検索に失敗しました')
                 })
             },
             openModal(){
                 this.showContent = true;
-                console.log('動いている');
             },
             closeModal(){
                 this.showContent = false;

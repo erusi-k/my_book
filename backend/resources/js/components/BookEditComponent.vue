@@ -69,7 +69,7 @@ export default ({
         getData() {
             const baseUrl = process.env.MIX_API_URL;
             const id = this.bookId;
-            axios.get(baseUrl+id)
+            axios.get(`${baseUrl}/`+id)
             .then((res) => {
                 console.log(res.data.data);
                 this.item = res.data.data;
@@ -94,7 +94,7 @@ export default ({
             }).then((willDelete) =>{
                 if(willDelete){
                     this.item.rating = this.rating;
-                    axios.put(baseUrl+this.bookId,this.item)
+                    axios.put(`${baseUrl}/`+this.bookId,this.item)
                     .then((res) => {
                     console.log(res);
                     this.$swal('更新に成功しました',{
