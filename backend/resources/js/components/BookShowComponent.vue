@@ -57,8 +57,9 @@ export default ({
 
     //詳細データ取得    
         getData(){
+            const baseUrl = process.env.MIX_API_URL;
             const id = this.bookId
-            axios.get("http://localhost:8080/api/book/"+id)
+            axios.get(baseUrl+id)
             .then((res) => {
                 this.items = res.data;
                 this.isLoading = false;
@@ -72,11 +73,9 @@ export default ({
     //ログインユーザー確認    
         checkId(user_id){
             if(this.user.id == user_id){
-                console.log('真です')
                 return true;
                 
             }
-            console.log('偽です')
             return false;
             
         },

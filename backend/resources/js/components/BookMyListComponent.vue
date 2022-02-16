@@ -91,7 +91,7 @@ export default({
     // データ取得    
         async getMyData(){
             const baseUrl = process.env.MIX_API_URL;
-            await axios.get(`${baseUrl}mydata`,{params:{user_id:this.user.id}})
+            await axios.get(`${baseUrl}/mydata`,{params:{user_id:this.user.id}})
             .then((res) => {
                 this.myDatas = res.data.data;
                 if(!this.myDatas.length == 0) {

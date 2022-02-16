@@ -83,7 +83,7 @@ export default {
     // データ取得    
         async getOtherData(){
             const baseUrl = process.env.MIX_API_URL;
-            await axios.get(`${baseUrl}other`,{params:{user_id:this.user.id}})
+            await axios.get(`${baseUrl}/other`,{params:{user_id:this.user.id}})
             .then((res)=>{
                 this.others = res.data.data
                 if(!this.others.length == 0) {
