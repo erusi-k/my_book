@@ -59,11 +59,12 @@ export default ({
         getData(){
             const baseUrl = process.env.MIX_API_URL;
             const id = this.bookId
-            axios.get(baseUrl/+id)
+            
+            axios.get(`${baseUrl}/`+id)
             .then((res) => {
                 this.items = res.data;
                 this.isLoading = false;
-                console.log(this.items);
+                console.log(this.res);
             })
             .catch((error) => {
                 console.log(error);
@@ -92,7 +93,7 @@ export default ({
             })
             .then((willDelete) => {
                 if(willDelete) {
-                    axios.delete(baseUrl/ +id)
+                    axios.delete(`${baseUrl}/` +id)
                     .then((res) => {
                     console.log(res);
                     this.$swal('削除しました!');
