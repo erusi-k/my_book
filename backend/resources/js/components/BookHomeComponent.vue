@@ -9,7 +9,7 @@
         <div>
             <div class="other">
                 <p class="heading">みんなの投稿</p>
-                <p class="not_data" v-show="!checkOtherData">投稿がありません</p>
+                <p class="not_data" v-show="!checkOtherData">投稿がありません...</p>
                 <div v-show="checkOtherData">
                     <carousel  :autoplay="true"   :per-page="page" :speed="3000" :autoplayTimeout="4000" pagination-color="#CCCCCC">
                         <slide class="slider" v-for="other in others" :key="other.id">
@@ -41,7 +41,7 @@
             </div>
             <div v-show="!resp" class="my_data">
                 <p class="heading">自分の投稿(最近の投稿）</p>
-                <p class="not_data" v-show="!checkMyData">投稿がありません</p>
+                <p class="not_data" v-show="!checkMyData">投稿がありません...</p>
                 <div v-show="checkMyData">
                     <div v-for="myData in myDatas" :key="myData.id">
                         <div class="my_data-content">
@@ -82,7 +82,7 @@
             </div>
             <div v-show="resp" class="responsive">
                 <p class="heading">自分の投稿(最近の投稿）</p>
-                <p class="not_data" v-show="!checkMyData">投稿がありません</p>
+                <p class="not_data" v-show="!checkMyData">投稿がありません...</p>
                 <div v-show="checkMyData">
                     <div class="responsive_my-data" v-for="myData in myDatas" :key="myData.id">
                         <router-link class="responsive_my-data-show" :to="`/book/show/${myData.id}`">
