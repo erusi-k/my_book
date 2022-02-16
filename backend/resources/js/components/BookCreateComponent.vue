@@ -94,7 +94,6 @@
                 this.item.rating = this.rating;
                 axios.post(baseUrl,this.item)
                     .then((res)=>{
-                        this.test = res;
                         this.$swal('登録が完了しました!',{
                             icon: "success",
                         });

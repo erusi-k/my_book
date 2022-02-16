@@ -18,7 +18,7 @@ class BookController extends Controller
         ]);
     }
 
-//homeの自分とデータ取得
+//homeの自分のデータ取得
     public function newMyData(Request $request) {
         $data = Book::where('user_id',$request->user_id)->latest()->take(5)->get();
         return response()->json([
