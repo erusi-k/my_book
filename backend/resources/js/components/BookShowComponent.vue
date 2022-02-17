@@ -151,7 +151,7 @@ export default ({
 
 
 .show-content {
-        margin: 3rem auto 0;
+        margin: 5rem auto 0;
         width: 70%;
         background :#FFF6e6;
         box-shadow: 0 2px 3px rgba(0,0,0,.22);
@@ -199,16 +199,7 @@ export default ({
     display: inline-block;
 }
 
-.show-content-header_myname:after {
-    position: absolute;
-    content: '';
-    top: 100%;
-    left: 30px;
-    border: 15px solid transparent;
-    border-top: 15px solid #FFDBC9;
-    width: 0;
-    height: 0;
-}
+
 
 .show-content_mycard {
     display: flex;
@@ -235,16 +226,6 @@ export default ({
     display: inline-block;
 }
 
-.show-content-header_othername:after {
-    position: absolute;
-    content: '';
-    top: 100%;
-    left: 30px;
-    border: 15px solid transparent;
-    border-top: 15px solid #e6f4ff;
-    width: 0;
-    height: 0;
-}
 
 .show-content_othercard {
     display: flex;
