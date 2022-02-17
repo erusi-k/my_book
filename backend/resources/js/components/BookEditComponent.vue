@@ -227,6 +227,20 @@ textarea {
     cursor: not-allowed;
 }
 
+@media screen and (max-width: 1024px) {
+    body {
+        margin-top: 5rem;
+    }
+
+    .input {
+        margin-top:9rem;
+    }
+
+    input:after {
+        top: 18px;
+    }
+}
+
 
 
 
@@ -239,19 +253,11 @@ textarea {
     .input {
         width:90%;
         padding: 1rem 0.5rem;
-        
+        margin-top:9rem;
     }
 
     .input:after {
-        position: absolute;
-        content: '';
-        top: 20px;
-        width: 50%;
-        height: 35px;
-        opacity: 0.3;
-        margin: -35px auto 10px;
-        background: #db7093;
-        transform: rotate(-2deg);
+        top: 18px;
     }
 
     .input-content_header-title {
@@ -269,10 +275,6 @@ textarea {
     }
 }
 
-@media screen and (max-width: 1024px) {
-    body {
-        margin-top: 5rem;
-    }
-}
+
 
 </style>

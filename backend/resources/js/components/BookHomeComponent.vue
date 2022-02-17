@@ -219,7 +219,7 @@ export default {
 <style scoped>
 
 .body {
-    font-family:'Nico Moji', 'Avenir','Arial Rounded MT Bold','Comic Sans MS','Hannotate SC','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','Yu Gothic UI',sans-serif;
+    font-family:'Avenir','Arial Rounded MT Bold','Comic Sans MS','Hannotate SC','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','Yu Gothic UI',sans-serif;
 }
 
 /* topに戻るボタン */
@@ -479,6 +479,7 @@ export default {
 .list-link {
     display: flex;
     justify-content: flex-end;
+    margin-bottom: 3rem;
 }
 
 .list-link_btn {

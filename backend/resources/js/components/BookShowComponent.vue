@@ -161,7 +161,7 @@ export default ({
 .show-content:after {
         position: absolute;
         content: '';
-        top: 150px;
+        top: 180px;
         width: 30%;
         height: 35px;
         opacity: 0.3;
@@ -358,6 +358,10 @@ export default ({
     
     .tag {
         font-size: 1rem;
+    }
+
+    .show-content:after {
+        top:120px;
     }
 }
 
