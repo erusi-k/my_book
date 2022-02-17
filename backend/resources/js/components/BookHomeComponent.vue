@@ -322,6 +322,13 @@ export default {
     font-size: 1rem;
     font-weight: bold;
     margin-left: 0.3rem;
+    display: -webkit-box;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-left: 0.3rem;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .slider-author {
@@ -552,9 +559,13 @@ export default {
 }
 
 .responsive_my-data_body-title {
+    display: -webkit-box;
     font-size: 1rem;
     font-weight: bold;
     margin-left: 0.3rem;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .responsive_my-data_body-author {

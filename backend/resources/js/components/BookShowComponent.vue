@@ -380,7 +380,7 @@ export default ({
     } 
     
     .show-content_mycard, .show-content_othercard {
-        height: 150px;
+        height: 180px;
     }
 
     .show-content_card-image {
@@ -408,6 +408,10 @@ export default ({
 
     .title,.author {
         font-size: 0.8rem;
+    }
+    
+    .author {
+        padding-top: 1rem;
     }
 
 }
