@@ -366,7 +366,7 @@
         /* モーダル */
         #book {
             width:100%;
-            margin-top: 7rem;
+            margin-top: 9rem;
         }
 
         .book-search_main {
