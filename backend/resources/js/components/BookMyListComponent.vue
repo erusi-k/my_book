@@ -12,7 +12,7 @@
                 <p class="not_data" v-show="!checkMyData">投稿がありません</p>
                 <div v-show="checkMyData">
                     <div v-for="myData in myDatas" :key="myData.id">
-                        <div>
+                        <div >
                             <div class="my_data-content">
                                 <div class="my_data-content_image">
                                     <img v-bind:src="myData.imge">
@@ -38,6 +38,10 @@
                             </div> 
                         </div>
                     </div>
+                    <div ref="observe_element" >
+                        <vue-loaders v-show='apiLoading'  name ="ball-beat" color="#FF8856" scale="2"></vue-loaders>
+                    </div>
+                    
                 </div>      
             </div>
             <div class="my_data">
@@ -81,8 +85,12 @@ export default({
         return{
             myDatas: '',
             isLoading: true,
+            apiLoading: true,
             resp: false,
             checkMyData: '',
+            observer: null,
+            page: 1,
+
         }
     },
     
@@ -91,15 +99,16 @@ export default({
     // データ取得    
         async getMyData(){
             const baseUrl = process.env.MIX_API_URL;
-            await axios.get(`${baseUrl}/mydata`,{params:{user_id:this.user.id}})
+            await axios.get(`${baseUrl}/mydata?page=${this.page++}`,{params:{user_id:this.user.id}})
             .then((res) => {
-                this.myDatas = res.data.data;
+                this.myDatas = [...this.myDatas, ...res.data.data.data];
                 if(!this.myDatas.length == 0) {
                     this.checkMyData = true;
                 } else {
                     this.checkMyData = false;
                 }
                 console.log(this.myDatas);
+                console.log('テスト');
                 this.isLoading = false;
             })
             .catch((error) => {
@@ -137,7 +146,19 @@ export default({
         window.addEventListener('resize',this.handleResize);
         this.handleResize();
         this.getMyData();
-    }    
+    },
+
+    mounted() {
+        this.observer = new IntersectionObserver(entries => {
+            const entry = entries[0]
+            if(entry && entry.isIntersecting) {
+                console.log('画面に入ったよ');
+                this.getMyData();
+            }
+        })
+        const observe_element = this.$refs.observe_element
+        this.observer.observe(observe_element)
+    }
 })
 </script>
 
