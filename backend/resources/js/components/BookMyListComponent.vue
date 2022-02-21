@@ -38,7 +38,7 @@
                             </div> 
                         </div>
                     </div>
-                    <div ref="observe_element" >
+                    <div class="api-loading" ref="observe_element" >
                         <vue-loaders v-show='apiLoading'  name ="ball-beat" color="#FF8856" scale="2"></vue-loaders>
                     </div>
                     
@@ -65,6 +65,9 @@
                                 </div>
                             </router-link>
                         </div>
+                        <div class="api-loading" ref="resp_observe_element" >
+                            <vue-loaders v-show='apiLoading'  name ="ball-beat" color="#FF8856" scale="2"></vue-loaders>
+                        </div>
                     </div>    
                 </div>  
                 <div class="new">
@@ -88,7 +91,8 @@ export default({
             apiLoading: true,
             resp: false,
             checkMyData: '',
-            observer: null,
+            observer: '',
+            resObserver: '',
             page: 1,
 
         }
@@ -101,6 +105,10 @@ export default({
             const baseUrl = process.env.MIX_API_URL;
             await axios.get(`${baseUrl}/mydata?page=${this.page++}`,{params:{user_id:this.user.id}})
             .then((res) => {
+                console.log(res.data.data.data);
+                if(res.data.data.data.length == 0){
+                    this.apiLoading = false;
+                }
                 this.myDatas = [...this.myDatas, ...res.data.data.data];
                 if(!this.myDatas.length == 0) {
                     this.checkMyData = true;
@@ -152,13 +160,22 @@ export default({
         this.observer = new IntersectionObserver(entries => {
             const entry = entries[0]
             if(entry && entry.isIntersecting) {
-                console.log('画面に入ったよ');
                 this.getMyData();
             }
         })
         const observe_element = this.$refs.observe_element
         this.observer.observe(observe_element)
-    }
+
+        this.respObserver = new IntersectionObserver(entries => {
+            const entry = entries[0]
+            if(entry && entry.isIntersecting) {
+                this.getMyData();
+            }
+        })
+        const resp_observe_element = this.$refs.resp_observe_element
+        this.respObserver.observe(resp_observe_element)
+    },
+    
 })
 </script>
 
@@ -181,6 +198,14 @@ body {
     align-items: center;
     justify-content: center;
 
+}
+
+/* データ取得ローディング */
+.api-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 4rem 0;
 }
 
 /* topに戻るボタン */
