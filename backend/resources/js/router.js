@@ -50,7 +50,7 @@ export default new Router({
 
             {
                 path: "/book/login",
-                name: "login",
+                name: "book.login",
                 component: login,
                 meta: {guestOnly: true}
             },

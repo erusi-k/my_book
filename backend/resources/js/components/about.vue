@@ -14,32 +14,35 @@ export default {
         }
     },
 
-    mounted(){
-        axios.get("/api/user").then(response => {
-            this.user = response.data;
-        });
-        console.log(this.user);
-    },
-
     created(){
-        this.test();
+        this.getUser();
     },
 
     methods: {
         logout(){
-            axios.get("api/logout")
+            axios.post("/api/logout")
             .then(response => {
                 console.log(response);
-                this.$router.push({name: 'login'});
+                this.$router.push({name: 'book.login'});
             })
             .catch(error => {
                 console.log(error);
             })
         },
 
-        test(){
-            console.log('テスト');
-            console.log(this.user);
+        getUser(){
+            axios.get("/api/user").then(response => {
+            if(!response.data){
+                this.$router.push({name: 'book.login'});
+            }
+            console.log('接続はできてます');
+            this.user = response.data;
+        })
+        .catch((error) => {
+            console.log(error);
+            this.$router.push({name: 'book.login'});
+        });
+        console.log(this.user);
         }
     }
 }
