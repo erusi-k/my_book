@@ -12,7 +12,7 @@ class BookController extends Controller
 {
 //mylistのデータ取得    
     public function myData(Request $request){
-        $data =  Book::where('user_id',$request->user_id)->latest()->get();
+        $data =  Book::where('user_id',$request->user_id)->paginate(3);
         return response()->json([
             'data'=>$data
         ]);
@@ -42,7 +42,7 @@ class BookController extends Controller
 
 //otherlistデータ取得
     public function other(Request $request){
-        $datas = Book::where('user_id','<>',$request->user_id)->latest()->get();
+        $datas = Book::where('user_id','<>',$request->user_id)->paginate(3);
         $i =0;
         foreach($datas as $data){
             $user_name = User::find($data->user_id);

@@ -36,6 +36,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="api-loading" ref="observe_element" >
+                    <vue-loaders v-show='apiLoading' name ="ball-beat" color="#FF8856" scale="2"></vue-loaders>
+                </div>
             </div>    
         </div>
         <div>
@@ -60,6 +63,9 @@
                             </div>
                         </router-link>
                     </div>
+                    <div class="api-loading" ref="resp_observe_element" >
+                        <vue-loaders v-show='apiLoading' name ="ball-beat" color="#FF8856" scale="2"></vue-loaders>
+                    </div>
                 </div>        
             </div>  
         </div>
@@ -73,8 +79,12 @@ export default {
         return{
             others:'',
             isLoading: true,
+            apiLoading: true,
             resp: false,
             checkOtherData: '',
+            page: 1,
+            observe: '',
+            respObserve:'',
         }
     },
 
@@ -83,9 +93,12 @@ export default {
     // データ取得    
         async getOtherData(){
             const baseUrl = process.env.MIX_API_URL;
-            await axios.get(`${baseUrl}/other`,{params:{user_id:this.user.id}})
+            await axios.get(`${baseUrl}/other?page=${this.page++}`,{params:{user_id:this.user.id}})
             .then((res)=>{
-                this.others = res.data.data
+                if(res.data.data.data == 0){
+                    this.apiLoading = false;
+                }
+                this.others = [...this.others,...res.data.data.data];
                 if(!this.others.length == 0) {
                     this.checkOtherData = true;
                 } else {
@@ -130,6 +143,26 @@ export default {
         window.addEventListener('resize',this.handleResize);
         this.handleResize();
         this.getOtherData();
+    },
+
+    mounted(){
+        this.observer = new IntersectionObserver(entries => {
+            const entry = entries[0];
+            if(entry && entry.isIntersecting) {
+                this.getOtherData();
+            }
+        })
+        const observe_element = this.$refs.observe_element;
+        this.observer.observe(observe_element);
+
+        this.respObserver = new IntersectionObserver(entries => {
+            const entry = entries[0];
+            if(entry && entry.isIntersecting) {
+                this.getOtherData();
+            }
+        })
+        const resp_observe_element = this.$refs.resp_observe_element;
+        this.respObserver.observe(resp_observe_element);
     }
 }
 </script>
@@ -166,7 +199,14 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+}
 
+/* データ取得ローディング */
+.api-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 4rem 0;
 }
 
 /* 見出し */
