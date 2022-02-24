@@ -28,6 +28,11 @@
                         <p class="input_rating-title">評価</p>
                         <star-rating v-model="rating" v-bind:increment="0.5"></star-rating>
                     </div>
+                    <div>
+                        <p>表紙</p>
+                        <img v-bind:src="thumbnauls">
+                        <p v-show="fileCheck"><input type="file" @change="fileSelected"></p>
+                    </div>
                     <div class="input-content_body">
                         <validation-provider v-slot="ProviderProps" rules="required|max:500">
                             <p>感想</p>
@@ -37,6 +42,7 @@
                     </div>
                     <button class="input-btn" type="submit" :disabled="ObserverProps.invalid">登録</button>
                 </validation-observer>
+                    <button class="input-btn" type="submit" @click="reset()">リセット</button>
             </div>
         </div>
         
@@ -79,35 +85,82 @@
                     author:'',
                     imge:'/images/noimage.jpg',
                 },  
+                file: '',
+                fileCheck: true,
                 searchDatas:'',
                 showContent:false,
                 query:'',
                 bookEmpty:false,
                 errors:{},
-        
+                thumbnauls:'/images/noimage.jpg', 
             }
         },
         methods: {
         // データーベース登録処理
             submit(){
+                // const baseUrl = process.env.MIX_API_URL;
+                // const formData = new FormData();
+                // formData.append('file',this.item.imge);
+                // console.log(formData);
+                // this.item.rating = this.rating;
+                // console.log(this.item);
+                // axios.post(baseUrl,this.item)
+                //     .then((res)=>{
+                //         this.$swal('登録が完了しました!',{
+                //             icon: "success",
+                //         });
+                //         console.log(this.item);
+                //         this.$router.push({name: 'book.home'});
+                //     })
+                //     .catch((error) =>{
+                //         this.errors = error.response.data.errors;
+                //         console.log(this.errors);
+                //         console.log(error);
+                //         this.$swal('登録に失敗しました。もう一度お試しください',{
+                //             icon: "error",
+                //         })
+                //     })
                 const baseUrl = process.env.MIX_API_URL;
+                let formData = new FormData();
+                if(!this.file == ''){
+                    formData.append('file',this.file);
+                }
                 this.item.rating = this.rating;
-                axios.post(baseUrl,this.item)
-                    .then((res)=>{
-                        this.$swal('登録が完了しました!',{
-                            icon: "success",
-                        });
-                        console.log(this.item);
-                        this.$router.push({name: 'book.home'});
-                    })
-                    .catch((error) =>{
-                        this.errors = error.response.data.errors;
-                        console.log(this.errors);
-                        console.log(error);
-                        this.$swal('登録に失敗しました。もう一度お試しください',{
-                            icon: "error",
-                        })
-                    })
+                let items = JSON.stringify(this.item);
+                formData.append('items',items);
+                let config = {headers:{'content-type':'multipart/form-data'}};
+                axios.post(baseUrl,formData,config)
+                .then(res => {
+                    this.$swal('登録が完了しました!',{
+                        icon:"success",
+                    });
+                    this.$router.push({name: 'book.home'});
+                })
+                .catch((error) =>{
+                    this.errors = error.response.data.errors;
+                    console.log(this.errors);
+                    console.log(error);
+                    this.$swal('登録に失敗しました。もう一度お試しください',{
+                        icon: "error",
+                    });
+                });
+            },
+
+            fileSelected(event){
+                console.log(event);
+                const file = event.target.files[0]; 
+                this.file = file;   
+                console.log(this.item.imge);
+                this.thumbnauls = URL.createObjectURL(file);
+            },
+
+            reset(){
+                this.item.title = '';
+                this.item.author = '';
+                this.item.imge = '/images/noimage.jpg';
+                this.file = '';
+                this.fileCheck = true;
+                this.thumbnauls = '/images/noimage.jpg';
             },
 
         // 本情報検索処理
@@ -140,6 +193,8 @@
                 this.item.title = data.volumeInfo.title;
                 this.item.author = data.volumeInfo.authors[0];
                 this.item.imge = data.volumeInfo.imageLinks.smallThumbnail;
+                this.thumbnauls = data.volumeInfo.imageLinks.smallThumbnail;
+                this.fileCheck = false;
                 return this.closeModal();
                 
             }
@@ -159,6 +214,11 @@
 
     textarea {
         height: 200px;
+    }
+
+    img {
+        width: 90px;
+        height: 90px;
     }
 
     .error {

@@ -16,6 +16,7 @@ class Book extends Model
         'imge',
         'author',
         'report',
+        'file_path'
     ];
 
     public function user(){
