@@ -55,27 +55,22 @@ class BookController extends Controller
     }
 
 //投稿新規作成
-    public function store(Request $request){
-        // var_dump($request->file);
+    public function store(PostRequest $request){
         $file_name  = null;
         if($request->file){
             $file_name = request()->file->getClientOriginalName();
             request()->file->storeAs('public/',$file_name);
         }
-        $data = $request->all();
-        $item = json_decode($data['items']);
         if (!empty($file_name)){
-            $item->imge ='storage/'.$file_name;
+            $request->imge ='/storage/'.$file_name;
         }
         return Book::create([
-            'user_id' =>$item->user_id,
-            'rating'=>$item->rating,
-            'title' => $item->title,
-            'imge'=> $item->imge,
-            'author' => $item->author,
-            'report' => $item->report,
-            'file_path' =>'storage/'.$file_name,
-            
+            'user_id'=>$request->user_id,
+            'rating'=>$request->rating,
+            'title' => $request->title,
+            'imge'=> $request->imge,
+            'author' => $request->author,
+            'report' => $request->report,
         ]);
     }
 

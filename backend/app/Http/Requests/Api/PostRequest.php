@@ -37,7 +37,11 @@ class PostRequest extends FormRequest
             ],
             'report' => [
                 'required',
-                'max:500',
+                'max:500'
+            ],
+            'file' => [
+                'max:1024',
+                'mimes:jpg,png'
             ]
         ];
     }
@@ -47,10 +51,14 @@ class PostRequest extends FormRequest
         return [
             'title.required' =>'タイトルを入力してください',
             'title.max'=>'タイトルは50文字以内で入力してください',
-            'author.required'=>'著者を入力してださい',
+            'author.required'=>'著者を入力してください',
             'author.max'=>'著者は30文字以内で入力してください',
             'report.required'=>'感想を入力してください',
-            'report.max'=>'感想は500文字以内で入力してください'
+            'report.max'=>'感想は500文字以内で入力してください',
+            'file.imgae'=>'指定されたファイルが画像ではありません',
+            'file.mines'=>'指定された拡張子（PNG/JPG/)ではありません',
+            'file.max'=>'1MB以下の画像を選択してください',
+
         ];
     }
 
