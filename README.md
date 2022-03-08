@@ -1,4 +1,4 @@
-## mybook
+# mybook
 
 読書感想シェアアプリです。
 
@@ -33,7 +33,7 @@
   
 ◉ 　他ユーザー投稿観覧機能
 
-![サンプル画像](mybook-search-img)
+![サンプル画像](./mybook-search-img)
 
 
 
