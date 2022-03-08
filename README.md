@@ -6,19 +6,19 @@
 
 ## 環境
 
-・　 PHP 8.1.3
+・PHP 8.1.3
 
-・　 laravel 8.73.2
+・laravel 8.73.2
 
-・   vue 2.6.14
+・vue 2.6.14
 
-・   MySQL 5.7
+・MySQL 5.7
 
-・   Docker
+・Docker
 
-・　 Apache
+・Apache
 
-・　 heroku
+・heroku
 
 
 ## 機能一覧
