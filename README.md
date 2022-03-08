@@ -10,11 +10,11 @@
 
 ・　 laravel 8.73.2
 
-・ vue 2.6.14
+・  vue 2.6.14
 
-・ MySQL 5.7
+・  MySQL 5.7
 
-・ Docker
+・  Docker
 
 ・　 Apache
 
@@ -33,7 +33,7 @@
   
 ◉ 　他ユーザー投稿観覧機能
 
-![サンプル画像](./mybook-search-img)
+![サンプル画像](./mybook-search-img.png)
 
 
 
