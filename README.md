@@ -35,5 +35,6 @@
 
 ![サンプル画像](./mybook-search-img.png)
 
+![サンプル画像](./mybook-home-img.png)
 
 
