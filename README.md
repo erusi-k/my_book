@@ -6,9 +6,9 @@
 
 ## 環境
 
-・　　PHP 8.1.3
+・　 PHP 8.1.3
 
-・　　laravel 8.73.2
+・　 laravel 8.73.2
 
 ・ vue 2.6.14
 
@@ -16,9 +16,9 @@
 
 ・ Docker
 
-・　　Apache
+・　 Apache
 
-・　　heroku
+・　 heroku
 
 
 ## 機能一覧
